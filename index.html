@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>比卡 Bika | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <nav class="nav" id="mainNav">
+    <div class="nav-logo">
+      <span class="logo-zh">比卡</span>
+      <span class="logo-sep">/</span>
+      <span class="logo-en">Bika</span>
+    </div>
+    <div class="nav-links">
+      <a href="#portfolio" data-zh="作品集" data-en="Portfolio">作品集</a>
+      <a href="#classroom" data-zh="小教室" data-en="Classroom">小教室</a>
+      <a href="#about" data-zh="關於" data-en="About">關於</a>
+    </div>
+    <div class="nav-controls">
+      <span class="lang-hint">
+        <span class="lang-en">if you want to change language &rarr;</span>
+        <span class="lang-zh">想切換語言 &rarr;</span>
+      </span>
+      <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+        <span class="lang-zh">EN</span>
+        <span class="lang-en">中</span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="icon-dark">☀</span>
+        <span class="icon-light">✦</span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="hero-eyebrow" data-zh="隨手創作 · 好奇寶寶 · 努力學習中" data-en="Making things when the mood strikes · Curious about everything · Forever a student">隨手創作 · 好奇寶寶 · 努力學習中</p>
+      <div class="hero-img-wrap">
+        <img src="assets/Bika.png" alt="比卡 Bika" class="hero-img">
+      </div>
+      <p class="hero-desc"
+         data-zh="用興趣、好奇去支撐筆、麥克風、以及所謂的未來"
+         data-en="Fueled by curiosity and passion — holding a pen, a microphone, and whatever the future may be">
+        用興趣、好奇去支撐筆、麥克風、以及所謂的未來
+      </p>
+      <a href="#portfolio" class="hero-cta" data-zh="探索作品" data-en="Explore Works">探索作品</a>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-line"></span>
+    </div>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <div class="section-header reveal">
+      <h2 data-zh="作品集" data-en="Portfolio">作品集</h2>
+      <p data-zh="點擊探索每個系列" data-en="Click to explore each series">點擊探索每個系列</p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <div class="portfolio-card reveal">
+        <div class="card-preview">
+          <div class="card-bg paintings-bg">
+            <img src="assets/Draw.png" alt="畫作" class="card-preview-img">
+          </div>
+          <div class="card-overlay">
+            <span class="card-tag" data-zh="視覺藝術" data-en="Visual Art">視覺藝術</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3 data-zh="畫作" data-en="Paintings">畫作</h3>
+          <p data-zh="小插畫、minecraft建築、仿畫" data-en="Illustrations · Minecraft Builds · Studies">小插畫、minecraft建築、仿畫</p>
+          <button class="card-btn" data-modal="paintings" data-zh="查看作品 →" data-en="View Works →">查看作品 →</button>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="card-preview">
+          <div class="card-bg audio-bg">
+            <img src="assets/Sing.png" alt="音樂作品" class="card-preview-img">
+          </div>
+          <div class="card-overlay">
+            <span class="card-tag" data-zh="聲音藝術" data-en="Sound Art">聲音藝術</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3 data-zh="音樂作品" data-en="Audio Works">音樂作品</h3>
+          <p data-zh="Cover・音樂平台連結" data-en="Covers · Music Platform Links">Cover・音樂平台連結</p>
+          <button class="card-btn" data-modal="audio" data-zh="聆聽作品 →" data-en="Listen →">聆聽作品 →</button>
+        </div>
+      </div>
+
+
+      <div class="portfolio-card reveal">
+        <div class="card-preview">
+          <div class="card-bg code-bg">
+            <img src="assets/Code.png" alt="程式作品" class="card-preview-img">
+          </div>
+          <div class="card-overlay">
+            <span class="card-tag" data-zh="程式開發" data-en="Development">程式開發</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3 data-zh="程式作品" data-en="Code Projects">程式作品</h3>
+          <p data-zh="進行中的程式專案" data-en="Ongoing Development Projects">進行中的程式專案</p>
+          <button class="card-btn" data-modal="code" data-zh="查看專案 →" data-en="View Projects →">查看專案 →</button>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="card-preview">
+          <div class="card-bg review-bg">
+            <img src="assets/Text.png" alt="備審經歷" class="card-preview-img">
+          </div>
+          <div class="card-overlay">
+            <span class="card-tag" data-zh="學習歷程" data-en="Academic">學習歷程</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3 data-zh="備審經歷" data-en="Academic Portfolio">備審經歷</h3>
+          <p data-zh="學習歷程・作品集備審資料" data-en="Learning Journey · Academic Review">學習歷程・作品集備審資料</p>
+          <button class="card-btn" data-modal="review" data-zh="查看經歷 →" data-en="View Portfolio →">查看經歷 →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="classroom" id="classroom">
+    <div class="section-header reveal">
+      <h2 data-zh="小教室" data-en="Mini Classroom">小教室</h2>
+      <p data-zh="每日一詞・跟著比卡學台語" data-en="One word a day · Learn Taiwanese with Bika">每日一詞・跟著比卡學台語</p>
+    </div>
+    <div class="classroom-inner">
+
+      <div class="portfolio-card classroom-card reveal">
+        <div class="card-preview">
+          <div class="card-bg taiwanese-bg">
+            <img src="assets/TaiYu.png" alt="台語小教室" class="card-preview-img">
+          </div>
+          <div class="card-overlay">
+            <span class="card-tag" data-zh="每日學台語" data-en="Daily Taiwanese">每日學台語</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3 data-zh="台語小教室" data-en="Taiwanese Classroom">台語小教室</h3>
+          <p data-zh="每日接觸一個台語單字，從生活出發，輕鬆培養語感，慢慢累積也能自然開口。" data-en="One Taiwanese word a day, rooted in daily life — build a natural feel for the language at your own pace.">每日接觸一個台語單字，從生活出發，輕鬆培養語感，慢慢累積也能自然開口。</p>
+          <button class="card-btn" data-modal="taiwanese" data-zh="進入教室 →" data-en="Enter Classroom →">進入教室 →</button>
+        </div>
+      </div>
+
+      <div class="portfolio-card classroom-card reveal">
+        <div class="card-preview">
+          <div class="card-bg japanese-bg">
+            <img src="assets/Zhiwen.png" alt="日文小教室" class="card-preview-img">
+          </div>
+          <div class="card-overlay">
+            <span class="card-tag" data-zh="每日學日文" data-en="Daily Japanese">每日學日文</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3 data-zh="日文小教室" data-en="Japanese Classroom">日文小教室</h3>
+          <p data-zh="每天學習一個日文單字，從基礎開始，逐步建立語感，穩穩提升出國詞彙量。" data-en="One Japanese word a day, starting from the basics — steadily build vocabulary for your next trip abroad.">每天學習一個日文單字，從基礎開始，逐步建立語感，穩穩提升出國詞彙量。</p>
+          <button class="card-btn" data-modal="japanese" data-zh="進入教室 →" data-en="Enter Classroom →">進入教室 →</button>
+        </div>
+      </div>
+
+      <div class="portfolio-card classroom-card reveal">
+        <div class="card-preview">
+          <div class="card-bg english-bg">
+            <img src="assets/English.png" alt="英文小教室" class="card-preview-img">
+          </div>
+          <div class="card-overlay">
+            <span class="card-tag" data-zh="每日學英文" data-en="Daily English">每日學英文</span>
+          </div>
+        </div>
+        <div class="card-info">
+          <h3 data-zh="英文小教室" data-en="English Classroom">英文小教室</h3>
+          <p data-zh="每天學習一個英文單字，從有趣的詞彙切入，讓英文慢慢變成日常的一部分。" data-en="One English word a day — start with interesting vocabulary and let the language gradually become part of your daily life.">每天學習一個英文單字，從有趣的詞彙切入，讓英文慢慢變成日常的一部分。</p>
+          <button class="card-btn" data-modal="english" data-zh="進入教室 →" data-en="Enter Classroom →">進入教室 →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-inner reveal">
+      <div class="about-text">
+        <h2 data-zh="關於比卡" data-en="About Bika">關於比卡</h2>
+        <p data-zh="大家好，謝謝你們願意花時間來看看我。我是一個會為了曾經喜歡、現在好奇的事情認真做很多功課的人，目前還是一名大學生，也在打工的過程中持續學習資料庫相關的知識。"
+           data-en="Hi everyone, thank you for taking the time to visit. I'm someone who dives deep into anything I've loved before or am currently curious about. I'm a university student, and I keep learning about databases through my part-time job.">
+          大家好，謝謝你們願意花時間來看看我。我是一個會為了曾經喜歡、現在好奇的事情認真做很多功課的人，目前還是一名大學生，也在打工的過程中持續學習資料庫相關的知識。
+        </p>
+        <p data-zh="我所在的公司主要在做金融系統，雖然一開始對金融沒有特別的興趣，但在接觸之後，反而讓我對投資以及整個金融體系有了更多理解與觀察。"
+           data-en="The company I work at focuses on financial systems. Though I wasn't drawn to finance at first, getting involved has given me a deeper understanding of investing and the broader financial ecosystem.">
+          我所在的公司主要在做金融系統，雖然一開始對金融沒有特別的興趣，但在接觸之後，反而讓我對投資以及整個金融體系有了更多理解與觀察。
+        </p>
+        <p data-zh="如果你也喜歡唱歌，那我們應該會很有共鳴。這裡是一個用比較不傳統方式學習唱歌的人，也很歡迎一起交流分享。"
+           data-en="If you enjoy singing, we'll probably have a lot in common. I learn to sing in a rather unconventional way — feel free to exchange ideas and share here anytime.">
+          如果你也喜歡唱歌，那我們應該會很有共鳴。這裡是一個用比較不傳統方式學習唱歌的人，也很歡迎一起交流分享。
+        </p>
+        <p data-zh="平常也會畫畫，目前主要還是在模仿階段。其實一直很想好好學畫畫，只是還沒有完成過讓自己滿意的作品，所以就當作紀錄與分享，輕鬆看看就好。"
+           data-en="I also draw occasionally, mostly still in the study and imitation phase. I've always wanted to learn properly, but haven't finished a piece I'm truly satisfied with yet — so think of it as a casual record and share.">
+          平常也會畫畫，目前主要還是在模仿階段。其實一直很想好好學畫畫，只是還沒有完成過讓自己滿意的作品，所以就當作紀錄與分享，輕鬆看看就好。
+        </p>
+        <p data-zh="我就讀資管系，對新事物一直抱有很大的好奇心，也因為想讓自己變得更強，所以會持續學習各種程式相關的技術。"
+           data-en="I study Information Management, and I've always had a strong curiosity for new things. Because I want to keep growing, I continue learning various programming technologies.">
+          我就讀資管系，對新事物一直抱有很大的好奇心，也因為想讓自己變得更強，所以會持續學習各種程式相關的技術。
+        </p>
+        <div class="about-links">
+          <a href="https://github.com/Bika0317" target="_blank" rel="noopener" class="social-link">
+            GitHub <span class="link-arr">↗</span>
+          </a>
+          <a href="https://www.instagram.com/jia_yu_0317" target="_blank" rel="noopener" class="social-link">
+            Instagram <span class="link-arr">↗</span>
+          </a>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-orb"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 比卡 Bika &nbsp;·&nbsp;
+      <span data-zh="用星塵製作" data-en="Made with stardust">用星塵製作</span>
+    </p>
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" role="dialog" aria-modal="true">
+    <button id="lightboxClose" aria-label="Close">✕</button>
+    <img id="lightboxImg" src="" alt="">
+    <p id="lightboxCaption"></p>
+  </div>
+
+  <script src="js/stars.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
