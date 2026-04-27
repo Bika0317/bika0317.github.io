@@ -6,7 +6,7 @@
 |------|------|
 | 專案路徑 | `C:\Users\Bika\Desktop\code\portfolio\` |
 | GitHub 帳號 | [Bika0317](https://github.com/Bika0317) |
-| 上線網址（推上去後） | `https://bika0317.github.io` |
+| 上線網址 | `https://bika0317.github.io` |
 | 技術 | 純 HTML / CSS / JavaScript |
 
 ---
@@ -30,11 +30,15 @@ portfolio/
 │   ├── Code.png                # 程式卡片封面
 │   ├── Text.png                # 備審卡片封面
 │   ├── TaiYu.png               # 台語小教室卡片封面
-│   ├── Zhiwen.png              # 日文小教室卡片封面
+│   ├── ZhiWen.png              # 日文小教室卡片封面（注意大小寫）
 │   ├── English.png             # 英文小教室卡片封面
 │   ├── paintings/              # 畫作圖片（26 張）
-│   └── review/                 # 備審文件（PDF）
-└── 統整.md                     # 本文件
+│   ├── review/                 # 備審文件（PDF）
+│   └── words/                  # 小教室單字 JSON 檔
+│       ├── english.json
+│       ├── japanese.json
+│       └── taiwanese.json
+└── CLAUDE.md                   # 本文件
 ```
 
 ---
@@ -50,7 +54,8 @@ portfolio/
 
 ### 2. Hero 區
 - 主圖：`Bika.png`（黑底框，粉色介面改淡粉色底無陰影）
-- 副標：「隨手創作 · 好奇寶寶 · 努力學習中」
+- 副標（中）：「隨手創作 · 好奇寶寶 · 努力學習中」
+- 副標（英）：「Create when inspiration hits · Curious about everything · Always a work in progress」
 - 描述：「用興趣、好奇去支撐筆、麥克風、以及所謂的未來」
 - 按鈕：「探索作品」→ 滑到作品集區
 
@@ -68,10 +73,11 @@ portfolio/
 | 教室 | 封面 | 單字數 | 說明 |
 |------|------|--------|------|
 | 台語小教室 | TaiYu.png | 60 | 含羅馬拼音（Tâi-lô）+ 使用情境 |
-| 日文小教室 | Zhiwen.png | 60 | 漢字後附平假名 + 使用情境 |
+| 日文小教室 | ZhiWen.png | 60 | 漢字後附平假名 + 使用情境 |
 | 英文小教室 | English.png | 60 | 音節式拼音（如 heh-LOH）+ 使用情境 |
 
 - 啟動日期：`2026-04-26`（每天自動推進到下一個單字）
+- 單字資料：存於 `assets/words/*.json`，前端用 `fetch` 讀取
 - 漢堡按鈕 ☰：開啟單字本，顯示所有已解鎖單字，可點開查看
 
 ### 5. 關於
@@ -111,11 +117,11 @@ Ina、Ina Paint、Gura、Anya、Anya 2、Asuna、和泉紗霧、Himeyuri、Kasli
 
 ## 待辦 / 可繼續的方向
 
-- [ ] 推上 GitHub Pages（建立 `bika0317.github.io` repo）
+- [x] 推上 GitHub Pages（`https://bika0317.github.io` 已上線）
 - [ ] 程式作品填入實際專案內容
 - [ ] 音樂作品繼續新增歌曲
 - [ ] 畫作持續新增
-- [ ] 小教室每日更新（自動化已設定好）
+- [ ] 小教室新增單字（手動更新 JSON 檔）
 - [ ] 加入更多備審文件
 
 ---
@@ -135,13 +141,17 @@ Ina、Ina Paint、Gura、Anya、Anya 2、Asuna、和泉紗霧、Himeyuri、Kasli
 ```
 
 ### 新增備審文件
-把 PDF 放入 `assets/review/`，在 `review.docs` 加一行：
+把 PDF 放入 `assets/review/`，在 `js/main.js` 的 `review.docs` 加一行：
 ```js
 { src: 'assets/review/檔名.pdf', zh: '中文標題', en: 'English Title' },
 ```
 
 ### 新增小教室單字
-在 `js/main.js` 對應語言的 `wordBank` 陣列加一行：
-```js
-{ hanzi: '字', tailo: '拼音', meaning: '意思', usage: '使用情境' },
+在 `assets/words/` 對應語言的 JSON 檔末尾加一筆：
+```json
+{ "hanzi": "字", "tailo": "拼音", "meaning": "意思", "usage": "使用情境" }
 ```
+
+### 注意事項
+- 圖片檔名大小寫要與 `index.html` / `main.js` 完全一致（GitHub Pages 跑 Linux，大小寫敏感）
+- 更新後記得 `git add . && git commit -m "..." && git push`
