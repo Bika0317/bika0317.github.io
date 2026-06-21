@@ -816,3 +816,17 @@ const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
   nav.style.boxShadow = window.scrollY > 10 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
 }, { passive: true });
+
+/* ============================================================
+   Visit counter (CountAPI)
+   ============================================================ */
+(async () => {
+  const countEl = document.getElementById('visitCount');
+  try {
+    const res = await fetch('https://abacus.jasoncameron.dev/hit/bika0317-github-io/visits');
+    const data = await res.json();
+    countEl.textContent = data.value.toLocaleString();
+  } catch {
+    countEl.textContent = '?';
+  }
+})();

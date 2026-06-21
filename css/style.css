@@ -739,6 +739,33 @@ html[lang="en"]    .lang-en { display: none; }
 }
 
 /* ============================================================
+   Visit Counter
+   ============================================================ */
+.visit-counter {
+  position: fixed;
+  left: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  color: var(--text-2);
+  font-size: 0.78rem;
+  font-family: inherit;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.visit-counter svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* ============================================================
    Footer
    ============================================================ */
 .footer {
