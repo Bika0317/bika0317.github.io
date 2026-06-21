@@ -32,7 +32,12 @@ portfolio/
 │   ├── TaiYu.png               # 台語小教室卡片封面
 │   ├── ZhiWen.png              # 日文小教室卡片封面（注意大小寫）
 │   ├── English.png             # 英文小教室卡片封面
-│   ├── paintings/              # 畫作圖片（26 張）
+│   ├── paintings/              # 畫作圖片，依分類分資料夾
+│   │   ├── 手繪/                # 18 張
+│   │   ├── MC建築/              # 8 張
+│   │   └── 電繪/                # 1 張
+│   ├── music/                  # 本地音樂檔（MP3）
+│   ├── note/                   # 程式作品「筆記內容」原始 .md + 轉換後 .json
 │   ├── review/                 # 備審文件（PDF）
 │   └── words/                  # 小教室單字 JSON 檔
 │       ├── english.json
@@ -63,10 +68,27 @@ portfolio/
 
 | 卡片 | 封面 | Modal 類型 | 內容 |
 |------|------|-----------|------|
-| 畫作 | Draw.png | `gallery` | 26 張圖，點圖放大 Lightbox |
-| 音樂作品 | Sing.png | `audio` | 曲目列表 + 平台連結 |
-| 程式作品 | Code.png | 一般佔位 | 3 個佔位格（待新增） |
-| 備審經歷 | Text.png | `documents` | PDF 文件列表 |
+| 畫作 | Draw.png | `gallery` | 真實頁籤：手繪 / MC建築 / 電繪，點圖放大 Lightbox |
+| 音樂作品 | Sing.png | `audio` | 真實頁籤：立即聽（本地播放器）/ 其他平台（外部連結） |
+| 程式作品 | Code.png | `code` | 真實頁籤：進行中的程式專案（3 個佔位格）/ 筆記內容（章節式筆記） |
+| 備審經歷 | Text.png | `documents` | PDF 文件列表 + 宣傳區塊 |
+
+#### 畫作 — 分類頁籤
+- 資料結構：`MODAL_DATA.paintings.categories`，每個分類是 `{ key, zh, en, images: [...] }`
+- 圖片實際檔案依分類放在對應子資料夾：`assets/paintings/手繪/`、`assets/paintings/MC建築/`、`assets/paintings/電繪/`
+- **新增畫作步驟**：把圖片放進對應分類的子資料夾，在該分類的 `images` 陣列加一行 `{ src: 'assets/paintings/分類資料夾/檔名.jpg', zh: '中文名', en: 'English Name' }`
+
+#### 程式作品 — 筆記內容
+- 筆記列表先顯示卡片（`.notes-card`），點進去才展開該筆記的章節手風琴；有「← 返回筆記列表」可以回去
+- 筆記來源：`assets/note/*.md`（原始 Markdown，含「## 目錄」章節列表）
+- 實際顯示用的是 `assets/note/*.json`（預先轉換好的章節陣列 `[{ title, html }]`），前端用 `fetch` 讀取，渲染成可展開/收合的章節手風琴（`.notes-chapter`）
+- **新增筆記步驟**：
+  1. 把新的 `.md` 筆記放進 `assets/note/`，開頭要有「## 目錄」清單（`- [章節標題](#anchor)`），章節標題會依目錄的項目切章節
+  2. 用 Node + `marked`（轉 HTML）+ `highlight.js`（SQL 等程式碼語法高亮，透過自訂 `renderer.code`）把 `.md` 轉成同名 `.json`（陣列存 `{ title, html }`，html 是該章節轉換後的內容，不含章節自己的標題行）；這兩個套件只在轉換時用，不會被加進網站的執行環境
+  3. 在 `js/main.js` 的 `MODAL_DATA.code.notes` 加一筆：`{ zh: '...', en: '...', source: 'assets/note/檔名.json' }`
+- 目錄與正文標題不一定完全一致（可能有手誤/空格差異），轉換時**先比對完全相同的正規化文字，比對不到才退回子字串比對**（純子字串比對會讓像「CREATE」這種短標題誤配到後面「CREATE TABLE」之類的子章節，截斷章節內容）
+- 程式碼區塊用 `white-space: pre-wrap` 讓過長的對齊註解自動換行，不會超出框外被裁掉
+- 語法高亮顏色對應在 `css/style.css` 的 `.notes-chapter-body .hljs-*` 規則，沿用站內 `--accent` / `--accent-2` 等主題變數
 
 ### 4. 小教室（3 格 Grid）
 
@@ -79,12 +101,17 @@ portfolio/
 - 啟動日期：`2026-04-26`（每天自動推進到下一個單字）
 - 單字資料：存於 `assets/words/*.json`，前端用 `fetch` 讀取
 - 漢堡按鈕 ☰：開啟單字本，顯示所有已解鎖單字，可點開查看
+- 副標題：「每日一詞・跟著比卡學單字」（已從原本的「學台語」改為通用三語版）
 
 ### 5. 關於
 - 5 段自我介紹（中英雙語）
-- 連結：GitHub、Instagram（https://www.instagram.com/jia_yu_0317）
 
-### 6. Footer
+### 6. 浮動社群側欄
+- 固定在畫面右側（手機版移至右下角，橫排）
+- GitHub、Instagram（https://www.instagram.com/jia_yu_0317）SVG icon 按鈕
+- 取代原本放在「關於」區段內的社群連結
+
+### 7. Footer
 - © 2025 比卡 Bika · 用星塵製作
 
 ---
@@ -103,22 +130,39 @@ portfolio/
 
 ## 作品內容現況
 
-### 畫作（26 張）
-Ina、Ina Paint、Gura、Anya、Anya 2、Asuna、和泉紗霧、Himeyuri、Kasli、Aphrodite、Tartaglia、Seki 簡筆、Mizuki 簡筆、Empress Cat、Nature's Guardians Elemental Pixies、皮卡丘、肥嘟嘟佐衛門、Nyanko Daisensou 1 / Miku / Snow Miku、玻璃瓶、格致中學、海軍基地、現代建築、金閣寺、隨畫 1
+### 畫作（27 張，分 3 頁籤）
+- **手繪（18）**：Anya、Anya 2、Asuna、Ina Paint、Mizuki 簡筆、Seki 簡筆、Tartaglia、Kasli、Himeyuri、Nature's Guardians Elemental Pixies、狐姬百荷、Fox（狐狸）、Aphrodite、Nyanko Daisensou 1 / Miku / Snow Miku、Empress Cat、隨畫 1
+- **MC建築（8）**：Gura、Ina、海軍基地、玻璃瓶、現代建築、皮卡丘、肥嘟嘟佐衛門、金閣寺
+- **電繪（1）**：Totoro（龍貓）
 
-### 音樂作品（1 首）
+### 音樂作品（2 首）
+- 紅塵客棧 — 本地 MP3（`assets/music/紅塵客棧.mp3`），支援即時頻率視覺化
 - 蘇幕遮 — [YouTube](https://youtu.be/hrPMTFN7m30?si=Pw4TzNXZRtJxHhha)
+
+#### 音樂 Modal 功能
+- **本地 MP3**：內建播放器（播放 / 暫停、進度條可拖拉跳轉、音量滑桿）
+- **Web Audio API**：`AudioContext` + `AnalyserNode` 讀取即時頻率資料
+- **Perimeter 視覺化**：頻率波紋沿 Modal 四邊順時針行進，播放時放大，暫停時凍結，關閉自動清除
+- **煙霧效果**：每根波紋條帶 `shadowBlur` 光暈 + 四邊漸層霧疊加，隨音量呼吸
+- **音量滑桿**：🔇 / 🔈 / 🔉 / 🔊 圖示跟著音量自動切換
 
 ### 備審文件（2 份）
 - TKUIM 多元綜整心得.pdf
 - TKUIM 學習歷程自述.pdf
+
+#### 備審經歷宣傳區塊
+- 文件列表下方附宣傳區塊（`doc-promo`），文案邀請需要協助的人私訊 IG 或加入 Discord
+- 連結設定在 `js/main.js` 的 `MODAL_DATA.review.promo`：`ig`（Instagram 連結）、`discord`（伺服器邀請連結 `https://discord.gg/37uRdVjXzU`）
+- 中英文案分別存在 `promo.zh` / `promo.en`
 
 ---
 
 ## 待辦 / 可繼續的方向
 
 - [x] 推上 GitHub Pages（`https://bika0317.github.io` 已上線）
-- [ ] 程式作品填入實際專案內容
+- [ ] 程式作品「進行中的程式專案」填入實際專案內容（目前仍是 3 個佔位格）
+- [x] 程式作品「筆記內容」加入 SQL 完整筆記（章節式手風琴）
+- [ ] 筆記內容繼續新增其他科目筆記
 - [ ] 音樂作品繼續新增歌曲
 - [ ] 畫作持續新增
 - [ ] 小教室新增單字（手動更新 JSON 檔）
@@ -129,16 +173,25 @@ Ina、Ina Paint、Gura、Anya、Anya 2、Asuna、和泉紗霧、Himeyuri、Kasli
 ## 常用維護指令
 
 ### 新增畫作
-把圖片放入 `assets/paintings/`，在 `js/main.js` 的 `paintings.images` 加一行：
+把圖片放入對應分類子資料夾（`assets/paintings/手繪/` / `MC建築/` / `電繪/`），在 `js/main.js` 的 `MODAL_DATA.paintings.categories` 裡找到該分類的 `images` 陣列加一行：
 ```js
-{ src: 'assets/paintings/檔名.jpg', zh: '中文名', en: 'English Name' },
+{ src: 'assets/paintings/手繪/檔名.jpg', zh: '中文名', en: 'English Name' },
 ```
 
 ### 新增音樂
-在 `js/main.js` 的 `audio.tracks` 加一行：
+
+**本地 MP3（有播放器 + 頻率視覺化）：**
+把 MP3 放入 `assets/music/`，在 `js/main.js` 的 `audio.tracks` 加：
+```js
+{ zh: '歌名', en: 'Song Name', audio: 'assets/music/檔名.mp3', link: null, platform: null },
+```
+
+**外部連結（YouTube 等）：**
 ```js
 { zh: '歌名', en: 'Song Name', link: 'https://...', platform: 'YouTube' },
 ```
+
+> 兩種格式可混用。有 `audio` 欄位的優先顯示本地播放器；無 `audio` 的顯示外部連結按鈕。
 
 ### 新增備審文件
 把 PDF 放入 `assets/review/`，在 `js/main.js` 的 `review.docs` 加一行：
