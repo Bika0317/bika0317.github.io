@@ -540,7 +540,7 @@ html[lang="en"]    .lang-en { display: none; }
 }
 
 .card-info h3 {
-  font-family: 'Dancing Script', 'Ma Shan Zheng', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  font-family: 'Dancing Script', 'LXGW WenKai Mono TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
   color: var(--text);
