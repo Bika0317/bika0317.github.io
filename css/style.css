@@ -72,7 +72,7 @@
 html { scroll-behavior: smooth; font-size: 19px; }
 
 body {
-  font-family: 'Caveat', 'Ma Shan Zheng', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  font-family: 'Caveat', 'LXGW WenKai Mono TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
@@ -1274,7 +1274,7 @@ html[lang="en"]    .lang-en { display: none; }
   background: none;
   border: none;
   color: var(--text);
-  font-family: 'Caveat', 'Ma Shan Zheng', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  font-family: 'Caveat', 'LXGW WenKai Mono TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
   font-size: 1rem;
   text-align: left;
   cursor: pointer;
@@ -1313,7 +1313,7 @@ html[lang="en"]    .lang-en { display: none; }
 .notes-chapter-body h5,
 .notes-chapter-body h6 {
   color: var(--text);
-  font-family: 'Caveat', 'Ma Shan Zheng', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  font-family: 'Caveat', 'LXGW WenKai Mono TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
   margin: 1.1rem 0 0.5rem;
   letter-spacing: 0.02em;
 }
@@ -1549,7 +1549,7 @@ html[lang="en"]    .lang-en { display: none; }
 }
 
 .glossary-hanzi-preview {
-  font-family: 'Dancing Script', 'Ma Shan Zheng', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  font-family: 'LXGW WenKai Mono TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
   font-size: 1.1rem;
   color: var(--text);
   flex: 1;
@@ -1652,6 +1652,7 @@ html[lang="en"]    .lang-en { display: none; }
 @media (max-width: 680px) {
   .nav            { padding: 1rem 1.4rem; }
   .nav-links      { display: none; }
+  .lang-hint      { display: none; }
   .portfolio      { padding: 5rem 1.2rem; }
   .portfolio-grid { grid-template-columns: 1fr; }
   .about          { padding: 5rem 1.4rem; }
