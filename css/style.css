@@ -627,7 +627,7 @@ html[lang="en"]    .lang-en { display: none; }
 }
 
 .about-text h2 {
-  font-family: 'Dancing Script', 'Ma Shan Zheng', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  font-family: 'Dancing Script', 'LXGW WenKai Mono TC', 'Microsoft JhengHei', 'PingFang TC', sans-serif;
   font-size: clamp(2.2rem, 4vw, 3.8rem);
   font-weight: 300;
   color: var(--text);
