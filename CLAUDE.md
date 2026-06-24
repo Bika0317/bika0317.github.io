@@ -38,6 +38,7 @@ portfolio/
 │   │   └── 電繪/                # 1 張
 │   ├── music/                  # 本地音樂檔（MP3）
 │   ├── note/                   # 程式作品「筆記內容」原始 .md + 轉換後 .json
+│   ├── projects/                # 程式作品「進行中的程式專案」卡片用 icon 圖
 │   ├── review/                 # 備審文件（PDF）
 │   └── words/                  # 小教室單字 JSON 檔
 │       ├── english.json
@@ -70,13 +71,21 @@ portfolio/
 |------|------|-----------|------|
 | 畫作 | Draw.png | `gallery` | 真實頁籤：手繪 / MC建築 / 電繪，點圖放大 Lightbox |
 | 音樂作品 | Sing.png | `audio` | 真實頁籤：立即聽（本地播放器）/ 其他平台（外部連結） |
-| 程式作品 | Code.png | `code` | 真實頁籤：進行中的程式專案（3 個佔位格）/ 筆記內容（章節式筆記） |
+| 程式作品 | Code.png | `code` | 真實頁籤：進行中的程式專案（卡片列表，連到實際網址）/ 筆記內容（章節式筆記） |
 | 備審經歷 | Text.png | `documents` | PDF 文件列表 + 宣傳區塊 |
 
 #### 畫作 — 分類頁籤
 - 資料結構：`MODAL_DATA.paintings.categories`，每個分類是 `{ key, zh, en, images: [...] }`
 - 圖片實際檔案依分類放在對應子資料夾：`assets/paintings/手繪/`、`assets/paintings/MC建築/`、`assets/paintings/電繪/`
 - **新增畫作步驟**：把圖片放進對應分類的子資料夾，在該分類的 `images` 陣列加一行 `{ src: 'assets/paintings/分類資料夾/檔名.jpg', zh: '中文名', en: 'English Name' }`
+
+#### 程式作品 — 進行中的程式專案
+- 資料結構：`MODAL_DATA.code.projects` 是一個陣列，每筆 `{ zh, en, descZh, descEn, url, tags: [...], icon }`
+- 顯示為卡片列表（`.project-card`），整張卡可點擊連到 `url`（開新分頁）；最後固定附一張虛線「更多專案，敬請期待」卡（`.project-card-more`），所以即使只有 1～2 個專案版面也不會太空
+- icon 圖放在 `assets/projects/`，卡片用 `<img onerror>` 處理圖片缺失（找不到就隱藏圖示，不會破版）
+- **新增專案步驟**：
+  1. 把專案 icon 圖放進 `assets/projects/`
+  2. 在 `js/main.js` 的 `MODAL_DATA.code.projects` 加一筆：`{ zh: '中文名', en: 'English Name', descZh: '一行中文簡介', descEn: 'One-line English description', url: 'https://...', tags: ['HTML', ...], icon: 'assets/projects/檔名.png' }`
 
 #### 程式作品 — 筆記內容
 - 筆記列表先顯示卡片（`.notes-card`），點進去才展開該筆記的章節手風琴；有「← 返回筆記列表」可以回去
@@ -160,7 +169,7 @@ portfolio/
 ## 待辦 / 可繼續的方向
 
 - [x] 推上 GitHub Pages（`https://bika0317.github.io` 已上線）
-- [ ] 程式作品「進行中的程式專案」填入實際專案內容（目前仍是 3 個佔位格）
+- [x] 程式作品「進行中的程式專案」填入實際專案內容（自動化排班系統，卡片列表 + 敬請期待佔位卡）
 - [x] 程式作品「筆記內容」加入 SQL 完整筆記（章節式手風琴）
 - [ ] 筆記內容繼續新增其他科目筆記
 - [ ] 音樂作品繼續新增歌曲
@@ -192,6 +201,12 @@ portfolio/
 ```
 
 > 兩種格式可混用。有 `audio` 欄位的優先顯示本地播放器；無 `audio` 的顯示外部連結按鈕。
+
+### 新增程式專案
+把專案 icon 圖放入 `assets/projects/`，在 `js/main.js` 的 `MODAL_DATA.code.projects` 加一筆：
+```js
+{ zh: '中文名', en: 'English Name', descZh: '一行中文簡介', descEn: 'One-line English description', url: 'https://...', tags: ['HTML'], icon: 'assets/projects/檔名.png' },
+```
 
 ### 新增備審文件
 把 PDF 放入 `assets/review/`，在 `js/main.js` 的 `review.docs` 加一行：

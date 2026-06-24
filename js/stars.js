@@ -5,14 +5,17 @@ const ctx    = canvas.getContext('2d');
 let stars   = [];
 let planets = [];
 
+// 功能：視窗尺寸改變的處理。寫法：重設 canvas 寬高，再呼叫 init() 重新產生星星/星球。
 function resize() {
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
   init();
 }
 
+// 功能：隨機數工具。寫法：Math.random() 配合線性映射，回傳 a~b 之間的隨機浮點數。
 function randBetween(a, b) { return a + Math.random() * (b - a); }
 
+// 功能：星星資料產生器。寫法：用 randBetween 隨機決定座標、大小、速度、相位、顏色。
 function makeStar() {
   return {
     x:     Math.random() * canvas.width,
@@ -25,6 +28,7 @@ function makeStar() {
   };
 }
 
+// 功能：星球資料產生器。寫法：隨機座標、半徑、漂移速度 vx/vy、相位與粉色系顏色。
 function makePlanet() {
   const palette = ['#ff9eb5','#ffb3c6','#ffd4e8','#ffc4aa','#ffddcc','#ffe4f0'];
   return {
@@ -40,6 +44,7 @@ function makePlanet() {
   };
 }
 
+// 功能：初始化動畫資料。寫法：Array.from 批量呼叫 makeStar/makePlanet 重建陣列。
 function init() {
   stars   = Array.from({ length: 220 }, makeStar);
   planets = Array.from({ length: 28  }, makePlanet);
@@ -50,6 +55,7 @@ let meteors = [];
 let meteorTimer = 0;
 const METEOR_INTERVAL = 3.5;
 
+// 功能：流星資料產生器。寫法：從畫面上方隨機位置出發，給定速度、長度與淡出速率。
 function makeMeteor() {
   return {
     x:     randBetween(canvas.width * 0.1, canvas.width * 0.85),
@@ -62,6 +68,7 @@ function makeMeteor() {
   };
 }
 
+// 功能：流星狀態更新邏輯。寫法：用計時器定期新增流星，filter 移除已淡出者，forEach 更新位置與透明度。
 function updateMeteors(dt) {
   meteorTimer += dt;
   if (meteorTimer > METEOR_INTERVAL) {
@@ -76,6 +83,7 @@ function updateMeteors(dt) {
   });
 }
 
+// 功能：流星繪製函式。寫法：依速度方向算出尾巴端點，用 createLinearGradient 畫出頭亮尾淡的線段。
 function drawMeteors() {
   meteors.forEach(m => {
     const spd  = Math.hypot(m.vx, m.vy);
@@ -99,6 +107,7 @@ function drawMeteors() {
 /* ---- Dark mode: twinkling star field ---- */
 let lastT = 0;
 
+// 功能：深色主題每幀繪製函式。寫法：clearRect 清畫面後疊星雲漸層，forEach 用 sin 算每顆星星的閃爍亮度並畫出，再接流星邏輯。
 function drawStars(t) {
   const dt = t - lastT;
   lastT = t;
@@ -171,6 +180,7 @@ function drawStars(t) {
 }
 
 /* ---- Light mode: drifting planet bubbles ---- */
+// 功能：亮色主題每幀繪製函式。寫法：clearRect 清畫面後疊背景光暈，forEach 更新星球位置（出界繞回）並用 sin 做脈動大小/透明度的漸層圓形。
 function drawPlanets(t) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -209,6 +219,7 @@ function drawPlanets(t) {
   ctx.globalAlpha = 1;
 }
 
+// 功能：動畫主迴圈。寫法：用 requestAnimationFrame 驅動，依目前主題呼叫 drawStars 或 drawPlanets，再遞迴排下一幀。
 function loop(t) {
   const theme = document.documentElement.getAttribute('data-theme') || 'dark';
   if (theme === 'dark') drawStars(t * 0.001);

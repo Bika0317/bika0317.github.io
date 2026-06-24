@@ -19,6 +19,7 @@ themeToggle.addEventListener('click', () => {
 const langToggle = document.getElementById('langToggle');
 let currentLang  = localStorage.getItem('bika-lang') || 'zh-TW';
 
+// 功能：語言切換函式。寫法：更新 html lang 屬性，querySelectorAll 選出所有雙語元素並替換成對應語言的文字。
 function applyLang(lang) {
   html.setAttribute('lang', lang);
   document.querySelectorAll('[data-zh],[data-en]').forEach(el => {
@@ -39,6 +40,7 @@ langToggle.addEventListener('click', () => {
    Day calculation
    ============================================================ */
 const LAUNCH_DATE = new Date('2026-04-26');
+// 功能：計算單字解鎖天數索引。寫法：用現在時間減啟動日除以一天的毫秒數，取整數並防呆不小於 0。
 function getDayIndex() {
   const ms = Date.now() - LAUNCH_DATE.getTime();
   return Math.max(0, Math.floor(ms / 86400000));
@@ -50,6 +52,7 @@ let currentModalKey = null;
    ============================================================ */
 const wordBanks = { english: [], japanese: [], taiwanese: [] };
 
+// 功能：單字資料載入函式。寫法：用 Promise.all 平行 fetch 三個 JSON 檔，存進 wordBanks，外層 try/catch 防錯誤。
 async function loadWordBanks() {
   try {
     const [en, ja, tw] = await Promise.all([
@@ -79,6 +82,7 @@ let _vizRafId   = null;
 let _activeSrc  = null;
 let _perimCanvas = null;
 
+// 功能：AudioContext 初始化函式。寫法：用 if return 確保只建立一次，建立 AnalyserNode 並串接 audio 來源到輸出。
 function _ensureAudioCtx() {
   if (_audioCtx) return;
   _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -89,10 +93,12 @@ function _ensureAudioCtx() {
   _analyser.connect(_audioCtx.destination);
 }
 
+// 功能：視覺化動畫停止函式。寫法：用 cancelAnimationFrame 取消排定的下一幀，並把 id 重設為 null。
 function stopViz() {
   if (_vizRafId) { cancelAnimationFrame(_vizRafId); _vizRafId = null; }
 }
 
+// 功能：頻率視覺化啟動函式。寫法：建立疊加在 Modal 上的透明 canvas，設定尺寸與頻率資料緩衝區，再呼叫內部 draw() 開始動畫。
 function startPerimeterViz() {
   stopViz();
   const modal = document.getElementById('modal');
@@ -113,6 +119,7 @@ function startPerimeterViz() {
   const ctx2 = _perimCanvas.getContext('2d');
   const buf  = _analyser ? new Uint8Array(_analyser.frequencyBinCount) : new Uint8Array(64);
 
+  // 功能：視覺化每幀繪製函式。寫法：讀取頻率資料，算出邊框格子序列，用 pv() 取得每格深度/透明度畫光條，再疊霧化漸層。
   function draw(ts) {
     _vizRafId = requestAnimationFrame(draw);
     if (_analyser) _analyser.getByteFrequencyData(buf);
@@ -137,6 +144,7 @@ function startPerimeterViz() {
       ? buf.reduce((s, v) => s + v, 0) / buf.length / 255
       : 0.18;
 
+    // 功能：單格光條深度/透明度計算函式。寫法：用 sin 波算出跑動波形，混合頻率資料(或假波形)算出深度 d 與透明度 a。
     function pv(g) {
       const p    = g / total;
       const wave = (Math.sin(p * Math.PI * 2 * WAVES - t * SPEED * Math.PI * 2) + 1) * 0.5;
@@ -186,6 +194,7 @@ function startPerimeterViz() {
     const fogDepth = 58 + avgLevel * 28;
     const fogAlpha = 0.038 + avgLevel * 0.055;
 
+    // 功能：邊緣霧化漸層繪製工具函式。寫法：用 createLinearGradient 從邊緣的白色漸層到透明，填色到指定矩形範圍，四邊各呼叫一次。
     function fog(x0, y0, x1, y1, rx, ry, rw, rh) {
       const gr = ctx2.createLinearGradient(x0, y0, x1, y1);
       gr.addColorStop(0, `rgba(255,255,255,${fogAlpha})`);
@@ -202,6 +211,7 @@ function startPerimeterViz() {
   draw(0);
 }
 
+// 功能：時間格式化函式。寫法：用 Math.floor 取分鐘與秒數，padStart 補零成 m:ss 字串。
 function fmtTime(s) {
   if (!isFinite(s)) return '0:00';
   return `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
@@ -296,7 +306,16 @@ const MODAL_DATA = {
     zh: { title: '程式作品',      subtitle: '進行中的程式專案 · 筆記內容' },
     en: { title: 'Code Projects', subtitle: 'Ongoing Projects · Study Notes' },
     type: 'code',
-    projects: { icon: '💻', count: 3, zhItem: '專案', enItem: 'Project' },
+    projects: [
+      {
+        zh: '自動化排班系統', en: 'Auto Scheduling System',
+        descZh: '用網頁自動產生班表，減少手動排班的時間與失誤',
+        descEn: 'A web tool that auto-generates work schedules to save time and reduce manual errors.',
+        url: 'https://bika0317.github.io/Auto-Scheduling-System/',
+        tags: ['HTML'],
+        icon: 'assets/projects/auto-scheduling-system.png',
+      },
+    ],
     notes: [
       { zh: 'SQL 完整筆記', en: 'SQL Complete Notes', source: 'assets/note/sql-notes.json' },
     ],
@@ -340,6 +359,7 @@ const overlay   = document.getElementById('modalOverlay');
 const modalBody = document.getElementById('modalBody');
 const closeBtn  = document.getElementById('modalClose');
 
+// 功能：單字 Modal 渲染函式。寫法：依 getDayIndex 取出當天單字，組成模板字串回傳 HTML。
 function renderVocabModal(data, lang, key) {
   const bank = wordBanks[key] || [];
   if (!bank || bank.length === 0) {
@@ -363,6 +383,7 @@ function renderVocabModal(data, lang, key) {
   `;
 }
 
+// 功能：音樂 Modal 渲染函式。寫法：用 filter/map 分別產生本地播放器清單與外部連結清單 HTML，依資料存在與否決定要不要包頁籤。
 function renderAudioModal(data, lang) {
   const comingSoon  = lang === 'zh' ? '即將上傳' : 'Coming soon';
   const listenLabel = lang === 'zh' ? '前往收聽' : 'Listen';
@@ -433,6 +454,7 @@ function renderAudioModal(data, lang) {
   return `<div class="modal-tab-panel active" data-tab-panel="ext"><div class="audio-list">${extHtml}</div></div>`;
 }
 
+// 功能：畫作 Modal 渲染函式。寫法：用 map 把每個分類轉成頁籤按鈕與對應的圖片格線面板。
 function renderGalleryModal(data, lang) {
   const emptyMsg = lang === 'zh' ? '作品即將上傳，敬請期待！' : 'Works coming soon, stay tuned!';
 
@@ -457,19 +479,26 @@ function renderGalleryModal(data, lang) {
   `;
 }
 
+// 功能：程式作品 Modal 渲染函式。寫法：map 產生專案卡片（附固定的「敬請期待」佔位卡）與筆記卡片，組成含頁籤的 HTML。
 function renderCodeModal(data, lang) {
-  const comingSoon   = lang === 'zh' ? '即將上傳' : 'Coming soon';
-  const itemLabel    = lang === 'zh' ? data.projects.zhItem : data.projects.enItem;
   const projectsLabel = lang === 'zh' ? '進行中的程式專案' : 'Ongoing Projects';
   const notesLabel    = lang === 'zh' ? '筆記內容' : 'Notes';
+  const viewLabel     = lang === 'zh' ? '查看專案' : 'View Project';
+  const moreLabel     = lang === 'zh' ? '更多專案，敬請期待' : 'More projects coming soon';
 
-  const projectsHtml = Array.from({ length: data.projects.count }, (_, i) => `
-    <div class="modal-item">
-      <span class="modal-item-icon">${data.projects.icon}</span>
-      <p class="modal-item-name">${itemLabel} ${i + 1}</p>
-      <p class="modal-item-note">${comingSoon}</p>
+  const projectsHtml = data.projects.map(p => `
+    <a class="project-card" href="${p.url}" target="_blank" rel="noopener">
+      <img class="project-card-icon" src="${p.icon}" alt="" onerror="this.style.display='none'">
+      <p class="project-card-title">${lang === 'zh' ? p.zh : p.en}</p>
+      <p class="project-card-desc">${lang === 'zh' ? p.descZh : p.descEn}</p>
+      <div class="project-card-tags">${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
+      <span class="project-card-arrow">${viewLabel} →</span>
+    </a>
+  `).join('') + `
+    <div class="project-card project-card-more">
+      <span class="project-card-more-text">${moreLabel}</span>
     </div>
-  `).join('');
+  `;
 
   const noteCardsHtml = data.notes.map((note, i) => `
     <div class="notes-card" data-note-idx="${i}">
@@ -485,7 +514,7 @@ function renderCodeModal(data, lang) {
       <button class="modal-tab" data-tab="notes" role="tab" aria-selected="false">${notesLabel}</button>
     </div>
     <div class="modal-tab-panel active" data-tab-panel="projects">
-      <div class="modal-grid">${projectsHtml}</div>
+      <div class="project-list">${projectsHtml}</div>
     </div>
     <div class="modal-tab-panel" data-tab-panel="notes">
       <div class="notes-list" id="notesList">${noteCardsHtml}</div>
@@ -496,6 +525,7 @@ function renderCodeModal(data, lang) {
 
 const _noteCache = {};
 
+// 功能：筆記章節載入函式。寫法：先查 _noteCache 快取，沒有才 fetch JSON 並存進快取後回傳。
 async function loadNoteChapters(source) {
   if (_noteCache[source]) return _noteCache[source];
   const res = await fetch(source);
@@ -504,6 +534,7 @@ async function loadNoteChapters(source) {
   return chapters;
 }
 
+// 功能：程式作品 Modal 互動綁定函式。寫法：綁定筆記卡片點擊事件，非同步載入章節後渲染手風琴並綁定展開/返回按鈕。
 function setupCodeModal(data, lang) {
   setupModalTabs();
 
@@ -553,6 +584,7 @@ function setupCodeModal(data, lang) {
   });
 }
 
+// 功能：Modal 開啟函式。寫法：依 data.type 用 if/else 呼叫對應的 render 函式產生內容，寫入 DOM 並顯示。
 function openModal(key) {
   const data = MODAL_DATA[key];
   if (!data) return;
@@ -620,6 +652,7 @@ function openModal(key) {
   document.body.style.overflow = 'hidden';
 }
 
+// 功能：Modal 關閉函式。寫法：移除 active 樣式、暫停音樂、停止視覺化並移除疊加 canvas。
 function closeModal() {
   overlay.classList.remove('active');
   overlay.setAttribute('aria-hidden', 'true');
@@ -629,12 +662,14 @@ function closeModal() {
   if (_perimCanvas) { _perimCanvas.remove(); _perimCanvas = null; }
 }
 
+// 功能：音量圖示更新函式。寫法：用三元運算子依音量區間切換對應的圖示文字。
 function updateVolIcon(vol) {
   const icon = document.getElementById('audioVolIcon');
   if (!icon) return;
   icon.textContent = vol === 0 ? '🔇' : vol < 0.35 ? '🔈' : vol < 0.7 ? '🔉' : '🔊';
 }
 
+// 功能：頁籤切換綁定函式。寫法：對每個 .modal-tab 綁 click，切換 active 樣式並顯示對應的面板。
 function setupModalTabs() {
   document.querySelectorAll('.modal-tab').forEach(tabBtn => {
     tabBtn.addEventListener('click', () => {
@@ -650,6 +685,7 @@ function setupModalTabs() {
   });
 }
 
+// 功能：音樂 Modal 互動綁定函式。寫法：啟動視覺化與頁籤，綁定音量滑桿 input 事件與每個音軌的播放/進度條 click 事件。
 function setupAudioModal() {
   startPerimeterViz(); // idle wave starts immediately when modal opens
   setupModalTabs();
@@ -726,6 +762,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 /* ============================================================
    Glossary (單字本)
    ============================================================ */
+// 功能：單字本 Modal 開啟函式。寫法：用 slice 取出已解鎖的單字，map 成可展開的 details 列表並寫入 Modal。
 function openGlossary() {
   const lang   = currentLang === 'zh-TW' ? 'zh' : 'en';
   const title  = lang === 'zh' ? '單字本' : 'Word Bank';
@@ -774,6 +811,7 @@ modalBody.addEventListener('click', e => {
 /* ============================================================
    Lightbox
    ============================================================ */
+// 功能：圖片燈箱開啟函式。寫法：把圖片來源與說明文字寫入燈箱元素，加上 active 樣式顯示。
 function openLightbox(src, caption) {
   const lb = document.getElementById('lightbox');
   document.getElementById('lightboxImg').src = src;
@@ -782,6 +820,7 @@ function openLightbox(src, caption) {
   document.body.style.overflow = 'hidden';
 }
 
+// 功能：圖片燈箱關閉函式。寫法：移除燈箱的 active 樣式並還原 body 的捲動狀態。
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
   document.body.style.overflow = '';
