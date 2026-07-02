@@ -1,0 +1,882 @@
+[
+  {
+    "q": { "zh": "台灣最高的山是哪一座？", "en": "What is the tallest mountain in Taiwan?" },
+    "options": [
+      { "zh": "玉山", "en": "Yushan (Jade Mountain)" },
+      { "zh": "阿里山", "en": "Alishan" },
+      { "zh": "雪山", "en": "Xueshan (Snow Mountain)" },
+      { "zh": "合歡山", "en": "Hehuanshan" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "世界上最大的海洋是？", "en": "What is the largest ocean in the world?" },
+    "options": [
+      { "zh": "太平洋", "en": "Pacific Ocean" },
+      { "zh": "大西洋", "en": "Atlantic Ocean" },
+      { "zh": "印度洋", "en": "Indian Ocean" },
+      { "zh": "北極海", "en": "Arctic Ocean" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "蜂蜜是哪種昆蟲製造的？", "en": "Which insect makes honey?" },
+    "options": [
+      { "zh": "蜜蜂", "en": "Bees" },
+      { "zh": "螞蟻", "en": "Ants" },
+      { "zh": "蝴蝶", "en": "Butterflies" },
+      { "zh": "瓢蟲", "en": "Ladybugs" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "日本的首都是哪裡？", "en": "What is the capital of Japan?" },
+    "options": [
+      { "zh": "東京", "en": "Tokyo" },
+      { "zh": "大阪", "en": "Osaka" },
+      { "zh": "京都", "en": "Kyoto" },
+      { "zh": "北海道", "en": "Hokkaido" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "水的化學式是什麼？", "en": "What is the chemical formula of water?" },
+    "options": [
+      { "zh": "H₂O", "en": "H₂O" },
+      { "zh": "CO₂", "en": "CO₂" },
+      { "zh": "O₂", "en": "O₂" },
+      { "zh": "NaCl", "en": "NaCl" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "地球繞太陽一圈大約需要多久？", "en": "About how long does Earth take to orbit the Sun once?" },
+    "options": [
+      { "zh": "一年", "en": "One year" },
+      { "zh": "一天", "en": "One day" },
+      { "zh": "一個月", "en": "One month" },
+      { "zh": "一小時", "en": "One hour" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "野生企鵝主要生活在哪個半球？", "en": "In which hemisphere do wild penguins mainly live?" },
+    "options": [
+      { "zh": "南半球", "en": "Southern Hemisphere" },
+      { "zh": "北半球", "en": "Northern Hemisphere" },
+      { "zh": "赤道附近才有", "en": "Only near the equator" },
+      { "zh": "兩極都一樣多", "en": "Both poles equally" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "貓咪的鬍鬚主要是用來做什麼的？", "en": "What are a cat's whiskers mainly for?" },
+    "options": [
+      { "zh": "感知周圍空間", "en": "Sensing the space around them" },
+      { "zh": "裝飾好看", "en": "Just for looks" },
+      { "zh": "嚐味道", "en": "Tasting food" },
+      { "zh": "保暖", "en": "Keeping warm" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "珍珠奶茶發源於哪裡？", "en": "Where did bubble tea originate?" },
+    "options": [
+      { "zh": "台灣", "en": "Taiwan" },
+      { "zh": "日本", "en": "Japan" },
+      { "zh": "泰國", "en": "Thailand" },
+      { "zh": "香港", "en": "Hong Kong" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "標準鋼琴有幾個琴鍵？", "en": "How many keys does a standard piano have?" },
+    "options": [
+      { "zh": "88 個", "en": "88" },
+      { "zh": "66 個", "en": "66" },
+      { "zh": "100 個", "en": "100" },
+      { "zh": "76 個", "en": "76" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "人體最大的器官是？", "en": "What is the largest organ of the human body?" },
+    "options": [
+      { "zh": "皮膚", "en": "Skin" },
+      { "zh": "肝臟", "en": "Liver" },
+      { "zh": "大腦", "en": "Brain" },
+      { "zh": "肺臟", "en": "Lungs" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "光的速度大約是每秒多少？", "en": "About how fast does light travel per second?" },
+    "options": [
+      { "zh": "30 萬公里", "en": "300,000 km" },
+      { "zh": "3 萬公里", "en": "30,000 km" },
+      { "zh": "300 公里", "en": "300 km" },
+      { "zh": "3000 萬公里", "en": "30 million km" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "下列哪種動物可以站著睡覺？", "en": "Which of these animals can sleep standing up?" },
+    "options": [
+      { "zh": "馬", "en": "Horse" },
+      { "zh": "貓", "en": "Cat" },
+      { "zh": "狗", "en": "Dog" },
+      { "zh": "兔子", "en": "Rabbit" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "奧運五環總共有幾種顏色？", "en": "How many colors are in the Olympic rings?" },
+    "options": [
+      { "zh": "5 種", "en": "5" },
+      { "zh": "4 種", "en": "4" },
+      { "zh": "6 種", "en": "6" },
+      { "zh": "3 種", "en": "3" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "世界上最小的鳥是？", "en": "What is the smallest bird in the world?" },
+    "options": [
+      { "zh": "蜂鳥", "en": "Hummingbird" },
+      { "zh": "麻雀", "en": "Sparrow" },
+      { "zh": "燕子", "en": "Swallow" },
+      { "zh": "綠繡眼", "en": "White-eye" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "Minecraft 裡的苦力怕爆炸前會發出什麼聲音？", "en": "In Minecraft, what sound does a Creeper make before exploding?" },
+    "options": [
+      { "zh": "嘶嘶聲", "en": "A hissing sound" },
+      { "zh": "吼叫聲", "en": "A roar" },
+      { "zh": "哭聲", "en": "Crying" },
+      { "zh": "完全沒聲音", "en": "No sound at all" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "章魚有幾顆心臟？", "en": "How many hearts does an octopus have?" },
+    "options": [
+      { "zh": "3 顆", "en": "3" },
+      { "zh": "1 顆", "en": "1" },
+      { "zh": "2 顆", "en": "2" },
+      { "zh": "5 顆", "en": "5" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "「初音未來」是什麼？", "en": "What is Hatsune Miku?" },
+    "options": [
+      { "zh": "虛擬歌手", "en": "A virtual singer" },
+      { "zh": "真人偶像", "en": "A real-life idol" },
+      { "zh": "一部電影", "en": "A movie" },
+      { "zh": "一種樂器", "en": "A musical instrument" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "太陽系目前有幾顆行星？", "en": "How many planets are in the Solar System?" },
+    "options": [
+      { "zh": "8 顆", "en": "8" },
+      { "zh": "9 顆", "en": "9" },
+      { "zh": "7 顆", "en": "7" },
+      { "zh": "10 顆", "en": "10" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "彩虹一般說有幾種顏色？", "en": "How many colors is a rainbow usually said to have?" },
+    "options": [
+      { "zh": "7 種", "en": "7" },
+      { "zh": "5 種", "en": "5" },
+      { "zh": "6 種", "en": "6" },
+      { "zh": "8 種", "en": "8" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "世界上最長的河流一般認為是？", "en": "Which river is generally considered the longest in the world?" },
+    "options": [
+      { "zh": "尼羅河", "en": "The Nile" },
+      { "zh": "亞馬遜河", "en": "The Amazon" },
+      { "zh": "長江", "en": "The Yangtze" },
+      { "zh": "密西西比河", "en": "The Mississippi" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "平年一年有幾天？", "en": "How many days are in a common (non-leap) year?" },
+    "options": [
+      { "zh": "365 天", "en": "365" },
+      { "zh": "366 天", "en": "366" },
+      { "zh": "360 天", "en": "360" },
+      { "zh": "364 天", "en": "364" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "海豚是屬於哪一類動物？", "en": "Dolphins belong to which class of animals?" },
+    "options": [
+      { "zh": "哺乳類", "en": "Mammals" },
+      { "zh": "魚類", "en": "Fish" },
+      { "zh": "兩棲類", "en": "Amphibians" },
+      { "zh": "爬蟲類", "en": "Reptiles" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "「金閣寺」位於日本哪個城市？", "en": "Kinkaku-ji (the Golden Pavilion) is located in which Japanese city?" },
+    "options": [
+      { "zh": "京都", "en": "Kyoto" },
+      { "zh": "東京", "en": "Tokyo" },
+      { "zh": "奈良", "en": "Nara" },
+      { "zh": "名古屋", "en": "Nagoya" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "「相對論」是由哪位學者提出的？", "en": "Who proposed the Theory of Relativity?" },
+    "options": [
+      { "zh": "愛因斯坦", "en": "Einstein" },
+      { "zh": "牛頓", "en": "Newton" },
+      { "zh": "霍金", "en": "Hawking" },
+      { "zh": "伽利略", "en": "Galileo" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "諾貝爾獎目前沒有下列哪一種獎項？", "en": "Which of these is NOT a Nobel Prize category?" },
+    "options": [
+      { "zh": "數學獎", "en": "Mathematics" },
+      { "zh": "物理獎", "en": "Physics" },
+      { "zh": "化學獎", "en": "Chemistry" },
+      { "zh": "文學獎", "en": "Literature" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "下列哪種哺乳類動物不是胎生？", "en": "Which of these mammals does NOT give live birth?" },
+    "options": [
+      { "zh": "鴨嘴獸", "en": "Platypus" },
+      { "zh": "鯨魚", "en": "Whale" },
+      { "zh": "蝙蝠", "en": "Bat" },
+      { "zh": "海豚", "en": "Dolphin" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "下列哪個元素的電負度最大？", "en": "Which element has the highest electronegativity?" },
+    "options": [
+      { "zh": "氟", "en": "Fluorine" },
+      { "zh": "氧", "en": "Oxygen" },
+      { "zh": "氯", "en": "Chlorine" },
+      { "zh": "氮", "en": "Nitrogen" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "十二生肖中，「羊」排在第幾位？", "en": "In the Chinese zodiac, what position is the Goat?" },
+    "options": [
+      { "zh": "第 8 位", "en": "8th" },
+      { "zh": "第 6 位", "en": "6th" },
+      { "zh": "第 7 位", "en": "7th" },
+      { "zh": "第 9 位", "en": "9th" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "哈利波特中不能說出名字的大魔王自稱為？", "en": "In Harry Potter, what does the Dark Lord call himself?" },
+    "options": [
+      { "zh": "佛地魔", "en": "Voldemort" },
+      { "zh": "跩哥·馬份", "en": "Draco Malfoy" },
+      { "zh": "石內卜", "en": "Snape" },
+      { "zh": "鄧不利多", "en": "Dumbledore" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "唐太宗李世民的哥哥是下列何者？", "en": "Who was the elder brother of Emperor Taizong (Li Shimin) of Tang?" },
+    "options": [
+      { "zh": "李建成", "en": "Li Jiancheng" },
+      { "zh": "李淵", "en": "Li Yuan" },
+      { "zh": "李元吉", "en": "Li Yuanji" },
+      { "zh": "李玄霸", "en": "Li Xuanba" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "台灣的雪山隧道位於哪一條國道上？", "en": "On which national freeway is Taiwan's Hsuehshan Tunnel located?" },
+    "options": [
+      { "zh": "國道 5 號", "en": "Freeway No. 5" },
+      { "zh": "國道 2 號", "en": "Freeway No. 2" },
+      { "zh": "國道 3 號", "en": "Freeway No. 3" },
+      { "zh": "國道 6 號", "en": "Freeway No. 6" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "小於 100 的質數共有幾個？", "en": "How many prime numbers are there below 100?" },
+    "options": [
+      { "zh": "25 個", "en": "25" },
+      { "zh": "24 個", "en": "24" },
+      { "zh": "26 個", "en": "26" },
+      { "zh": "27 個", "en": "27" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "三國演義中，「鳳雛先生」指的是誰？", "en": "In Romance of the Three Kingdoms, who is nicknamed 'Fledgling Phoenix'?" },
+    "options": [
+      { "zh": "龐統", "en": "Pang Tong" },
+      { "zh": "諸葛亮", "en": "Zhuge Liang" },
+      { "zh": "司馬懿", "en": "Sima Yi" },
+      { "zh": "周瑜", "en": "Zhou Yu" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "澳洲的首都是哪一座城市？", "en": "What is the capital of Australia?" },
+    "options": [
+      { "zh": "坎培拉", "en": "Canberra" },
+      { "zh": "雪梨", "en": "Sydney" },
+      { "zh": "墨爾本", "en": "Melbourne" },
+      { "zh": "伯斯", "en": "Perth" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "伽利略相傳在哪座塔上做自由落體實驗？", "en": "From which tower did Galileo reportedly perform his free-fall experiment?" },
+    "options": [
+      { "zh": "比薩斜塔", "en": "Leaning Tower of Pisa" },
+      { "zh": "艾菲爾鐵塔", "en": "Eiffel Tower" },
+      { "zh": "倫敦塔", "en": "Tower of London" },
+      { "zh": "羅馬競技場", "en": "Colosseum" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "小提琴由低到高的四條弦定音為？", "en": "What are the four strings of a violin tuned to, low to high?" },
+    "options": [
+      { "zh": "G D A E", "en": "G D A E" },
+      { "zh": "E A D G", "en": "E A D G" },
+      { "zh": "C G D A", "en": "C G D A" },
+      { "zh": "A E B F", "en": "A E B F" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "蕭邦一生共寫了幾首鋼琴奏鳴曲？", "en": "How many piano sonatas did Chopin compose?" },
+    "options": [
+      { "zh": "3 首", "en": "3" },
+      { "zh": "2 首", "en": "2" },
+      { "zh": "4 首", "en": "4" },
+      { "zh": "5 首", "en": "5" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "台灣面積最大的縣是哪一個？", "en": "Which is the largest county by area in Taiwan?" },
+    "options": [
+      { "zh": "花蓮縣", "en": "Hualien County" },
+      { "zh": "南投縣", "en": "Nantou County" },
+      { "zh": "台東縣", "en": "Taitung County" },
+      { "zh": "屏東縣", "en": "Pingtung County" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "中國面積最大的省級行政區是？", "en": "Which is the largest province-level region of China by area?" },
+    "options": [
+      { "zh": "新疆維吾爾自治區", "en": "Xinjiang" },
+      { "zh": "西藏自治區", "en": "Tibet" },
+      { "zh": "內蒙古自治區", "en": "Inner Mongolia" },
+      { "zh": "青海省", "en": "Qinghai" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "體型最大的家貓品種是下列何者？", "en": "Which is the largest domestic cat breed?" },
+    "options": [
+      { "zh": "緬因貓", "en": "Maine Coon" },
+      { "zh": "波斯貓", "en": "Persian" },
+      { "zh": "暹羅貓", "en": "Siamese" },
+      { "zh": "美國短毛貓", "en": "American Shorthair" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "台灣成立的第一座國家公園是？", "en": "What was Taiwan's first national park?" },
+    "options": [
+      { "zh": "墾丁國家公園", "en": "Kenting National Park" },
+      { "zh": "陽明山國家公園", "en": "Yangmingshan National Park" },
+      { "zh": "太魯閣國家公園", "en": "Taroko National Park" },
+      { "zh": "玉山國家公園", "en": "Yushan National Park" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "酒精主要由人體哪個器官吸收？", "en": "Which organ absorbs most of the alcohol we drink?" },
+    "options": [
+      { "zh": "小腸", "en": "Small intestine" },
+      { "zh": "胃", "en": "Stomach" },
+      { "zh": "大腸", "en": "Large intestine" },
+      { "zh": "肝臟", "en": "Liver" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "中國歷史上最著名的女詞人是誰？", "en": "Who is the most famous female ci-poet in Chinese history?" },
+    "options": [
+      { "zh": "李清照", "en": "Li Qingzhao" },
+      { "zh": "蔡文姬", "en": "Cai Wenji" },
+      { "zh": "上官婉兒", "en": "Shangguan Wan'er" },
+      { "zh": "薛濤", "en": "Xue Tao" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "瑞典生物學家林奈被稱為？", "en": "The Swedish scientist Linnaeus is known as the father of what?" },
+    "options": [
+      { "zh": "生物分類學之父", "en": "Father of Taxonomy" },
+      { "zh": "演化論之父", "en": "Father of Evolution" },
+      { "zh": "遺傳學之父", "en": "Father of Genetics" },
+      { "zh": "現代化學之父", "en": "Father of Modern Chemistry" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "被稱為「台北的肺」的是下列何者？", "en": "Which place is called 'the lungs of Taipei'?" },
+    "options": [
+      { "zh": "大安森林公園", "en": "Daan Forest Park" },
+      { "zh": "陽明山", "en": "Yangmingshan" },
+      { "zh": "象山", "en": "Elephant Mountain" },
+      { "zh": "中央公園", "en": "Central Park" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "希臘神話中，為人類盜取火種的神是誰？", "en": "In Greek mythology, which god stole fire for humankind?" },
+    "options": [
+      { "zh": "普羅米修斯", "en": "Prometheus" },
+      { "zh": "宙斯", "en": "Zeus" },
+      { "zh": "阿波羅", "en": "Apollo" },
+      { "zh": "海克力斯", "en": "Heracles" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "「杯酒釋兵權」的典故出自哪位皇帝？", "en": "Which emperor is behind the story of 'releasing military power over a cup of wine'?" },
+    "options": [
+      { "zh": "宋太祖趙匡胤", "en": "Emperor Taizu (Zhao Kuangyin) of Song" },
+      { "zh": "漢高祖劉邦", "en": "Emperor Gaozu (Liu Bang) of Han" },
+      { "zh": "明太祖朱元璋", "en": "Emperor Taizu (Zhu Yuanzhang) of Ming" },
+      { "zh": "隋文帝楊堅", "en": "Emperor Wen (Yang Jian) of Sui" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "耶路撒冷是下列哪些宗教的聖地？", "en": "Jerusalem is a holy city for which religion?" },
+    "options": [
+      { "zh": "以上皆是", "en": "All of the above" },
+      { "zh": "猶太教", "en": "Judaism" },
+      { "zh": "伊斯蘭教", "en": "Islam" },
+      { "zh": "基督教", "en": "Christianity" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "蝙蝠俠（Batman）的真實身分是誰？", "en": "What is Batman's real name?" },
+    "options": [
+      { "zh": "布魯斯·韋恩", "en": "Bruce Wayne" },
+      { "zh": "克拉克·肯特", "en": "Clark Kent" },
+      { "zh": "彼得·帕克", "en": "Peter Parker" },
+      { "zh": "東尼·史塔克", "en": "Tony Stark" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "泡麵是哪一個國家發明的？", "en": "Which country invented instant noodles?" },
+    "options": [
+      { "zh": "日本", "en": "Japan" },
+      { "zh": "中國", "en": "China" },
+      { "zh": "韓國", "en": "South Korea" },
+      { "zh": "台灣", "en": "Taiwan" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "台積電（TSMC）的股票代號是？", "en": "What is TSMC's stock ticker number on the Taiwan exchange?" },
+    "options": [
+      { "zh": "2330", "en": "2330" },
+      { "zh": "2317", "en": "2317" },
+      { "zh": "2454", "en": "2454" },
+      { "zh": "1301", "en": "1301" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "白雪公主故事中有幾個小矮人？", "en": "How many dwarfs are there in Snow White?" },
+    "options": [
+      { "zh": "7 個", "en": "7" },
+      { "zh": "5 個", "en": "5" },
+      { "zh": "6 個", "en": "6" },
+      { "zh": "8 個", "en": "8" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "唐宋古文八大家之首是誰？", "en": "Who is regarded as the foremost of the Eight Masters of Tang and Song prose?" },
+    "options": [
+      { "zh": "韓愈", "en": "Han Yu" },
+      { "zh": "柳宗元", "en": "Liu Zongyuan" },
+      { "zh": "歐陽脩", "en": "Ouyang Xiu" },
+      { "zh": "蘇軾", "en": "Su Shi" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "一次減數分裂最後會產生幾個子細胞？", "en": "How many daughter cells does one meiosis produce?" },
+    "options": [
+      { "zh": "4 個", "en": "4" },
+      { "zh": "2 個", "en": "2" },
+      { "zh": "3 個", "en": "3" },
+      { "zh": "8 個", "en": "8" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "中國諷刺小說《儒林外史》的作者是誰？", "en": "Who wrote the satirical Chinese novel 'The Scholars'?" },
+    "options": [
+      { "zh": "吳敬梓", "en": "Wu Jingzi" },
+      { "zh": "曹雪芹", "en": "Cao Xueqin" },
+      { "zh": "羅貫中", "en": "Luo Guanzhong" },
+      { "zh": "施耐庵", "en": "Shi Nai'an" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "世界上面積最大的熱帶雨林是？", "en": "What is the largest tropical rainforest in the world?" },
+    "options": [
+      { "zh": "亞馬遜雨林", "en": "Amazon Rainforest" },
+      { "zh": "剛果雨林", "en": "Congo Rainforest" },
+      { "zh": "婆羅洲雨林", "en": "Borneo Rainforest" },
+      { "zh": "大堡礁", "en": "Great Barrier Reef" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "荷蘭的首都是哪一座城市？", "en": "What is the capital of the Netherlands?" },
+    "options": [
+      { "zh": "阿姆斯特丹", "en": "Amsterdam" },
+      { "zh": "鹿特丹", "en": "Rotterdam" },
+      { "zh": "海牙", "en": "The Hague" },
+      { "zh": "烏特勒支", "en": "Utrecht" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "南美洲印加帝國的首都在哪裡？", "en": "What was the capital of the Inca Empire?" },
+    "options": [
+      { "zh": "庫斯科", "en": "Cusco" },
+      { "zh": "利馬", "en": "Lima" },
+      { "zh": "波哥大", "en": "Bogotá" },
+      { "zh": "基多", "en": "Quito" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "瑞士的首都是哪一座城市？", "en": "What is the capital of Switzerland?" },
+    "options": [
+      { "zh": "伯恩", "en": "Bern" },
+      { "zh": "蘇黎世", "en": "Zurich" },
+      { "zh": "日內瓦", "en": "Geneva" },
+      { "zh": "巴塞爾", "en": "Basel" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "西班牙的首都是哪一座城市？", "en": "What is the capital of Spain?" },
+    "options": [
+      { "zh": "馬德里", "en": "Madrid" },
+      { "zh": "巴塞隆納", "en": "Barcelona" },
+      { "zh": "塞維亞", "en": "Seville" },
+      { "zh": "瓦倫西亞", "en": "Valencia" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "自然對數 ln 是以什麼數為底？", "en": "The natural logarithm (ln) uses what as its base?" },
+    "options": [
+      { "zh": "e", "en": "e" },
+      { "zh": "10", "en": "10" },
+      { "zh": "2", "en": "2" },
+      { "zh": "π", "en": "π" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "「主權在民」的思想是由哪位思想家提出的？", "en": "Which thinker championed the idea of popular sovereignty?" },
+    "options": [
+      { "zh": "盧梭", "en": "Rousseau" },
+      { "zh": "洛克", "en": "Locke" },
+      { "zh": "孟德斯鳩", "en": "Montesquieu" },
+      { "zh": "霍布斯", "en": "Hobbes" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "牛頓第一運動定律又稱為什麼定律？", "en": "Newton's First Law of Motion is also known as the law of what?" },
+    "options": [
+      { "zh": "慣性定律", "en": "Law of Inertia" },
+      { "zh": "作用力與反作用力定律", "en": "Action–Reaction Law" },
+      { "zh": "加速度定律", "en": "Law of Acceleration" },
+      { "zh": "萬有引力定律", "en": "Law of Gravitation" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "中國第一座佛寺是下列何者？", "en": "What was the first Buddhist temple in China?" },
+    "options": [
+      { "zh": "白馬寺", "en": "White Horse Temple" },
+      { "zh": "少林寺", "en": "Shaolin Temple" },
+      { "zh": "靈隱寺", "en": "Lingyin Temple" },
+      { "zh": "寒山寺", "en": "Hanshan Temple" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "《四書集注》的作者是誰？", "en": "Who wrote the 'Collected Commentaries on the Four Books'?" },
+    "options": [
+      { "zh": "朱熹", "en": "Zhu Xi" },
+      { "zh": "王陽明", "en": "Wang Yangming" },
+      { "zh": "程頤", "en": "Cheng Yi" },
+      { "zh": "董仲舒", "en": "Dong Zhongshu" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "金庸小說中，東方不敗練的是哪一部武功？", "en": "In Jin Yong's novels, which manual does Dongfang Bubai practice?" },
+    "options": [
+      { "zh": "葵花寶典", "en": "Sunflower Manual" },
+      { "zh": "九陰真經", "en": "Nine Yin Manual" },
+      { "zh": "易筋經", "en": "Yijin Jing" },
+      { "zh": "獨孤九劍", "en": "Nine Swords of Dugu" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "台灣的國花是下列哪一種花？", "en": "What is the national flower of the Republic of China (Taiwan)?" },
+    "options": [
+      { "zh": "梅花", "en": "Plum blossom" },
+      { "zh": "蘭花", "en": "Orchid" },
+      { "zh": "菊花", "en": "Chrysanthemum" },
+      { "zh": "牡丹", "en": "Peony" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "自來水煮沸後留下的白色鍋垢主要是什麼？", "en": "The white scale left after boiling tap water is mostly what compound?" },
+    "options": [
+      { "zh": "碳酸鈣", "en": "Calcium carbonate" },
+      { "zh": "氯化鈉", "en": "Sodium chloride" },
+      { "zh": "碳酸鈉", "en": "Sodium carbonate" },
+      { "zh": "硫酸鈣", "en": "Calcium sulfate" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "濃度單位 ppm 代表的數量是？", "en": "The concentration unit ppm stands for what amount?" },
+    "options": [
+      { "zh": "百萬分之一", "en": "One in a million" },
+      { "zh": "千分之一", "en": "One in a thousand" },
+      { "zh": "十萬分之一", "en": "One in a hundred thousand" },
+      { "zh": "十億分之一", "en": "One in a billion" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "白色情人節是每年的哪一天？", "en": "On what date is White Day celebrated?" },
+    "options": [
+      { "zh": "3 月 14 日", "en": "March 14" },
+      { "zh": "2 月 14 日", "en": "February 14" },
+      { "zh": "3 月 1 日", "en": "March 1" },
+      { "zh": "4 月 14 日", "en": "April 14" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "台灣民謠〈望春風〉、〈四季紅〉的作曲家是誰？", "en": "Who composed the Taiwanese songs 'Bāng Chhun-hong' and 'Sù-kùi-âng'?" },
+    "options": [
+      { "zh": "鄧雨賢", "en": "Teng Yu-hsien" },
+      { "zh": "李臨秋", "en": "Li Lin-chiu" },
+      { "zh": "周添旺", "en": "Chou Tien-wang" },
+      { "zh": "江文也", "en": "Chiang Wen-yeh" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "元曲《西廂記》的女主角是誰？", "en": "Who is the heroine of the Chinese play 'Romance of the West Chamber'?" },
+    "options": [
+      { "zh": "崔鶯鶯", "en": "Cui Yingying" },
+      { "zh": "杜麗娘", "en": "Du Liniang" },
+      { "zh": "林黛玉", "en": "Lin Daiyu" },
+      { "zh": "竇娥", "en": "Dou E" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "名曲〈卡農〉（Canon）的作曲家是誰？", "en": "Who composed the famous piece 'Canon'?" },
+    "options": [
+      { "zh": "帕海貝爾", "en": "Pachelbel" },
+      { "zh": "巴哈", "en": "Bach" },
+      { "zh": "韓德爾", "en": "Handel" },
+      { "zh": "韋瓦第", "en": "Vivaldi" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "《封神演義》主要是以哪位君王的故事改編？", "en": "'Investiture of the Gods' is loosely based on which king's story?" },
+    "options": [
+      { "zh": "商紂王", "en": "King Zhou of Shang" },
+      { "zh": "夏桀", "en": "King Jie of Xia" },
+      { "zh": "周幽王", "en": "King You of Zhou" },
+      { "zh": "秦始皇", "en": "Qin Shi Huang" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "金庸《倚天屠龍記》中，峨嵋派的創始人是誰？", "en": "In 'Heaven Sword and Dragon Sabre', who founded the Emei Sect?" },
+    "options": [
+      { "zh": "郭襄", "en": "Guo Xiang" },
+      { "zh": "郭靖", "en": "Guo Jing" },
+      { "zh": "黃蓉", "en": "Huang Rong" },
+      { "zh": "滅絕師太", "en": "Abbess Miejue" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "北極熊的皮膚其實是什麼顏色？", "en": "What color is a polar bear's skin actually?" },
+    "options": [
+      { "zh": "黑色", "en": "Black" },
+      { "zh": "白色", "en": "White" },
+      { "zh": "粉紅色", "en": "Pink" },
+      { "zh": "灰色", "en": "Gray" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "一公克脂肪可產生多少大卡的熱量？", "en": "How many kilocalories does one gram of fat provide?" },
+    "options": [
+      { "zh": "9 大卡", "en": "9 kcal" },
+      { "zh": "4 大卡", "en": "4 kcal" },
+      { "zh": "7 大卡", "en": "7 kcal" },
+      { "zh": "2 大卡", "en": "2 kcal" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "一國貨幣貶值時，通常會使該國的出口如何？", "en": "When a country's currency depreciates, its exports usually do what?" },
+    "options": [
+      { "zh": "增加", "en": "Increase" },
+      { "zh": "減少", "en": "Decrease" },
+      { "zh": "不變", "en": "Stay the same" },
+      { "zh": "完全停止", "en": "Stop entirely" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "岳陽樓是由哪位人物出資重修而聞名？", "en": "Who is famed for funding the restoration of the Yueyang Tower?" },
+    "options": [
+      { "zh": "滕子京", "en": "Teng Zijing" },
+      { "zh": "范仲淹", "en": "Fan Zhongyan" },
+      { "zh": "歐陽脩", "en": "Ouyang Xiu" },
+      { "zh": "王安石", "en": "Wang Anshi" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "現代的行人交通號誌最早起源於哪個國家？", "en": "In which country did modern pedestrian traffic signals originate?" },
+    "options": [
+      { "zh": "德國", "en": "Germany" },
+      { "zh": "美國", "en": "United States" },
+      { "zh": "英國", "en": "United Kingdom" },
+      { "zh": "法國", "en": "France" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "馬達加斯加的首都是哪一座城市？", "en": "What is the capital of Madagascar?" },
+    "options": [
+      { "zh": "安塔那那利佛", "en": "Antananarivo" },
+      { "zh": "奈洛比", "en": "Nairobi" },
+      { "zh": "路易港", "en": "Port Louis" },
+      { "zh": "馬普托", "en": "Maputo" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "中國歷史上疆域版圖最大的朝代是？", "en": "Which dynasty had the largest territory in Chinese history?" },
+    "options": [
+      { "zh": "元朝", "en": "Yuan" },
+      { "zh": "漢朝", "en": "Han" },
+      { "zh": "唐朝", "en": "Tang" },
+      { "zh": "清朝", "en": "Qing" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "提拉米蘇主要使用哪一種起司製作？", "en": "Which cheese is the key ingredient in tiramisu?" },
+    "options": [
+      { "zh": "馬斯卡彭起司", "en": "Mascarpone" },
+      { "zh": "切達起司", "en": "Cheddar" },
+      { "zh": "莫札瑞拉起司", "en": "Mozzarella" },
+      { "zh": "帕瑪森起司", "en": "Parmesan" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "量販店「家樂福」源自哪一個國家？", "en": "The hypermarket chain Carrefour originated in which country?" },
+    "options": [
+      { "zh": "法國", "en": "France" },
+      { "zh": "德國", "en": "Germany" },
+      { "zh": "英國", "en": "United Kingdom" },
+      { "zh": "美國", "en": "United States" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "汽車品牌「賓利」（Bentley）是哪一國的品牌？", "en": "The car brand Bentley is from which country?" },
+    "options": [
+      { "zh": "英國", "en": "United Kingdom" },
+      { "zh": "德國", "en": "Germany" },
+      { "zh": "法國", "en": "France" },
+      { "zh": "義大利", "en": "Italy" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "西羅馬帝國滅亡於西元哪一年？", "en": "In what year did the Western Roman Empire fall?" },
+    "options": [
+      { "zh": "西元 476 年", "en": "476 AD" },
+      { "zh": "西元 395 年", "en": "395 AD" },
+      { "zh": "西元 410 年", "en": "410 AD" },
+      { "zh": "西元 527 年", "en": "527 AD" }
+    ],
+    "answer": 0
+  },
+  {
+    "q": { "zh": "阿基米德原理是用來描述哪一種物理現象？", "en": "Archimedes' principle describes which physical phenomenon?" },
+    "options": [
+      { "zh": "浮力", "en": "Buoyancy" },
+      { "zh": "慣性", "en": "Inertia" },
+      { "zh": "重力", "en": "Gravity" },
+      { "zh": "摩擦力", "en": "Friction" }
+    ],
+    "answer": 0
+  }
+]

@@ -20,6 +20,7 @@ portfolio/
 │   └── style.css               # 全站樣式 + 深色/亮色主題變數
 ├── js/
 │   ├── stars.js                # Canvas 背景動畫（星空 / 太陽系粒子 + 流星）
+│   ├── games.js                # 遊戲區邏輯（猜單字 / 貪吃蛇 / 圈圈叉叉 / 知識王）
 │   └── main.js                 # 主邏輯（主題切換、語言切換、Modal、小教室）
 ├── pages/
 │   └── taiwanese.html          # 台語作品獨立頁（目前未連結，可刪除）
@@ -40,6 +41,8 @@ portfolio/
 │   ├── note/                   # 程式作品「筆記內容」原始 .md + 轉換後 .json
 │   ├── projects/                # 程式作品「進行中的程式專案」卡片用 icon 圖
 │   ├── review/                 # 備審文件（PDF）
+│   ├── games/                  # 遊戲區資料
+│   │   └── quiz.json           # 知識王題庫（中英雙語，88 題）
 │   └── words/                  # 小教室單字 JSON 檔
 │       ├── english.json
 │       ├── japanese.json
@@ -53,7 +56,7 @@ portfolio/
 
 ### 1. Nav 導覽列
 - Logo：比卡 / Bika
-- 連結：作品集 / 小教室 / 關於
+- 連結：作品集 / 小教室 / 遊戲區 / 關於
 - 語言切換：中文 ↔ 英文（偏好存 localStorage）
 - 主題切換：星空深色 ↔ 太陽系粉色（偏好存 localStorage）
 - 提示文字：中文介面顯示 `if you want to change language →`，英文介面顯示 `想切換語言 →`
@@ -112,15 +115,29 @@ portfolio/
 - 漢堡按鈕 ☰：開啟單字本，顯示所有已解鎖單字，可點開查看
 - 副標題：「每日一詞・跟著比卡學單字」（已從原本的「學台語」改為通用三語版）
 
-### 5. 關於
+### 5. 遊戲區（4 格 Grid）
+
+| 遊戲 | 卡片 key | 說明 |
+|------|---------|------|
+| 猜單字 | `wordle` | Wordle 風格，6 次機會猜 5 字母英文單字，螢幕鍵盤 + 實體鍵盤皆可輸入，單字庫寫在 `js/games.js` 的 `WORDLE_WORDS` |
+| 小精靈 | `pacman` | Canvas 15x15 柱狀迷宮（牆=外框+行列皆偶數的格子，保證通道相連），吃光豆子過關、大力丸可反吃鬼（`FRIGHT_TICKS` 回合），3 條命，3 隻鬼會追逐/逃跑；方向鍵 / WASD / 滑動 / 觸控方向鍵控制 |
+| 圈圈叉叉 | `tictactoe` | 玩家 ⭕ vs 比卡 AI ❌（啟發式：贏 > 擋 > 中間 > 角落 > 邊），可切換先手／後手（選 AI 先手開局它會先落子），比分只記當次瀏覽 |
+| 知識王 | `quiz` | 從 `assets/games/quiz.json` 隨機抽 10 題，答完顯示分數與稱號（知識王 / 達人 / 好奇寶寶 / 再接再厲） |
+
+- 遊戲邏輯集中在 `js/games.js`（在 `main.js` 之前載入），`main.js` 的 `openModal` 遇到 `type: 'game'` 會呼叫 `renderGameModal(key, lang)` 與 `setupGameModal(key, lang)`
+- 關閉 Modal 時 `closeModal` 會呼叫 `stopActiveGame()` 清掉貪吃蛇計時器與猜單字的鍵盤監聽
+- 卡片封面不用圖片，是 CSS 漸層底（`.wordle-bg` 等）+ 漂浮 emoji（`.game-emoji`）
+- **新增知識王題目步驟**：在 `assets/games/quiz.json` 加一筆 `{ "q": { "zh", "en" }, "options": [4 個 { "zh", "en" }], "answer": 正解索引 }`（選項顯示時會自動洗牌，answer 填在原陣列的索引即可）
+
+### 6. 關於
 - 5 段自我介紹（中英雙語）
 
-### 6. 浮動社群側欄
+### 7. 浮動社群側欄
 - 固定在畫面右側（手機版移至右下角，橫排）
 - GitHub、Instagram（https://www.instagram.com/jia_yu_0317）SVG icon 按鈕
 - 取代原本放在「關於」區段內的社群連結
 
-### 7. Footer
+### 8. Footer
 - © 2025 比卡 Bika · 用星塵製作
 
 ---

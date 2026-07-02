@@ -1712,3 +1712,340 @@ html[lang="en"]    .lang-en { display: none; }
   .modal          { padding: 2rem 1.4rem; }
   .project-list   { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   Games Section（遊戲區）
+   ============================================================ */
+.games {
+  padding: 8rem 3rem;
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.games-inner {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.8rem;
+}
+
+/* 遊戲卡片封面：漸層底 + 漂浮 emoji */
+.game-card .card-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-emoji {
+  font-size: 3.6rem;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
+  animation: gameEmojiBob 2.6s ease-in-out infinite;
+}
+
+@keyframes gameEmojiBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+.wordle-bg {
+  background:
+    radial-gradient(ellipse at 25% 70%, rgba(92,184,122,0.45) 0%, transparent 55%),
+    radial-gradient(ellipse at 78% 25%, rgba(217,164,65,0.32) 0%, transparent 48%);
+}
+
+.pacman-bg {
+  background:
+    radial-gradient(ellipse at 70% 70%, rgba(247,213,74,0.42) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 25%, rgba(139,124,248,0.32) 0%, transparent 48%);
+}
+
+.tictactoe-bg {
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(120,170,247,0.42) 0%, transparent 52%),
+    radial-gradient(ellipse at 75% 72%, rgba(247,168,120,0.34) 0%, transparent 50%);
+}
+
+.quiz-bg {
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(196,140,248,0.44) 0%, transparent 56%),
+    radial-gradient(ellipse at 22% 22%, rgba(247,208,120,0.32) 0%, transparent 46%);
+}
+
+@media (max-width: 1100px) {
+  .games-inner { grid-template-columns: repeat(2, minmax(0, 420px)); justify-content: center; }
+}
+
+@media (max-width: 680px) {
+  .games       { padding: 5rem 1.2rem; }
+  .games-inner { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Game Modal 共用
+   ============================================================ */
+.game-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.4rem;
+}
+
+.game-msg {
+  color: var(--text-2);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  min-height: 1.4em;
+  text-align: center;
+}
+
+.game-restart { margin-top: 0.4rem; }
+
+/* ============================================================
+   猜單字（Wordle）
+   ============================================================ */
+.wordle-board {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wordle-row { display: flex; gap: 6px; }
+
+.wordle-cell {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--border-h);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.wordle-cell.good { background: #4caf7d; border-color: #4caf7d; color: #fff; }
+.wordle-cell.mid  { background: #d9a441; border-color: #d9a441; color: #fff; }
+.wordle-cell.bad  { background: rgba(125,125,145,0.4); border-color: transparent; color: #fff; }
+
+.wordle-kb {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.wordle-kb-row { display: flex; gap: 5px; }
+
+.wordle-key {
+  min-width: 1.9rem;
+  height: 2.5rem;
+  padding: 0 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.wordle-key:hover { border-color: var(--accent); }
+.wordle-key-wide  { min-width: 2.8rem; }
+
+.wordle-key.good { background: #4caf7d; border-color: #4caf7d; color: #fff; }
+.wordle-key.mid  { background: #d9a441; border-color: #d9a441; color: #fff; }
+.wordle-key.bad  { background: rgba(125,125,145,0.4); border-color: transparent; color: rgba(255,255,255,0.55); }
+
+@media (max-width: 680px) {
+  .wordle-cell { width: 2.5rem; height: 2.5rem; font-size: 1.1rem; }
+  .wordle-key  { min-width: 1.65rem; height: 2.3rem; font-size: 0.75rem; }
+}
+
+/* ============================================================
+   小精靈（Pac-Man）
+   ============================================================ */
+.pacman-score-row {
+  display: flex;
+  gap: 2.2rem;
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+.pacman-score-row b { color: var(--accent); font-size: 1.05rem; }
+
+#pacmanCanvas {
+  width: min(330px, 80vw);
+  height: min(330px, 80vw);
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card-bg);
+}
+
+.pacman-hint { font-size: 0.78rem; }
+
+/* 觸控方向鍵：桌機（可 hover 的裝置）隱藏 */
+.pacman-dpad {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.pacman-dpad-mid { display: flex; gap: 6px; }
+
+.pacman-dpad-btn {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.pacman-dpad-btn:active { background: var(--btn-bg-h); border-color: var(--accent); }
+
+@media (hover: none) {
+  .pacman-dpad { display: flex; }
+  .pacman-hint { display: none; }
+}
+
+/* ============================================================
+   圈圈叉叉
+   ============================================================ */
+.ttt-score-row {
+  display: flex;
+  gap: 2rem;
+  color: var(--text-2);
+  font-size: 0.88rem;
+}
+
+.ttt-score-row b { color: var(--accent); font-size: 1.05rem; }
+
+.ttt-first-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ttt-first-label { color: var(--text-2); font-size: 0.85rem; }
+
+.ttt-first-btn {
+  padding: 0.28rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--card-bg);
+  color: var(--text-2);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.ttt-first-btn:hover { border-color: var(--accent); color: var(--text); }
+
+.ttt-first-btn.active {
+  background: var(--btn-bg-h);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 5rem);
+  grid-template-rows: repeat(3, 5rem);
+  gap: 8px;
+}
+
+.ttt-cell {
+  border: 1.5px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--card-bg);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.ttt-cell:hover  { border-color: var(--accent); }
+.ttt-cell:active { transform: scale(0.94); }
+
+.ttt-cell.win {
+  background: var(--btn-bg-h);
+  border-color: var(--accent);
+  box-shadow: 0 0 18px var(--accent-glow);
+}
+
+@media (max-width: 680px) {
+  .ttt-board { grid-template-columns: repeat(3, 4.2rem); grid-template-rows: repeat(3, 4.2rem); }
+}
+
+/* ============================================================
+   知識王
+   ============================================================ */
+.quiz-wrap { width: 100%; max-width: 480px; margin: 0 auto; }
+
+.quiz-progress {
+  color: var(--text-2);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+.quiz-live-score { color: var(--accent); }
+
+.quiz-question {
+  color: var(--text);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  text-align: center;
+  min-height: 3.4em;
+  display: flex;
+  align-items: center;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 100%;
+}
+
+.quiz-option {
+  padding: 0.85rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: inherit;
+}
+
+.quiz-option:hover:not(:disabled) { border-color: var(--accent); background: var(--card-bg-h); }
+.quiz-option:disabled { cursor: default; opacity: 0.85; }
+
+.quiz-option.right { background: rgba(76,175,125,0.28); border-color: #4caf7d; opacity: 1; }
+.quiz-option.wrong { background: rgba(224,85,85,0.25);  border-color: #e05555; opacity: 1; }
+
+.quiz-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem 0;
+}
+
+.quiz-result-label { color: var(--text-2); font-size: 0.9rem; letter-spacing: 0.1em; }
+
+.quiz-result-score {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.quiz-result-rank { color: var(--text); font-size: 1.05rem; }

@@ -350,6 +350,26 @@ const MODAL_DATA = {
     en: { title: 'Taiwanese Classroom', subtitle: 'One word a day · Learn Taiwanese with Bika' },
     type: 'vocabulary',
   },
+  wordle: {
+    zh: { title: '猜單字', subtitle: '六次機會・猜出五個字母的英文單字' },
+    en: { title: 'Word Guess', subtitle: 'Six tries · Guess the five-letter word' },
+    type: 'game',
+  },
+  pacman: {
+    zh: { title: '小精靈', subtitle: '穿梭迷宮吃豆子・大力丸反吃鬼' },
+    en: { title: 'Pac-Man', subtitle: 'Eat dots through the maze · power pellets chomp ghosts' },
+    type: 'game',
+  },
+  tictactoe: {
+    zh: { title: '圈圈叉叉', subtitle: '和比卡 AI 一決勝負' },
+    en: { title: 'Tic-Tac-Toe', subtitle: 'Face off against Bika AI' },
+    type: 'game',
+  },
+  quiz: {
+    zh: { title: '知識王', subtitle: '十題隨機問答・挑戰常識極限' },
+    en: { title: 'Quiz Master', subtitle: 'Ten random questions · Test your knowledge' },
+    type: 'game',
+  },
 };
 
 /* ============================================================
@@ -635,6 +655,8 @@ function openModal(key) {
     content = renderAudioModal(data, lang);
   } else if (data.type === 'code') {
     content = renderCodeModal(data, lang);
+  } else if (data.type === 'game') {
+    content = renderGameModal(key, lang);
   }
 
   modalBody.innerHTML = `
@@ -646,13 +668,14 @@ function openModal(key) {
   if (data.type === 'audio') setupAudioModal();
   if (data.type === 'code') setupCodeModal(data, lang);
   if (data.type === 'gallery') setupModalTabs();
+  if (data.type === 'game') setupGameModal(key, lang);
   currentModalKey = key;
   overlay.classList.add('active');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
 
-// 功能：Modal 關閉函式。寫法：移除 active 樣式、暫停音樂、停止視覺化並移除疊加 canvas。
+// 功能：Modal 關閉函式。寫法：移除 active 樣式、暫停音樂、停止視覺化並移除疊加 canvas，同時停止運作中的遊戲。
 function closeModal() {
   overlay.classList.remove('active');
   overlay.setAttribute('aria-hidden', 'true');
@@ -660,6 +683,7 @@ function closeModal() {
   if (!_audio.paused) _audio.pause();
   stopViz();
   if (_perimCanvas) { _perimCanvas.remove(); _perimCanvas = null; }
+  stopActiveGame();
 }
 
 // 功能：音量圖示更新函式。寫法：用三元運算子依音量區間切換對應的圖示文字。
