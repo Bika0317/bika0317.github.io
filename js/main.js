@@ -352,7 +352,7 @@ const MODAL_DATA = {
   },
   wordle: {
     zh: { title: '猜單字', subtitle: '六次機會・猜出五個字母的英文單字' },
-    en: { title: 'Word Guess', subtitle: 'Six tries · Guess the five-letter word' },
+    en: { title: 'Wordle', subtitle: 'Six tries · Guess the five-letter word' },
     type: 'game',
   },
   pacman: {
