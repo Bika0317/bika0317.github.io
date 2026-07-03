@@ -119,7 +119,7 @@ portfolio/
 
 | 遊戲 | 卡片 key | 說明 |
 |------|---------|------|
-| 猜單字 | `wordle` | Wordle 風格，6 次機會猜 5 字母英文單字，螢幕鍵盤 + 實體鍵盤皆可輸入，單字庫寫在 `js/games.js` 的 `WORDLE_WORDS` |
+| 猜單字 | `wordle` | Wordle 風格，6 次機會猜 5 字母英文單字，螢幕鍵盤 + 實體鍵盤皆可輸入，單字庫寫在 `js/games.js` 的 `WORDLE_WORDS`（取自 [StockQ Wordle 歷史答案](https://www.stockq.org/life/wordle-history.php)，2021/06/19 起官方每日答案去重共 1606 字） |
 | 小精靈 | `pacman` | Canvas 15x15 柱狀迷宮（牆=外框+行列皆偶數的格子，保證通道相連），吃光豆子過關、大力丸可反吃鬼（`FRIGHT_TICKS` 回合），3 條命，3 隻鬼會追逐/逃跑；方向鍵 / WASD / 滑動 / 觸控方向鍵控制 |
 | 圈圈叉叉 | `tictactoe` | 玩家 ⭕ vs 比卡 AI ❌（啟發式：贏 > 擋 > 中間 > 角落 > 邊），可切換先手／後手（選 AI 先手開局它會先落子），比分只記當次瀏覽 |
 | 知識王 | `quiz` | 從 `assets/games/quiz.json` 隨機抽 10 題，答完顯示分數與稱號（知識王 / 達人 / 好奇寶寶 / 再接再厲） |
