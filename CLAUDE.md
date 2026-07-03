@@ -34,6 +34,7 @@ portfolio/
 │   ├── ZhiWen.png              # 日文小教室卡片封面（注意大小寫）
 │   ├── English.png             # 英文小教室卡片封面
 │   ├── OOXX.png                # 圈圈叉叉遊戲卡片封面
+│   ├── PAC_MAN.png             # 小精靈遊戲卡片封面
 │   ├── paintings/              # 畫作圖片，依分類分資料夾
 │   │   ├── 手繪/                # 18 張
 │   │   ├── MC建築/              # 8 張
@@ -127,7 +128,7 @@ portfolio/
 
 - 遊戲邏輯集中在 `js/games.js`（在 `main.js` 之前載入），`main.js` 的 `openModal` 遇到 `type: 'game'` 會呼叫 `renderGameModal(key, lang)` 與 `setupGameModal(key, lang)`
 - 關閉 Modal 時 `closeModal` 會呼叫 `stopActiveGame()` 清掉貪吃蛇計時器與猜單字的鍵盤監聽
-- 卡片封面：圈圈叉叉用圖片 `assets/OOXX.png`（同作品集卡片的 `.card-preview-img` 模式）；其餘三張是 CSS 漸層底（`.wordle-bg` 等）+ 漂浮 emoji（`.game-emoji`）
+- 卡片封面：圈圈叉叉用 `assets/OOXX.png`、小精靈用 `assets/PAC_MAN.png`（同作品集卡片的 `.card-preview-img` 模式）；其餘兩張是 CSS 漸層底（`.wordle-bg` 等）+ 漂浮 emoji（`.game-emoji`）
 - **新增知識王題目步驟**：在 `assets/games/quiz.json` 加一筆 `{ "q": { "zh", "en" }, "options": [4 個 { "zh", "en" }], "answer": 正解索引 }`（選項顯示時會自動洗牌，answer 填在原陣列的索引即可）
 
 ### 6. 關於
