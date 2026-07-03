@@ -779,26 +779,33 @@ function setupTicTacToe(lang) {
     return LINES.find(l => l.every(i => board[i] === sym)) || null;
   }
 
-  // 功能：AI 落子選位函式。寫法：依序找「自己能贏的格」→「擋玩家要贏的格」→ 中間 → 隨機角落 → 隨機邊。
+  // 功能：AI 落子選位函式。寫法：依序找「自己能贏的格」→「擋玩家要贏的格」→ 中間/角落 → 邊；每一層的候選格都隨機挑，讓每局下法不同。
   function aiPick() {
-    // 功能：找出某符號再一步就連線的格子。寫法：逐條連線檢查是否恰有兩格同符號且剩一空格。
+    // 功能：隨機挑格函式。寫法：從候選格陣列中等機率抽一格回傳。
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+    // 功能：找出某符號再一步就連線的所有格子。寫法：逐條連線收集「恰有兩格同符號且剩一空格」的空格，回傳陣列。
     function oneAway(sym) {
+      const spots = [];
       for (const l of LINES) {
         const marks = l.filter(i => board[i] === sym);
         const empty = l.filter(i => board[i] === '');
-        if (marks.length === 2 && empty.length === 1) return empty[0];
+        if (marks.length === 2 && empty.length === 1 && !spots.includes(empty[0])) spots.push(empty[0]);
       }
-      return -1;
+      return spots;
     }
-    let p = oneAway('❌');
-    if (p !== -1) return p;
-    p = oneAway('⭕');
-    if (p !== -1) return p;
-    if (board[4] === '') return 4;
+    let spots = oneAway('❌');
+    if (spots.length) return pick(spots);
+    spots = oneAway('⭕');
+    if (spots.length) return pick(spots);
+    // 中間略優先（60%）但不必搶，其餘隨機角落，開局才不會每次都一樣
     const corners = [0, 2, 6, 8].filter(i => board[i] === '');
-    if (corners.length) return corners[Math.floor(Math.random() * corners.length)];
+    if (board[4] === '' && (Math.random() < 0.6 || !corners.length)) return 4;
+    if (corners.length) return pick(corners);
+    if (board[4] === '') return 4;
     const sides = [1, 3, 5, 7].filter(i => board[i] === '');
-    return sides[Math.floor(Math.random() * sides.length)];
+    return pick(sides);
   }
 
   // 功能：回合結束檢查函式。寫法：先查勝利連線標記亮格並記分，再查是否滿盤平手，回傳是否已結束。
