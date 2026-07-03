@@ -425,6 +425,8 @@ function setupPacman(lang) {
     again: lang === 'zh' ? '再玩一次' : 'Play Again',
     win:   lang === 'zh' ? '全部吃光，通關啦！🎉' : 'All cleared — you win! 🎉',
     over:  lang === 'zh' ? '被抓到了，遊戲結束！' : 'Caught! Game Over!',
+    rule:  lang === 'zh' ? '吃光全部豆子即獲勝！' : 'Eat every dot to win!',
+    press: lang === 'zh' ? '按「開始遊戲」出發' : 'Press "Start" to play',
   };
 
   // 功能：主題色讀取函式。寫法：用 getComputedStyle 讀取 CSS 變數，讓迷宮牆色跟著深淺主題走。
@@ -609,15 +611,20 @@ function setupPacman(lang) {
     ctx.fill();
   }
 
-  // 功能：中央訊息疊字函式。寫法：蓋半透明底並置中畫文字（通關/結束共用）。
-  function overlay(text) {
+  // 功能：中央訊息疊字函式。寫法：蓋半透明底並置中畫主文字，若給第二行則以小字畫在下方（開場規則/通關/結束共用）。
+  function overlay(text, sub) {
     ctx.fillStyle = 'rgba(0,0,0,0.6)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#fff';
     ctx.font = '20px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2 - (sub ? 14 : 0));
+    if (sub) {
+      ctx.font = '14px sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.75)';
+      ctx.fillText(sub, canvas.width / 2, canvas.height / 2 + 18);
+    }
   }
 
   // 功能：通關處理函式。寫法：停止主迴圈、標記結束並蓋上通關訊息與分數。
@@ -697,11 +704,12 @@ function setupPacman(lang) {
 
   btn.addEventListener('click', start);
 
-  // 初始畫面：先畫好靜態迷宮與豆子，等玩家按開始
+  // 初始畫面：先畫好靜態迷宮與豆子，蓋上勝利規則通知，等玩家按開始
   buildDots();
   resetActors();
   score = 0; lives = 3; tick = 0;
   draw();
+  overlay(T.rule, T.press);
 
   _gameCleanup = () => {
     clearInterval(timer); timer = null;
