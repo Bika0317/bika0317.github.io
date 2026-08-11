@@ -169,6 +169,16 @@
   - [IDENTITY_INSERT](#identity_insert允許插入識別欄位)
   - [修改順序物件 ALTER SEQUENCE](#修改順序物件alter-sequence)
   - [刪除順序物件 DROP SEQUENCE](#刪除順序物件drop-sequence)
+- [SQL Server Synonym（同義字）與 Linked Server 跨資料庫用法](#sql-server-synonym同義字與-linked-server-跨資料庫用法)
+  - [什麼是 Synonym？](#什麼是-synonym)
+  - [一、同一台 SQL Server，不同 Database](#一同一台-sql-server不同-database)
+  - [二、不同 SQL Server（Linked Server）](#二不同-sql-serverlinked-server)
+  - [三、建立 Linked Server](#三建立-linked-server)
+  - [四、Synonym 可以指向哪些物件？](#四synonym-可以指向哪些物件)
+  - [五、查看 Synonym](#五查看-synonym)
+  - [六、刪除 Synonym](#六刪除-synonym)
+  - [七、修改 Synonym](#七修改-synonym)
+  - [八、Synonym 的限制](#八synonym-的限制)
 
 ---
 
@@ -3380,3 +3390,204 @@ DROP SEQUENCE 順序物件名稱
 -- 範例
 DROP SEQUENCE 編號順序
 ```
+
+---
+
+## SQL Server Synonym（同義字）與 Linked Server 跨資料庫用法
+
+### 什麼是 Synonym？
+
+Synonym（同義字）是 SQL Server 提供的**物件別名**功能，可以替 Table、View、Stored Procedure、Function、Sequence 等物件建立一個別名。
+
+使用 Synonym 後，查詢端不需要重複撰寫完整的資料庫或伺服器名稱；來源位置改變時，也只需重新建立 Synonym，不必逐一修改所有查詢。
+
+---
+
+### 一、同一台 SQL Server，不同 Database
+
+假設：
+
+- `DatabaseA`：目前的專案資料庫
+- `DatabaseB`：資料來源
+
+原本查詢：
+
+```sql
+SELECT *
+FROM DatabaseB.dbo.Product;
+```
+
+在 `DatabaseA` 建立 Synonym：
+
+```sql
+USE DatabaseA;
+GO
+
+CREATE SYNONYM dbo.Product
+FOR DatabaseB.dbo.Product;
+```
+
+之後即可直接查詢：
+
+```sql
+SELECT *
+FROM dbo.Product;
+```
+
+效果等同於：
+
+```sql
+SELECT *
+FROM DatabaseB.dbo.Product;
+```
+
+---
+
+### 二、不同 SQL Server（Linked Server）
+
+假設 Linked Server 名稱為：
+
+```text
+TD1_DB
+```
+
+原本需要使用四段式名稱：
+
+```sql
+SELECT *
+FROM TD1_DB.DatabaseB.dbo.Product;
+```
+
+建立 Synonym：
+
+```sql
+CREATE SYNONYM dbo.Product
+FOR TD1_DB.DatabaseB.dbo.Product;
+```
+
+之後即可：
+
+```sql
+SELECT *
+FROM dbo.Product;
+```
+
+藉此存取遠端 SQL Server 的資料。
+
+---
+
+### 三、建立 Linked Server
+
+#### 建立 Linked Server
+
+```sql
+EXEC sp_addlinkedserver
+    @server = 'TD1_DB',
+    @srvproduct = '',
+    @provider = 'MSOLEDBSQL',
+    @datasrc = '192.168.20.141';
+```
+
+#### 設定登入帳號
+
+```sql
+EXEC sp_addlinkedsrvlogin
+    @rmtsrvname = 'TD1_DB',
+    @useself = 'false',
+    @rmtuser = 'sa',
+    @rmtpassword = 'password';
+```
+
+> 正式環境應使用權限受限的專用帳號，避免使用 `sa`，也不要把真實密碼直接寫進版本控制或公開筆記。
+
+完成後即可使用四段式名稱查詢：
+
+```sql
+SELECT *
+FROM TD1_DB.DatabaseB.dbo.Product;
+```
+
+---
+
+### 四、Synonym 可以指向哪些物件？
+
+常見支援物件：
+
+- Table
+- View
+- Stored Procedure
+- Scalar Function
+- Table-valued Function
+- Sequence
+
+例如替遠端函數建立 Synonym：
+
+```sql
+CREATE SYNONYM dbo.fn_FormatFinancialValue
+FOR TD1_DB.TD1_SCSB.dbo.fn_FormatFinancialValue;
+```
+
+之後即可透過 Synonym 呼叫：
+
+```sql
+SELECT dbo.fn_FormatFinancialValue(...);
+```
+
+不用再寫完整的伺服器、資料庫與 Schema 名稱。
+
+---
+
+### 五、查看 Synonym
+
+可以查詢目前資料庫中的 `sys.synonyms` 系統檢視：
+
+```sql
+SELECT
+    name,
+    base_object_name
+FROM sys.synonyms;
+```
+
+範例結果：
+
+| name | base_object_name |
+|------|------------------|
+| Product | TD1_DB.TD1_SCSB.dbo.Product |
+| RefCurrency | TD1_DB.TD1_SCSB.dbo.RefCurrency |
+
+---
+
+### 六、刪除 Synonym
+
+```sql
+DROP SYNONYM dbo.Product;
+```
+
+---
+
+### 七、修改 Synonym
+
+SQL Server **不能直接修改 Synonym**。
+
+若來源變更，只能先刪除再重新建立：
+
+```sql
+DROP SYNONYM dbo.Product;
+GO
+
+CREATE SYNONYM dbo.Product
+FOR NewDB.dbo.Product;
+```
+
+---
+
+### 八、Synonym 的限制
+
+不能對 Synonym 直接進行以下操作：
+
+- `ALTER SYNONYM`
+- 建立 Index
+- 建立 Constraint
+- 修改 Schema
+
+Synonym 本身不儲存資料，也不會複製來源物件，它只是**名稱轉發**。
