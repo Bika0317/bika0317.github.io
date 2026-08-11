@@ -17,10 +17,14 @@
 portfolio/
 ├── index.html                  # 主頁面
 ├── css/
-│   └── style.css               # 全站樣式 + 深色/亮色主題變數
+│   ├── style.css               # 全站樣式 + 深色/亮色主題變數
+│   ├── xianxia-life.css        # 《天命仙途》月回合介面與修仙專用樣式
+│   └── tictactoe.css           # 圈圈叉叉模式選擇與三子移動樣式
 ├── js/
 │   ├── stars.js                # Canvas 背景動畫（星空 / 太陽系粒子 + 流星）
-│   ├── games.js                # 遊戲區邏輯（猜單字 / 貪吃蛇 / 圈圈叉叉 / 知識王）
+│   ├── games.js                # 遊戲區與一般 JSON RPG 共用邏輯
+│   ├── xianxia-life.js         # 《天命仙途》月回合生涯模擬、事件與結局
+│   ├── tictactoe.js            # 圈圈叉叉一般／三子模式畫面、規則與 AI
 │   └── main.js                 # 主邏輯（主題切換、語言切換、Modal、小教室）
 ├── pages/
 │   └── taiwanese.html          # 台語作品獨立頁（目前未連結，可刪除）
@@ -46,7 +50,10 @@ portfolio/
 │   ├── projects/                # 程式作品「進行中的程式專案」卡片用 icon 圖
 │   ├── review/                 # 備審文件（PDF）
 │   ├── games/                  # 遊戲區資料
-│   │   └── quiz.json           # 知識王題庫（中英雙語，88 題）
+│   │   ├── quiz.json           # 知識王題庫（中英雙語，88 題）
+│   │   └── rpg/                # 文字 RPG 劇情檔（一條故事線一個 JSON）
+│   │       ├── star.json       # 星空冒險「星塵之歌」（23 節點、2 場戰鬥、3 結局）
+│   │       └── xianxia.json    # 《天命仙途》舊版固定分支參考（目前由月回合模式取代）
 │   └── words/                  # 小教室單字 JSON 檔
 │       ├── english.json
 │       ├── japanese.json
@@ -98,6 +105,7 @@ portfolio/
 - 筆記列表先顯示卡片（`.notes-card`），點進去才展開該筆記的章節手風琴；有「← 返回筆記列表」可以回去
 - 筆記來源：`assets/note/*.md`（原始 Markdown，含「## 目錄」章節列表）
 - 實際顯示用的是 `assets/note/*.json`（預先轉換好的章節陣列 `[{ title, html }]`），前端用 `fetch` 讀取，渲染成可展開/收合的章節手風琴（`.notes-chapter`）
+- SQL 完整筆記目前共 32 個章節；第 32 章是「SQL Server Synonym（同義字）與 Linked Server 跨資料庫用法」，原始檔為 `assets/note/SQL完整筆記.md`，網站資料為 `assets/note/sql-notes.json`
 - **新增筆記步驟**：
   1. 把新的 `.md` 筆記放進 `assets/note/`，開頭要有「## 目錄」清單（`- [章節標題](#anchor)`），章節標題會依目錄的項目切章節
   2. 用 Node + `marked`（轉 HTML）+ `highlight.js`（SQL 等程式碼語法高亮，透過自訂 `renderer.code`）把 `.md` 轉成同名 `.json`（陣列存 `{ title, html }`，html 是該章節轉換後的內容，不含章節自己的標題行）；這兩個套件只在轉換時用，不會被加進網站的執行環境
@@ -125,13 +133,65 @@ portfolio/
 |------|---------|------|
 | 猜單字 | `wordle` | Wordle 風格，6 次機會猜 5 字母英文單字，螢幕鍵盤 + 實體鍵盤皆可輸入，單字庫寫在 `js/games.js` 的 `WORDLE_WORDS`（取自 [StockQ Wordle 歷史答案](https://www.stockq.org/life/wordle-history.php)，2021/06/19 起官方每日答案去重共 1606 字） |
 | 小精靈 | `pacman` | Canvas 15x15 柱狀迷宮（牆=外框+行列皆偶數的格子，保證通道相連），吃光豆子過關（開始前 canvas 蓋「吃光全部豆子即獲勝」規則通知）、大力丸可反吃鬼（`FRIGHT_TICKS` 回合），3 條命，3 隻鬼會追逐/逃跑；方向鍵 / WASD / 滑動 / 觸控方向鍵控制 |
-| 圈圈叉叉 | `tictactoe` | 玩家 ⭕ vs 比卡 AI ❌（啟發式：贏 > 擋 > 中間/角落 > 邊，每層候選格隨機挑、中間 60% 優先，避免每局下法相同），可切換先手／後手（選 AI 先手開局它會先落子），比分只記當次瀏覽 |
+| 圈圈叉叉 | `tictactoe` | 進入後先選「一般模式」或「三子模式」。三子模式每方最多三枚，從自己的第四回合起先選一枚己方棋，再移到任意空格；兩種模式皆可切換玩家／AI 先手，並保留當次遊玩的比分 |
 | 知識王 | `quiz` | 從 `assets/games/quiz.json` 隨機抽 10 題，答完顯示分數與稱號（知識王 / 達人 / 好奇寶寶 / 再接再厲） |
 
 - 遊戲邏輯集中在 `js/games.js`（在 `main.js` 之前載入），`main.js` 的 `openModal` 遇到 `type: 'game'` 會呼叫 `renderGameModal(key, lang)` 與 `setupGameModal(key, lang)`
 - 關閉 Modal 時 `closeModal` 會呼叫 `stopActiveGame()` 清掉貪吃蛇計時器與猜單字的鍵盤監聽
-- 卡片封面：四張皆用圖片（同作品集卡片的 `.card-preview-img` 模式）——猜單字 `assets/Wordle.png`、小精靈 `assets/PAC_MAN.png`、圈圈叉叉 `assets/OOXX.png`、知識王 `assets/Knowledge.png`；`.wordle-bg` 等漸層底與 `.game-emoji` 樣式仍留在 CSS 裡當底色/備用
+- 卡片封面：都用圖片（同作品集卡片的 `.card-preview-img` 模式）——猜單字 `assets/Wordle.png`、小精靈 `assets/PAC_MAN.png`、圈圈叉叉 `assets/OOXX.png`、知識王 `assets/Knowledge.png`；`.wordle-bg` 等漸層底與 `.game-emoji` 樣式仍留在 CSS 裡當底色/備用
 - **新增知識王題目步驟**：在 `assets/games/quiz.json` 加一筆 `{ "q": { "zh", "en" }, "options": [4 個 { "zh", "en" }], "answer": 正解索引 }`（選項顯示時會自動洗牌，answer 填在原陣列的索引即可）
+
+#### RPG余路（懸浮入口，不在 4 格 Grid 內）
+- 入口是獨立的懸浮按鈕（`index.html` 的 `.yulu-float`，`id="yuluFloatBtn"`），固定在 `.social-float` 側欄正上方、不佔遊戲區格子，點擊透過既有的 `.card-btn[data-modal]` 機制開啟跟其他卡片一樣的 Modal（`data-modal="yulu"`）
+- 目前懸浮按鈕只有文字（「RPG余路」/「RPG Path」），還沒有圖片；之後比卡會提供背景圖與一張透明背景 PNG 疊在左上角，屆時要在 `.yulu-float` 裡加 `<img>` 並調整 `css/style.css` 的 `.yulu-float` 樣式
+- 目前「星空冒險」與「古風修仙之路」已上線；其餘四條故事線仍是敬請期待
+- 一般故事線使用 JSON 節點式文字冒險、回合制戰鬥與 `bikaRpgSave`／`bikaRpgEndings`；《天命仙途》則使用獨立的月回合生涯模擬
+
+##### 《天命仙途》月回合生涯模式
+
+- 故事線 key 為 `xianxia`，中文名《天命仙途》，英文名 `Path of Celestial Fate`，共有 10 個主要結局
+- `js/games.js` 的 `startLine()` 遇到 `xianxia` 時不載入一般 JSON 節點，而是呼叫 `window.setupXianxiaLife(lang, wrap, showMenu, useSave)`
+- 完整遊戲流程、月回合行動、事件、數值與結局判定寫在 `js/xianxia-life.js`；畫面樣式在 `css/xianxia-life.css`
+- `assets/games/rpg/xianxia.json` 保留為舊版固定分支故事參考，目前不直接驅動月回合玩法
+- 開始新遊戲時先顯示世界觀與玩法前言，玩家確認「踏入仙途」後才進入第一個月
+- 每次選擇代表一個月，進度存於 `bikaXianxiaLife`，並在 `bikaRpgSave.xianxia` 留下相容標記；返回故事線選單後可繼續
+- 主要數值：年齡、壽元、境界、修為、生命、道心、氣運、靈石、丹藥、靈獸親密、宗門聲望、魔念
+- 每個行動都有好處與代價，按鈕會直接顯示主要數值變化：
+  - 閉關修練：增加修為，消耗生命與道心
+  - 外出歷練：增加氣運與靈石，但可能受傷
+  - 宗門任務：增加聲望與靈石，消耗生命
+  - 煉丹研藥：增加丹藥與丹道，消耗靈石與生命
+  - 煉化法寶：增加法寶契合，消耗靈石與道心
+  - 靈獸峰餵養：增加靈獸親密與妖族緣分，消耗靈石與生命
+  - 靜坐問心：恢復道心、壓制魔念，但修為進度較慢
+  - 下山行善：增加氣運、道心與正道傾向，消耗生命
+- 境界順序：煉氣 → 築基 → 金丹 → 元嬰 → 化神 → 合體；修為達標時會觸發突破
+- 里程碑事件：五大仙門招生、拜師選擇、築基秘境、正魔立場、妖王契約、宗門戰、上古遺跡、天道試煉
+- 即時失敗條件：生命歸零為「天道失敗」；道心歸零為「魔尊降世」；壽元耗盡則坐化
+- 10 個主要結局：飛升成仙、魔尊降世、萬劍之祖、丹道至尊、妖王契約者、輪迴守護者、散修傳奇、宗主、天道失敗、凡人一生
+
+##### 一般 JSON 故事線格式
+
+- 劇情檔結構（`assets/games/rpg/*.json`）：
+  - `meta.player`：初始 `hp`／`atk`／`items`（道具 id 陣列）
+  - `items`：道具定義表，`type: "heal"`（可用，附 `heal` 回血量）或 `"key"`（劇情道具），皆含中英名稱與 `desc`
+  - `nodes`：節點表，`start` 欄位指定起始節點。節點三種型態：
+    1. **劇情節點**：`text` + `choices`（每個選項 `{ text, next, require?, effect? }`；`require: { item }` 沒道具就不顯示、`effect: { hp, atk, addItem }` 選了就生效）
+    2. **戰鬥節點**：`text`（遭遇描述）+ `battle: { name, hp, atk, win, lose, reward?, rewardText? }`（win/lose 填節點 id，lose 通常是 `gameover`）
+    3. **結局節點**：`ending: { id, title }` + `text`（id 用來記結局收集）；另有 `gameover: true` 的戰敗節點
+- **新增故事線步驟**：寫一個新的劇情 JSON 放進 `assets/games/rpg/`，在 `YULU_LINES` 把該線 `available` 改 `true` 並填 `file` 與 `endings` 數
+- **調整戰鬥手感**：玩家/敵人傷害為基礎攻擊 ±2 隨機（最低 1），防禦傷害減半＋回 2 HP，逃跑成功率 60%（回到戰前劇情節點）
+
+#### 待補故事線內容準備清單
+目前 4 條敬請期待的故事線（現代學測生之路📚／大學生之路🎓／未來科技之路🤖／現代打工人之路💼），比卡之後會陸續提供劇情內容。每條線要準備的東西（格式比照上面「劇情檔結構」）：
+
+1. **基本設定**：標題（中英）、主角初始 HP／攻擊力、初始道具（可留空）
+2. **道具清單**：每個道具的中英名稱＋說明，分 `heal`（補血，附回血量）或 `key`（劇情關鍵道具，用來推進劇情）
+3. **劇情節點**：一段情境文字（中英）＋ 2~3 個選項，選項可帶「需要某道具才出現」與「選了之後的效果（扣血／加攻擊／拿道具）」，串成分支劇情樹
+4. **戰鬥節點**：敵人名稱（中英）／HP／攻擊力，打贏／打輸各自走哪個節點，可選打贏獎勵道具與獎勵文字
+5. **結局節點**：至少 2~3 個，各自的結局稱號（中英）＋結局文字，對應不同的選擇路徑
+
+拿到任一條線的內容後，就寫成對應的 `assets/games/rpg/*.json`，並在 `js/games.js` 的 `YULU_LINES` 把該線 `available` 改 `true`。
 
 ### 6. 關於
 - 5 段自我介紹（中英雙語）
@@ -191,8 +251,11 @@ portfolio/
 
 - [x] 推上 GitHub Pages（`https://bika0317.github.io` 已上線）
 - [x] 程式作品「進行中的程式專案」填入實際專案內容（自動化排班系統，卡片列表 + 敬請期待佔位卡）
-- [x] 程式作品「筆記內容」加入 SQL 完整筆記（章節式手風琴）
+- [x] 程式作品「筆記內容」加入 SQL 完整筆記（目前 32 章，含 Synonym／Linked Server）
+- [x] RPG余路上線《天命仙途》月回合生涯模式（前言、行動代價、道心／生命歸零結局、10 個主要結局）
 - [ ] 筆記內容繼續新增其他科目筆記
+- [ ] RPG余路補上「現代學測生之路」「大學生之路」「未來科技之路」「現代打工人之路」4 條故事線劇情
+- [ ] RPG余路懸浮按鈕補上背景圖與左上角透明疊圖（目前只有純文字）
 - [ ] 音樂作品繼續新增歌曲
 - [ ] 畫作持續新增
 - [ ] 小教室新增單字（手動更新 JSON 檔）

@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600&family=Ma+Shan+Zheng&family=Noto+Sans+TC:wght@400;500;700&family=LXGW+WenKai+Mono+TC:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/xianxia-life.css">
+  <link rel="stylesheet" href="css/tictactoe.css">
 </head>
 <body>
   <canvas id="bg-canvas"></canvas>
@@ -242,7 +244,7 @@
         </div>
         <div class="card-info">
           <h3 data-zh="圈圈叉叉" data-en="Tic-Tac-Toe">圈圈叉叉</h3>
-          <p data-zh="經典井字遊戲，和比卡 AI 一決勝負，看看誰先連成一線！" data-en="The classic game — face off against Bika AI and see who lines up three first!">經典井字遊戲，和比卡 AI 一決勝負，看看誰先連成一線！</p>
+          <p data-zh="一般與三子移動兩種玩法，和比卡 AI 一決勝負！" data-en="Play classic or three-piece movement mode against Bika AI!">一般與三子移動兩種玩法，和比卡 AI 一決勝負！</p>
           <button class="card-btn" data-modal="tictactoe" data-zh="開始遊戲 →" data-en="Play →">開始遊戲 →</button>
         </div>
       </div>
@@ -317,6 +319,11 @@
     <p id="lightboxCaption"></p>
   </div>
 
+  <!-- Floating RPG余路 game entry -->
+  <button class="card-btn yulu-float" id="yuluFloatBtn" data-modal="yulu" aria-label="RPG余路">
+    <span class="yulu-float-label" data-zh="RPG余路" data-en="RPG Path">RPG余路</span>
+  </button>
+
   <!-- Floating social sidebar -->
   <div class="social-float">
     <a href="https://github.com/Bika0317" target="_blank" rel="noopener"
@@ -350,6 +357,8 @@
 
   <script src="js/stars.js"></script>
   <script src="js/games.js"></script>
+  <script src="js/tictactoe.js"></script>
+  <script src="js/xianxia-life.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

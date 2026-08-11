@@ -1,0 +1,240 @@
+{
+  "meta": {
+    "title": { "zh": "星塵之歌", "en": "Song of Stardust" },
+    "player": { "hp": 30, "atk": 5, "items": ["potion"] }
+  },
+  "items": {
+    "potion": {
+      "zh": "星露藥水", "en": "Stardew Potion", "type": "heal", "heal": 12,
+      "desc": { "zh": "以清晨的星露釀成，喝下恢復 12 點 HP。", "en": "Brewed from morning stardew. Restores 12 HP." }
+    },
+    "map": {
+      "zh": "古老星圖", "en": "Ancient Star Map", "type": "key",
+      "desc": { "zh": "邊角泡爛了的星圖，畫著整片星海與看不懂的古文字。", "en": "A water-worn chart of the star sea, inked with letters you cannot read." }
+    },
+    "shard": {
+      "zh": "星光碎片", "en": "Starlight Shard", "type": "key",
+      "desc": { "zh": "小星星最後的光，握在手心的時候暖暖的。", "en": "The little star's last light. It feels warm in your hand." }
+    }
+  },
+  "start": "start",
+  "nodes": {
+    "start": {
+      "text": {
+        "zh": "你在一艘紙摺的小船上醒來，四周是一望無際的星海，星光像水波一樣在船底輕輕起伏。遠方有三個方向隱約發亮——左邊是一座緩緩旋轉的藍色漩渦，正前方立著一座金色的高塔，右邊有一顆小星星，一閃、一閃，像是在向你求救。",
+        "en": "You wake in a little paper boat, adrift on an endless sea of stars. Starlight ripples beneath the hull like water. Three glows beckon in the distance — a slowly turning blue whirlpool to your left, a golden tower straight ahead, and to your right a little star blinking on and off, as if calling for help."
+      },
+      "choices": [
+        { "text": { "zh": "划向藍色漩渦", "en": "Row toward the whirlpool" }, "next": "whirl" },
+        { "text": { "zh": "前往金色高塔", "en": "Head for the golden tower" }, "next": "tower" },
+        { "text": { "zh": "回應小星星的求救", "en": "Answer the little star" }, "next": "star" }
+      ]
+    },
+    "whirl": {
+      "text": {
+        "zh": "越靠近漩渦，星水轉得越急，把小船拉得吱吱作響。漩渦的中心似乎沉著什麼東西，隨著旋轉一閃一閃的。",
+        "en": "The closer you row, the faster the starwater spins, tugging the boat until it creaks. Something glints at the whirlpool's heart, flashing with every turn."
+      },
+      "choices": [
+        { "text": { "zh": "伸手去撈那個發光的東西", "en": "Reach for the glinting thing" }, "next": "whirlGrab", "effect": { "hp": -6, "addItem": "map" } },
+        { "text": { "zh": "保持距離，沿著漩渦邊緣觀察", "en": "Keep your distance and watch the currents" }, "next": "whirlWatch" }
+      ]
+    },
+    "whirlGrab": {
+      "text": {
+        "zh": "你抓到了！那是一卷古老星圖——但漩渦趁機掀翻小船，你嗆了好幾口冰涼的星水，狼狽地爬回船上。",
+        "en": "Got it! An ancient star map — but the whirlpool flips your boat in revenge, and you swallow mouthfuls of icy starwater before scrambling back aboard."
+      },
+      "choices": [
+        { "text": { "zh": "收好星圖，繼續前進", "en": "Stow the map and press on" }, "next": "whirlAfter" }
+      ]
+    },
+    "whirlWatch": {
+      "text": {
+        "zh": "你按住船槳靜靜觀察，發現漩渦其實在低聲「唱歌」，而所有星水都流向同一個方向——星海最深、最暗的那一頭。你把方向記在心裡。",
+        "en": "You still your oars and watch. The whirlpool is humming — singing, almost — and every current flows the same way: toward the deepest, darkest end of the star sea. You commit the heading to memory."
+      },
+      "choices": [
+        { "text": { "zh": "順著水流前進", "en": "Follow the current" }, "next": "whirlAfter" }
+      ]
+    },
+    "whirlAfter": {
+      "text": {
+        "zh": "漩渦深處傳來一句細小的低語：「光……被拿走了……」話音落下，小船像被誰推了一把，自己朝星海深處滑去。",
+        "en": "From deep within the whirlpool drifts a tiny whisper: 'The light... someone took the light...' As the words fade, your boat glides forward on its own, as if nudged by an unseen hand."
+      },
+      "choices": [
+        { "text": { "zh": "任由小船帶你前進", "en": "Let the boat carry you on" }, "next": "crossroad" }
+      ]
+    },
+    "tower": {
+      "text": {
+        "zh": "金色高塔立在一座小小的星島上，塔身刻滿了會發光的文字。門口坐著一位守塔人，正在打瞌睡，長長的鬍子幾乎垂進星水裡。",
+        "en": "The golden tower stands on a tiny star-isle, its walls carved with glowing script. By the door dozes a tower keeper, his long beard nearly trailing into the starwater."
+      },
+      "choices": [
+        { "text": { "zh": "輕輕叫醒守塔人", "en": "Gently wake the keeper" }, "next": "towerWake", "effect": { "addItem": "potion" } },
+        { "text": { "zh": "趁他睡著，偷偷溜進塔裡", "en": "Slip inside while he sleeps" }, "next": "towerSneak" }
+      ]
+    },
+    "towerWake": {
+      "text": {
+        "zh": "守塔人揉揉眼睛：「訪客？多久沒有訪客了啊……你來得正好。星星們最近一顆一顆暗下去，聽說是住在沉默之淵的『影子』把光偷走了。」他從袖子裡摸出一瓶藥水塞給你：「路上小心。」",
+        "en": "The keeper rubs his eyes. 'A visitor? It's been ages... and you've come at the right time. The stars have been going dark one by one — they say the Shadow of the Silent Deep is stealing their light.' He fishes a potion from his sleeve and presses it into your hands. 'Be careful out there.'"
+      },
+      "choices": [
+        { "text": { "zh": "追問影子的弱點", "en": "Ask about the Shadow's weakness" }, "next": "towerAsk" },
+        { "text": { "zh": "道謝後啟程", "en": "Thank him and set off" }, "next": "crossroad" }
+      ]
+    },
+    "towerAsk": {
+      "text": {
+        "zh": "守塔人壓低聲音：「用劍打得倒影子，但打不散黑暗。」他頓了頓，「如果你在路上遇見還亮著的星光——把它帶在身上。有些結局，是劍給不了的。」",
+        "en": "The keeper lowers his voice. 'A sword can fell the Shadow, but it cannot scatter the dark.' He pauses. 'If you meet a light still shining on your way — carry it with you. Some endings, no sword can give.'"
+      },
+      "choices": [
+        { "text": { "zh": "記下他的話，啟程出發", "en": "Take his words to heart and set off" }, "next": "crossroad" }
+      ]
+    },
+    "towerSneak": {
+      "text": {
+        "zh": "塔裡堆滿了會自己翻頁的發光書本。你隨手翻開一本，正好停在這一行：「影子並非生來邪惡，牠只是從未擁有過光。」背後突然傳來一聲咳嗽——守塔人不知道什麼時候醒了。你紅著臉道歉，趕緊溜回船上。",
+        "en": "Inside, glowing books turn their own pages. You open one at random and it settles on a single line: 'The Shadow was not born wicked. It has simply never owned a light.' A cough sounds behind you — the keeper is awake. Red-faced, you apologize and hurry back to your boat."
+      },
+      "choices": [
+        { "text": { "zh": "帶著那句話啟程", "en": "Set off, carrying that line with you" }, "next": "crossroad" }
+      ]
+    },
+    "star": {
+      "text": {
+        "zh": "你划到小星星身邊。牠的光已經微弱得快看不見了，聲音抖抖的：「我的光……被影子拿走了……好冷……」",
+        "en": "You row up beside the little star. Its glow has faded almost to nothing, and its voice trembles: 'The Shadow... took my light... it's so cold...'"
+      },
+      "choices": [
+        { "text": { "zh": "把牠抱進懷裡取暖", "en": "Gather it into your arms to warm it" }, "next": "starWarm", "effect": { "hp": -4, "addItem": "shard" } },
+        { "text": { "zh": "先問清楚影子的事", "en": "Ask about the Shadow first" }, "next": "starAsk" }
+      ]
+    },
+    "starAsk": {
+      "text": {
+        "zh": "「影子住在沉默之淵，星海最深、最暗的地方……」小星星頓了頓，聲音更小了，「大家都說牠很可怕。可是牠拿走我的光的時候，我聽見牠……好像在哭。」",
+        "en": "'The Shadow lives in the Silent Deep, where the star sea is darkest...' The little star hesitates, its voice shrinking. 'Everyone says it's terrifying. But when it took my light... I could have sworn it was crying.'"
+      },
+      "choices": [
+        { "text": { "zh": "把牠抱進懷裡取暖", "en": "Gather it into your arms to warm it" }, "next": "starWarm", "effect": { "hp": -4, "addItem": "shard" } },
+        { "text": { "zh": "立刻動身前往沉默之淵", "en": "Set out for the Silent Deep at once" }, "next": "crossroad" }
+      ]
+    },
+    "starWarm": {
+      "text": {
+        "zh": "你把小星星抱進懷裡，讓體溫一點一點傳過去。牠慢慢亮了一些，從身上剝下一小片光遞給你：「這是我最後的光……帶著它。說不定，會有用的。」牠指向星海最暗的那一頭。",
+        "en": "You gather the little star into your arms and let your warmth seep in, little by little. Its glow steadies, and it peels a sliver of light from itself and offers it to you. 'My last light... take it. It might matter, somehow.' It points toward the darkest reach of the sea."
+      },
+      "choices": [
+        { "text": { "zh": "收好碎片，前往沉默之淵", "en": "Pocket the shard and head for the Silent Deep" }, "next": "crossroad" }
+      ]
+    },
+    "crossroad": {
+      "text": {
+        "zh": "星海越來越暗，星水濃得像墨。前方出現一道往下沉的階梯，由一顆顆熄滅的星星鋪成——沉默之淵到了。入口旁漂著一塊石碑，刻著你看不懂的古老文字。",
+        "en": "The sea grows darker, the starwater thick as ink. Ahead, a stairway sinks downward, paved with burnt-out stars — the Silent Deep. Beside the entrance floats a stone tablet carved with letters you cannot read."
+      },
+      "choices": [
+        { "text": { "zh": "攤開古老星圖，比對碑文", "en": "Unroll the star map and compare the carvings" }, "next": "crossroadMap", "require": { "item": "map" } },
+        { "text": { "zh": "深呼吸，走下階梯", "en": "Take a deep breath and descend" }, "next": "sentinel" }
+      ]
+    },
+    "crossroadMap": {
+      "text": {
+        "zh": "星圖的角落畫著一模一樣的文字，旁邊用小字註著：「留給影子的門，也留給光。」你順著星圖的指引，在石碑後找到一條藏在黑暗裡的小徑——看起來可以繞過正門。",
+        "en": "The same letters are inked in a corner of the star map, glossed in tiny script: 'The door kept for the Shadow is kept for the light as well.' Following the map, you find a narrow path hidden behind the tablet — it looks like it slips right past the main gate."
+      },
+      "choices": [
+        { "text": { "zh": "走隱藏小徑", "en": "Take the hidden path" }, "next": "shadowMeet" },
+        { "text": { "zh": "還是從正門走下去", "en": "Descend by the main gate anyway" }, "next": "sentinel" }
+      ]
+    },
+    "sentinel": {
+      "text": {
+        "zh": "階梯的盡頭，一團黑霧緩緩凝成人形，攔住了去路。牠沒有臉，卻讓你覺得牠正盯著你——影子哨兵！",
+        "en": "At the foot of the stairs, black mist gathers slowly into a figure that bars your way. It has no face, yet you feel it staring — a Shadow Sentinel!"
+      },
+      "battle": {
+        "name": { "zh": "影子哨兵", "en": "Shadow Sentinel" },
+        "hp": 16, "atk": 3,
+        "win": "shadowMeet", "lose": "gameover",
+        "reward": { "addItem": "potion" },
+        "rewardText": { "zh": "哨兵散去的黑霧裡掉出一瓶星露藥水！", "en": "A stardew potion tumbles from the scattering mist!" }
+      }
+    },
+    "shadowMeet": {
+      "text": {
+        "zh": "淵底比想像中安靜。影子蜷縮在一座由偷來的星光堆成的小山旁，忽明忽暗的光把牠的輪廓照得搖搖晃晃。牠發現了你，緩緩站起身——你注意到，牠在發抖。",
+        "en": "The bottom of the Deep is quieter than you imagined. The Shadow huddles beside a small mountain of stolen starlight, its outline wavering in the flickering glow. It notices you and rises slowly — and you realize it is trembling."
+      },
+      "choices": [
+        { "text": { "zh": "拔劍攻擊", "en": "Draw your sword and attack" }, "next": "bossFight" },
+        { "text": { "zh": "開口和牠說話", "en": "Speak to it" }, "next": "shadowTalk" }
+      ]
+    },
+    "bossFight": {
+      "text": {
+        "zh": "影子發出一聲像從很深的井底傳來的嘶吼，黑霧瞬間漲滿了整個淵底！",
+        "en": "The Shadow lets out a cry like a voice from the bottom of a deep well, and black mist floods the Deep!"
+      },
+      "battle": {
+        "name": { "zh": "影子", "en": "The Shadow" },
+        "hp": 24, "atk": 5,
+        "win": "endingSlay", "lose": "gameover"
+      }
+    },
+    "shadowTalk": {
+      "text": {
+        "zh": "「你也是來搶光的嗎？」影子的聲音很低，像從很深的井底傳上來。「我只是想知道，溫暖是什麼感覺。可是光一到我手裡……就會慢慢暗掉。」牠攤開手，掌心裡的星光正一點一點變得黯淡。",
+        "en": "'Have you come to take the light too?' The Shadow's voice is low, like an echo from the bottom of a well. 'I only wanted to know what warmth felt like. But every light I hold... slowly goes dark.' It opens its hands; the starlight in its palms is dimming even now."
+      },
+      "choices": [
+        { "text": { "zh": "把星光碎片放進牠的掌心", "en": "Place the starlight shard in its palm" }, "next": "endingShare", "require": { "item": "shard" } },
+        { "text": { "zh": "「把光還給星星們吧，我陪你想別的辦法。」", "en": "'Give the light back. We'll find another way together.'" }, "next": "shadowPersuade" },
+        { "text": { "zh": "趁牠分神，拔劍偷襲", "en": "Strike while it is distracted" }, "next": "bossFight" }
+      ]
+    },
+    "shadowPersuade": {
+      "text": {
+        "zh": "影子沉默了很久、很久。「……真的，會有別的辦法嗎？」牠終於鬆開手。偷來的星光一顆一顆升上夜空，回到那些熄滅的星星身上。星海重新亮起的那一刻，影子的身影淡了一些——但你覺得，牠好像笑了。",
+        "en": "The Shadow is silent for a long, long time. '...Could there really be another way?' At last it opens its hands. The stolen starlight rises, mote by mote, returning to the darkened stars above. As the sea lights up again, the Shadow's outline grows fainter — and yet, you could swear it is smiling."
+      },
+      "choices": [
+        { "text": { "zh": "走向牠", "en": "Walk toward it" }, "next": "endingFriend" }
+      ]
+    },
+    "endingSlay": {
+      "ending": { "id": "A", "title": { "zh": "結局・星海勇者", "en": "Ending · Hero of the Star Sea" } },
+      "text": {
+        "zh": "影子在你的劍下散成黑霧，偷來的星光四散飛回夜空，熄滅的星星一顆顆重新亮起，整片星海都在為你歡呼。只是在回程的路上，你總會想起——黑霧散開之前，好像有誰輕輕說了一句：「好冷。」",
+        "en": "The Shadow bursts into mist beneath your blade. The stolen starlight scatters home to the night sky, dark stars rekindle one by one, and the whole sea cheers your name. And yet, all the way home, you keep remembering it — just before the mist dissolved, a small voice whispering: 'So cold.'"
+      }
+    },
+    "endingShare": {
+      "ending": { "id": "S", "title": { "zh": "結局・星塵之歌", "en": "Ending · Song of Stardust" } },
+      "text": {
+        "zh": "碎片在影子的掌心亮了起來——這一次，光沒有熄滅。「因為這是『送』給牠的光啊。」小星星的聲音彷彿就在耳邊。影子第一次擁有了屬於自己的光。牠把偷來的星光全部放回夜空，星星們重新亮起，整片星海亮得像一首歌。",
+        "en": "The shard kindles in the Shadow's palms — and this time, the light does not fade. 'Because that light was given.' The little star's voice seems to chime right beside your ear. For the first time, the Shadow holds a light of its own. It releases every stolen spark back into the night, the stars rekindle, and the whole sea shines like a song."
+      }
+    },
+    "endingFriend": {
+      "ending": { "id": "B", "title": { "zh": "結局・不再沉默的淵", "en": "Ending · The Deep, No Longer Silent" } },
+      "text": {
+        "zh": "從那天起，沉默之淵不再沉默。你時常划著紙船下去，給影子講星海上層的故事，守塔人偶爾也會跟來，帶一壺熱熱的星露茶。影子還是沒有自己的光。但牠說，有人記得牠——好像，也就沒有那麼冷了。",
+        "en": "From that day on, the Silent Deep is silent no more. You often row your paper boat down to tell the Shadow stories of the sea above, and sometimes the tower keeper tags along with a pot of hot stardew tea. The Shadow still has no light of its own. But it says that being remembered... makes the dark feel a little less cold."
+      }
+    },
+    "gameover": {
+      "gameover": true,
+      "text": {
+        "zh": "你的意識慢慢散進星海裡……別擔心，星海記得每一個勇敢的旅人。下一次醒來，紙船還會在原地等你。",
+        "en": "Your senses drift apart into the starlit sea... But don't worry — the sea remembers every brave traveler. When you wake again, the paper boat will be waiting where it always was."
+      }
+    }
+  }
+}

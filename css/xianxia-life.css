@@ -1,0 +1,227 @@
+/* 《天命仙途》月回合修仙生涯 */
+.xl-wrap {
+  max-width: 720px;
+  gap: 0.8rem;
+}
+
+.xl-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.xl-title {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.xl-calendar {
+  color: var(--accent);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.xl-vitals {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.xl-vital {
+  min-width: 0;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card-bg);
+  text-align: center;
+}
+
+.xl-vital span {
+  display: block;
+  color: var(--text-2);
+  font-size: 0.72rem;
+  margin-bottom: 0.2rem;
+}
+
+.xl-vital strong {
+  color: var(--text);
+  font-size: 0.92rem;
+}
+
+.xl-progress-card {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card-bg);
+}
+
+.xl-progress-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  color: var(--text-2);
+  font-size: 0.8rem;
+}
+
+.xl-progress-track {
+  height: 9px;
+  margin-top: 0.45rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(125, 125, 145, 0.25);
+}
+
+.xl-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 0.35s ease;
+}
+
+.xl-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.xl-chip {
+  padding: 0.3rem 0.62rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-2);
+  font-size: 0.76rem;
+}
+
+.xl-chip strong {
+  color: var(--text);
+  margin-left: 0.18rem;
+}
+
+.xl-story {
+  min-height: 7.5rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 12%, transparent), transparent 45%),
+    var(--card-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.xl-story-title {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
+.xl-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.xl-action {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card-bg);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.18s, border-color 0.18s, background 0.18s;
+}
+
+.xl-action:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: var(--card-bg-h);
+}
+
+.xl-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+.xl-action-icon {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+}
+
+.xl-action strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.88rem;
+}
+
+.xl-action small {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--text-2);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.xl-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.xl-tool {
+  padding: 0.42rem 0.72rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+}
+
+.xl-tool:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.xl-event .rpg-text {
+  min-height: 8rem;
+  cursor: default;
+}
+
+.xl-event-tag {
+  color: var(--accent);
+  font-size: 0.8rem;
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+
+.xl-qualified {
+  color: var(--text-2);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .xl-vitals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .xl-actions {
+    grid-template-columns: 1fr;
+  }
+}

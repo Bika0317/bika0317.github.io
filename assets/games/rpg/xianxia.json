@@ -1,0 +1,412 @@
+{
+  "meta": {
+    "title": { "zh": "天命仙途", "en": "Path of Celestial Fate" },
+    "player": { "hp": 36, "atk": 6, "items": ["healing_pill"] }
+  },
+  "items": {
+    "healing_pill": {
+      "zh": "回春丹", "en": "Rejuvenation Pill", "type": "heal", "heal": 14,
+      "desc": { "zh": "青玉小瓶中的療傷丹藥，可恢復 14 點 HP。", "en": "A healing pill kept in a jade vial. Restores 14 HP." }
+    },
+    "taixuan_token": {
+      "zh": "太玄令", "en": "Taixuan Token", "type": "key",
+      "desc": { "zh": "太玄宗內門弟子的身分令牌，刻著護佑蒼生的門規。", "en": "An inner-disciple token of the Taixuan Sect, engraved with its vow to protect all life." }
+    },
+    "sword_seed": {
+      "zh": "無名劍種", "en": "Nameless Sword Seed", "type": "key",
+      "desc": { "zh": "萬劍山祖師留下的一縷劍意，會隨持有者的道心成長。", "en": "A wisp of sword intent left by the founder of Mount Wanjian. It grows with its bearer's resolve." }
+    },
+    "sun_cauldron": {
+      "zh": "離火丹爐", "en": "Solarflame Cauldron", "type": "key",
+      "desc": { "zh": "丹霞谷傳承丹爐，可引九離真火煉化萬藥。", "en": "An heirloom cauldron of Danxia Valley, able to summon true solar flame and refine countless herbs." }
+    },
+    "spirit_egg": {
+      "zh": "混沌靈獸蛋", "en": "Chaos Spirit Egg", "type": "key",
+      "desc": { "zh": "在御靈宮禁地甦醒的神秘靈獸蛋，殼上流轉著五色靈光。", "en": "A mysterious egg awakened in the forbidden grounds of the Beastward Palace, veined with five-colored light." }
+    },
+    "wanderer_gourd": {
+      "zh": "青竹酒葫蘆", "en": "Green Bamboo Gourd", "type": "key",
+      "desc": { "zh": "雲遊散修所贈，裝得下酒，也裝得下不受拘束的一生。", "en": "A gift from a wandering cultivator, made to hold both wine and an unfettered life." }
+    },
+    "demon_mark": {
+      "zh": "九幽魔印", "en": "Ninefold Abyss Mark", "type": "key",
+      "desc": { "zh": "四大魔宗共同追尋的魔道印記，力量強大，也會放大心中執念。", "en": "A demonic sigil coveted by all four demon sects. Its power magnifies the obsessions of its bearer." }
+    },
+    "artifact_shard": {
+      "zh": "天命鏡碎片", "en": "Shard of the Fate Mirror", "type": "key",
+      "desc": { "zh": "九大神器之一「天命鏡」的殘片，可照見因果與未來的岔路。", "en": "A fragment of the Fate Mirror, one of the Nine Divine Artifacts. It reveals branching paths of cause and fate." }
+    },
+    "samsara_seal": {
+      "zh": "輪迴印", "en": "Seal of Samsara", "type": "key",
+      "desc": { "zh": "輪迴淵認可守護者後留下的印記，能聽見亡魂未了的心願。", "en": "A mark bestowed by the Abyss of Samsara upon its chosen guardian, carrying the wishes of the departed." }
+    },
+    "sect_seal": {
+      "zh": "宗主法印", "en": "Sect Master Seal", "type": "key",
+      "desc": { "zh": "凝聚太玄宗歷代弟子信念的法印，象徵一宗之主的責任。", "en": "A seal bearing the convictions of generations of Taixuan disciples and the burden of leadership." }
+    },
+    "celestial_key": {
+      "zh": "登天玉", "en": "Ascension Jade", "type": "key",
+      "desc": { "zh": "天道試煉中凝成的玉珏，是開啟飛升之門的鑰匙。", "en": "A jade talisman formed during the Heavenly Trial, serving as the key to the Gate of Ascension." }
+    }
+  },
+  "start": "start",
+  "nodes": {
+    "start": {
+      "text": {
+        "zh": "你生在青石村，是個會替鄰家挑水、也會在夜裡仰望群星的普通少年。這一年，五大仙門同赴臨仙城招生。傳聞只要測出靈根，便能拜師修練，踏入凡人一生都看不見的天地。村長把唯一的路費塞進你手裡，問你是否願意前往。",
+        "en": "You were born in Qingshi Village, an ordinary youth who carries water for neighbors and watches the stars at night. This year, the Five Immortal Sects gather in Linxian City to recruit disciples. Those found to possess a spirit root may enter a world beyond mortal sight. The village elder presses the only travel money into your hand and asks if you will go."
+      },
+      "choices": [
+        { "text": { "zh": "前往臨仙城參加仙門測試", "en": "Travel to Linxian City for the immortal trial" }, "next": "spirit_test" },
+        { "text": { "zh": "把路費還給村長，留在故鄉", "en": "Return the money and remain in your village" }, "next": "ending_ordinary" }
+      ]
+    },
+    "spirit_test": {
+      "text": {
+        "zh": "臨仙城廣場人山人海。測靈碑前，少年們依次伸手，有人點亮一道微光，也有人失望離去。輪到你時，石碑先是沉寂，隨後金、木、水、火、土五色光柱同時沖天，雲層深處更傳來一聲龍吟。長老們齊聲驚呼：「五行天靈根！千年難遇！」",
+        "en": "Linxian Plaza is packed with hopeful youths. One by one they touch the Spirit Tablet; some kindle a faint glow, while others leave in disappointment. At your touch the stone is silent—then pillars of metal, wood, water, fire, and earth pierce the sky together, answered by a dragon's cry above the clouds. The elders gasp: 'A Fivefold Celestial Root—unseen for a thousand years!'"
+      },
+      "choices": [
+        { "text": { "zh": "聽五大仙門介紹各自傳承", "en": "Hear what the Five Immortal Sects offer" }, "next": "world_lore" }
+      ]
+    },
+    "world_lore": {
+      "text": {
+        "zh": "接引長老告訴你：修仙界由太玄宗、萬劍山、丹霞谷、御靈宮與天機閣五大仙門守護；暗處則有血河殿、無相魔宗、白骨門與九幽教四大魔宗。世間另有無歸海、葬仙原、輪迴淵三座禁地，十二秘境與失落的九大神器。你的靈根或許能改變整個修仙界，但第一步，仍是選擇自己的道路。",
+        "en": "The welcoming elder explains that the cultivation world is guarded by five great powers: Taixuan Sect, Mount Wanjian, Danxia Valley, Beastward Palace, and Tianji Pavilion. In the shadows lurk four demon sects: Bloodriver Hall, Formless Demon Sect, Bonegate, and the Ninefold Abyss. Beyond them lie three forbidden lands, twelve secret realms, and nine lost Divine Artifacts. Your spirit root may change the world—but first, you must choose your path."
+      },
+      "choices": [
+        { "text": { "zh": "拜入太玄宗，修正統仙法", "en": "Join Taixuan Sect and follow the orthodox path" }, "next": "taixuan_entry", "effect": { "addItem": "taixuan_token" } },
+        { "text": { "zh": "拜入萬劍山，以劍證道", "en": "Join Mount Wanjian and seek the Dao through the sword" }, "next": "sword_entry", "effect": { "addItem": "sword_seed", "atk": 2 } },
+        { "text": { "zh": "拜入丹霞谷，鑽研丹道", "en": "Join Danxia Valley and pursue alchemy" }, "next": "alchemy_entry", "effect": { "addItem": "sun_cauldron" } },
+        { "text": { "zh": "拜入御靈宮，與靈獸同行", "en": "Join the Beastward Palace and walk beside spirit beasts" }, "next": "beast_entry", "effect": { "addItem": "spirit_egg" } },
+        { "text": { "zh": "婉拒仙門，做一名自由散修", "en": "Decline the sects and live as a free wanderer" }, "next": "wanderer_entry", "effect": { "addItem": "wanderer_gourd" } },
+        { "text": { "zh": "跟隨人群外的黑袍人離開", "en": "Follow the black-robed stranger beyond the crowd" }, "next": "demon_entry", "effect": { "addItem": "demon_mark", "atk": 3 } }
+      ]
+    },
+    "taixuan_entry": {
+      "text": {
+        "zh": "太玄宗立於中州雲海之巔。掌門玄微真人收你為親傳，教你的第一課不是御劍，而是問心：「力量若能讓你長生，也能讓千萬人受苦，你將為何而用？」三年後，你築基有成，恰逢十二秘境之一的五行洞天開啟。",
+        "en": "Taixuan Sect rises above the cloud sea of the Central Realm. Sect Master Xuanwei accepts you as a personal disciple. His first lesson is not sword flight but a question: 'If power can grant you long life yet bring suffering to thousands, what will you use it for?' Three years later, you establish your foundation just as the Fivefold Grotto, one of the Twelve Secret Realms, opens."
+      },
+      "choices": [
+        { "text": { "zh": "代表宗門進入五行洞天", "en": "Enter the Fivefold Grotto for your sect" }, "next": "fivefold_realm" }
+      ]
+    },
+    "fivefold_realm": {
+      "text": {
+        "zh": "洞天深處五行倒轉，山河懸空。你在一座上古祭壇找到天命鏡碎片，鏡中卻映出未來：四大魔宗聯軍攻上太玄宗，師父為護弟子力竭而亡。就在你取下碎片時，守護祭壇的五行石傀轟然甦醒。",
+        "en": "Deep within the grotto, the five elements reverse and mountains hang in the air. Upon an ancient altar you find a shard of the Fate Mirror. It shows a future where the four demon sects assault Taixuan and your master dies protecting his disciples. As you lift the shard, the altar's Fivefold Stone Guardian awakens."
+      },
+      "battle": {
+        "name": { "zh": "五行石傀", "en": "Fivefold Stone Guardian" },
+        "hp": 22, "atk": 4, "win": "realm_victory", "lose": "cultivation_gameover",
+        "reward": { "addItem": "artifact_shard" },
+        "rewardText": { "zh": "石傀崩解，天命鏡碎片認你為主！", "en": "The guardian crumbles, and the Fate Mirror shard accepts you!" }
+      }
+    },
+    "realm_victory": {
+      "text": {
+        "zh": "你帶著神器碎片趕回宗門，預言已然成真。魔雲遮天，四宗大軍圍住山門；玄微真人獨守護山大陣，嘴角已有血跡。天命鏡映出三條岔路：守住宗門、深入輪迴淵切斷魔軍魂幡，或直闖魔陣奪取天道試煉的資格。",
+        "en": "You race home with the artifact shard, only to find its prophecy unfolding. Demonic clouds smother the sky as four armies surround the mountain. Master Xuanwei holds the grand formation alone, blood at his lips. The Fate Mirror reveals three paths: defend the sect, descend into the Abyss of Samsara to sever the enemy's soul banners, or break through the army and claim the Heavenly Trial."
+      },
+      "choices": [
+        { "text": { "zh": "留下統領弟子，守護太玄宗", "en": "Remain and lead the disciples in Taixuan's defense" }, "next": "sect_defense" },
+        { "text": { "zh": "前往輪迴淵，解放被奴役的亡魂", "en": "Enter the Abyss of Samsara and free the enslaved souls" }, "next": "samsara_abyss" },
+        { "text": { "zh": "穿過魔軍，前往天道試煉", "en": "Break through the demon army and seek the Heavenly Trial" }, "next": "heavenly_trial" }
+      ]
+    },
+    "sect_defense": {
+      "text": {
+        "zh": "你以五行靈根接掌大陣，將散亂的弟子重新編成五行戰陣。魔宗少主血無涯踏碎山門，嘲笑你只是被天命眷顧的幸運兒。你握緊太玄令，身後是數千名願與宗門共存亡的同門。",
+        "en": "You bind your fivefold root to the grand formation and reorganize the scattered disciples into an elemental array. Xue Wuyai, heir of Bloodriver Hall, shatters the gate and mocks you as merely fortune's favored child. You grip the Taixuan Token; behind you stand thousands ready to live or die with their sect."
+      },
+      "battle": {
+        "name": { "zh": "魔宗少主・血無涯", "en": "Demon Heir Xue Wuyai" },
+        "hp": 27, "atk": 5, "win": "sect_after_battle", "lose": "cultivation_gameover",
+        "reward": { "addItem": "sect_seal" },
+        "rewardText": { "zh": "玄微真人將宗主法印交到你手中。", "en": "Master Xuanwei places the Sect Master Seal in your hands." }
+      }
+    },
+    "sect_after_battle": {
+      "text": {
+        "zh": "血無涯敗退，魔軍潰散。玄微真人傷勢沉重，卻欣慰地看著你：「今日救下太玄宗的，不是你的稀有靈根，而是你讓所有人相信自己仍能一戰。」他當眾卸下宗主法印，問你是否願意接下這座山與山下的蒼生。",
+        "en": "Xue Wuyai falls and the demon armies scatter. Gravely wounded, Xuanwei smiles. 'It was not your rare spirit root that saved Taixuan today. You made everyone believe they could still fight.' Before all disciples, he offers you the Sect Master Seal and asks whether you will carry the mountain—and the lives beneath it."
+      },
+      "choices": [
+        { "text": { "zh": "接過法印，重建並帶領宗門", "en": "Accept the seal and lead the sect into a new age" }, "next": "ending_sect_leader", "require": { "item": "sect_seal" } }
+      ]
+    },
+    "samsara_abyss": {
+      "text": {
+        "zh": "輪迴淵是三大禁地之一。崖下沒有日月，只有被魔宗魂幡束縛的亡魂反覆呼喊自己的名字。你放下飛劍，承受萬魂的記憶：戰死的修士、思念孩子的凡人，甚至曾被正道誤殺的妖族。怨念凝成守門鬼王，若不能勝過它，連你也會忘記自己是誰。",
+        "en": "The Abyss of Samsara is one of the Three Forbidden Lands. Below its cliffs there is neither sun nor moon, only souls bound to demonic banners, endlessly calling their own names. You lower your sword and accept their memories: fallen cultivators, parents longing for their children, even beasts slain unjustly by the righteous. Their resentment forms a Wraith King. If you cannot defeat it, you too will forget who you are."
+      },
+      "battle": {
+        "name": { "zh": "輪迴鬼王", "en": "Wraith King of Samsara" },
+        "hp": 25, "atk": 5, "win": "samsara_choice", "lose": "cultivation_gameover",
+        "reward": { "addItem": "samsara_seal" },
+        "rewardText": { "zh": "萬魂散去怨念，凝成一枚輪迴印。", "en": "The souls release their hatred, forming the Seal of Samsara." }
+      }
+    },
+    "samsara_choice": {
+      "text": {
+        "zh": "輪迴印落入掌心，你終於看見魂幡背後的真相：生死輪迴早已出現裂縫，魔宗只是趁隙取魂。若你離開，裂縫終會吞沒陰陽兩界；若留下鎮守，便再也無法走完自己的飛升路。",
+        "en": "The Seal of Samsara settles into your palm, revealing the truth: the cycle of life and death has long been fractured, and the demon sects merely harvest what slips through. If you leave, the breach will consume both worlds. If you remain, your own road to ascension will end here."
+      },
+      "choices": [
+        { "text": { "zh": "放棄飛升，永鎮輪迴淵", "en": "Forsake ascension and guard the Abyss forever" }, "next": "ending_samsara", "require": { "item": "samsara_seal" } }
+      ]
+    },
+    "heavenly_trial": {
+      "text": {
+        "zh": "你以天命鏡碎片穿過魔陣，登上接天峰。天雷化作九層古門，每一門都逼你重看自己的選擇：求仙是為長生、為力量，還是為了有能力守住不願失去之物？當你坦然承認自己也曾恐懼、貪心與後悔時，第九門終於開啟。",
+        "en": "With the Fate Mirror shard, you pierce the demonic formation and ascend Skyreach Peak. Heavenly lightning becomes nine ancient gates, each forcing you to revisit your choices. Did you cultivate for immortality, for power, or for the strength to protect what you refuse to lose? When you admit your fear, greed, and regret without hiding them, the ninth gate opens."
+      },
+      "choices": [
+        { "text": { "zh": "踏入第九門，接受最後一道天雷", "en": "Enter the ninth gate and face the final bolt" }, "next": "trial_battle", "effect": { "addItem": "celestial_key" } }
+      ]
+    },
+    "trial_battle": {
+      "text": {
+        "zh": "最後一道天雷沒有形體，卻化成與你一模一樣的心魔。它說你所有善意都只是為了成為傳說，所有犧牲都只是想證明自己被天命選中。唯有擊敗心魔，你才有資格決定修仙界的未來。",
+        "en": "The final thunderbolt has no body. It becomes an inner demon wearing your face, claiming every kindness was performed for glory and every sacrifice made only to prove you were chosen by fate. Only by defeating it can you earn the right to shape the cultivation world's future."
+      },
+      "battle": {
+        "name": { "zh": "心魔・天命之影", "en": "Inner Demon, Shadow of Fate" },
+        "hp": 29, "atk": 6, "win": "ascension_gate", "lose": "ending_fallen"
+      }
+    },
+    "ascension_gate": {
+      "text": {
+        "zh": "心魔破碎，登天玉與天命鏡同時發光。仙門在雲海上方開啟，門後傳來真正仙界的氣息；但下方的修仙界仍在戰火中。天道問你：是循著既定規則獨自飛升，還是突破規則，讓靈氣重新流向眾生？後者會招來遠勝雷劫的天罰。",
+        "en": "Your inner demon shatters. Ascension Jade and Fate Mirror blaze together as the celestial gate opens above the clouds. Yet the cultivation world still burns below. Heaven asks: ascend alone by the established law, or break that law and return spiritual energy to all beings? The latter will invite punishment greater than any tribulation."
+      },
+      "choices": [
+        { "text": { "zh": "以天命鏡承受天罰，為眾生重開仙路", "en": "Bear Heaven's wrath with the Fate Mirror and reopen the immortal path for all" }, "next": "ending_immortal", "require": { "item": "celestial_key" } },
+        { "text": { "zh": "不顧道心裂痕，強行引落全部天雷", "en": "Ignore the cracks in your resolve and force down every bolt at once" }, "next": "ending_fallen" }
+      ]
+    },
+    "sword_entry": {
+      "text": {
+        "zh": "萬劍山沒有華麗宮殿，只有插滿殘劍的九千級石階。劍首顧長歌不教招式，只命你每日問那枚無名劍種：「你的劍要斬什麼？」十年後，葬仙原秘境現世，傳說其中埋著九大神器之一的太阿仙劍。",
+        "en": "Mount Wanjian has no splendid palaces, only nine thousand stone steps lined with broken blades. Sword Master Gu Changge teaches no forms. Each day he asks you to question the Nameless Sword Seed: 'What shall your sword cut?' Ten years later, the Immortal Burial Plain opens, rumored to hold Tai'e, one of the Nine Divine Artifacts."
+      },
+      "choices": [
+        { "text": { "zh": "進入葬仙原，尋找自己的劍道", "en": "Enter the Burial Plain and seek your own sword path" }, "next": "sword_realm" }
+      ]
+    },
+    "sword_realm": {
+      "text": {
+        "zh": "葬仙原遍地都是敗者的劍。太阿仙劍懸在劍塚中央，問你願斬情、斬親、斬盡天下羈絆來換取無敵否。你拒絕後，萬柄殘劍齊聲震鳴；真正的試煉不是得到太阿，而是在它的威壓下守住自己的劍心。",
+        "en": "The Burial Plain is carpeted with the swords of the defeated. Tai'e hangs above the central tomb and asks whether you would cut away love, kinship, and every bond to become invincible. When you refuse, ten thousand broken blades ring together. The true trial is not claiming Tai'e, but preserving your heart beneath its pressure."
+      },
+      "battle": {
+        "name": { "zh": "上古劍靈・太阿", "en": "Ancient Sword Spirit Tai'e" },
+        "hp": 28, "atk": 6, "win": "sword_final", "lose": "cultivation_gameover"
+      }
+    },
+    "sword_final": {
+      "text": {
+        "zh": "你的無名劍種終於萌發，化作一柄沒有名字的本命劍。你沒有帶走太阿，只留下自己對劍道的回答：「我的劍不斬情義，只斬持強凌弱之人。」此後百年，你遍訪五大仙門、四大魔宗與三座禁地，未嘗一敗。",
+        "en": "The Nameless Sword Seed finally blooms into a life-bound blade with no name. You leave Tai'e behind and give your answer: 'My sword does not cut away love. It cuts those who use strength to prey upon the weak.' For the next century you cross every immortal sect, demon stronghold, and forbidden land without defeat."
+      },
+      "choices": [
+        { "text": { "zh": "以無名之劍，開創天下劍道", "en": "Found a new sword path with the nameless blade" }, "next": "ending_sword", "require": { "item": "sword_seed" } }
+      ]
+    },
+    "alchemy_entry": {
+      "text": {
+        "zh": "丹霞谷終年飄著藥香。谷主蘇晚照告訴你，丹道從來不只是把藥草丟進爐中，而是理解每一條生命為何枯萎。你從最普通的回春丹煉起，十年炸了八十七次爐，也救回八十七名重傷弟子。",
+        "en": "Danxia Valley is forever fragrant with herbs. Valley Master Su Wanzhao tells you alchemy is not merely throwing plants into a furnace, but understanding why every life withers. You begin with simple healing pills. In ten years you explode eighty-seven furnaces—and save eighty-seven wounded disciples."
+      },
+      "choices": [
+        { "text": { "zh": "前往炎帝秘境尋找不死神藥", "en": "Enter the Flame Emperor's Realm in search of the deathless herb" }, "next": "alchemy_realm" }
+      ]
+    },
+    "alchemy_realm": {
+      "text": {
+        "zh": "炎帝秘境中央生著一株涅槃草，旁邊卻守著浴火而生的赤焰麒麟。你發現神獸並非貪圖仙草，而是在守護即將出生的幼崽。若想取藥，只能先證明你的丹火不為掠奪而燃。",
+        "en": "At the heart of the Flame Emperor's Realm grows a Nirvana Herb, guarded by a qilin born of living fire. You realize it does not covet the herb; it protects an unborn cub. To harvest even a leaf, you must prove your alchemical flame burns to heal, not to plunder."
+      },
+      "battle": {
+        "name": { "zh": "赤焰麒麟的丹火試煉", "en": "Solarflame Trial of the Qilin" },
+        "hp": 24, "atk": 5, "win": "alchemy_final", "lose": "cultivation_gameover",
+        "reward": { "addItem": "healing_pill" },
+        "rewardText": { "zh": "麒麟贈你一片涅槃草葉與一枚回春丹。", "en": "The qilin grants you a Nirvana leaf and a Rejuvenation Pill." }
+      }
+    },
+    "alchemy_final": {
+      "text": {
+        "zh": "你只取一片草葉，回谷閉關九九八十一日。離火丹爐開啟時，沒有長生不死的仙丹，只有九十九枚能治癒靈脈崩毀的「眾生丹」。你把丹方傳遍天下，使無數走火入魔與渡劫受傷的修士得救。丹道因你不再是少數人的長生術。",
+        "en": "You take only one leaf and seclude yourself for eighty-one days. When the Solarflame Cauldron opens, it holds no pill of selfish immortality, but ninety-nine Lifebound Pills capable of restoring shattered meridians. You share the formula with the world, saving countless cultivators wounded by deviation and tribulation. Through you, alchemy ceases to be a privilege of the few."
+      },
+      "choices": [
+        { "text": { "zh": "以丹心濟世，煉成自己的仙道", "en": "Heal the world and refine your own path to immortality" }, "next": "ending_alchemy", "require": { "item": "sun_cauldron" } }
+      ]
+    },
+    "beast_entry": {
+      "text": {
+        "zh": "御靈宮的第一條戒律是「契約須由雙方自願」。宮主白翎將混沌靈獸蛋交給你，卻不教你強行認主。你每天與蛋說話，講青石村、講仙門，也講自己的害怕。直到某夜，蛋裡傳來第一次心跳。",
+        "en": "The first law of the Beastward Palace is that every bond must be freely chosen by both sides. Palace Master Bai Ling entrusts you with a Chaos Spirit Egg, but refuses to teach forced binding. Each day you tell it of Qingshi Village, the immortal sects, and your fears. One night, a heartbeat answers."
+      },
+      "choices": [
+        { "text": { "zh": "帶靈獸蛋前往萬妖秘境孵化", "en": "Carry the egg into the Myriad Beast Realm to hatch" }, "next": "beast_realm" }
+      ]
+    },
+    "beast_realm": {
+      "text": {
+        "zh": "萬妖秘境中，人族捕獸隊正以鎖魂陣圍獵妖族。靈獸蛋在你懷中劇烈震動，五色小龍破殼而出，沒有向你低頭，反而飛到妖族幼獸前護住牠們。捕獸隊首領拔刀喝令你交出神獸。",
+        "en": "Within the Myriad Beast Realm, human hunters trap beast clans in a soul-binding formation. The egg trembles and hatches into a five-colored young dragon. It does not bow to you; instead it shields the beast cubs. The hunters' captain draws his blade and orders you to surrender the divine beast."
+      },
+      "battle": {
+        "name": { "zh": "鎖魂使・韓狩", "en": "Soulbinder Han Shou" },
+        "hp": 26, "atk": 5, "win": "beast_final", "lose": "cultivation_gameover"
+      }
+    },
+    "beast_final": {
+      "text": {
+        "zh": "鎖魂陣被你與小龍聯手擊碎。妖族本想奉你為主人，你卻解開所有契約，提議人族與妖族共同守護秘境。小龍繞著你飛了三圈，主動在你手背留下平等契印。多年後，萬妖來朝，卻沒有一隻妖獸需要跪下。",
+        "en": "Together, you and the young dragon shatter the soul-binding array. The beasts offer to name you master, but you release every contract and propose that humans and beasts guard the realm together. The dragon circles you three times and freely leaves an equal bond upon your hand. Years later, ten thousand beasts gather—yet not one is forced to kneel."
+      },
+      "choices": [
+        { "text": { "zh": "與神獸締結平等契約，共治萬妖境", "en": "Form an equal pact with the divine beast and guard the realm together" }, "next": "ending_beast", "require": { "item": "spirit_egg" } }
+      ]
+    },
+    "wanderer_entry": {
+      "text": {
+        "zh": "你拒絕五大仙門，滿城人都說你浪費了千年難遇的靈根。只有一名醉醺醺的老散修大笑，把青竹酒葫蘆扔給你：「仙路不是只有山門那一條。」從此你睡過破廟、替凡人驅過小妖，也曾為一株藥草與宗門天驕爭得頭破血流。",
+        "en": "You refuse all five sects, and the city calls you a fool for wasting a once-in-a-millennium spirit root. Only a drunken old wanderer laughs and tosses you a green bamboo gourd. 'The road to immortality has more than one gate.' You sleep in ruined temples, drive minor spirits from mortal villages, and fight sect prodigies over single healing herbs."
+      },
+      "choices": [
+        { "text": { "zh": "循酒葫蘆上的地圖前往無歸海", "en": "Follow the map etched on the gourd to the Sea of No Return" }, "next": "wanderer_realm" }
+      ]
+    },
+    "wanderer_realm": {
+      "text": {
+        "zh": "無歸海沒有靈舟敢渡。你以竹筏入海，在風暴中救起一群被宗門拋棄的散修。海底妖蛟追來，眾人問你是哪一宗弟子，你晃了晃酒葫蘆：「無宗無派，但同路之人便是同門。」",
+        "en": "No spirit vessel dares cross the Sea of No Return. You enter on a bamboo raft and rescue wanderers abandoned by their sects. When a sea wyrm gives chase, they ask which sect you represent. You shake your wine gourd. 'I belong to none—but those who share the road are companions.'"
+      },
+      "battle": {
+        "name": { "zh": "無歸海妖蛟", "en": "Wyrm of the Sea of No Return" },
+        "hp": 25, "atk": 5, "win": "wanderer_final", "lose": "cultivation_gameover"
+      }
+    },
+    "wanderer_final": {
+      "text": {
+        "zh": "你們以竹筏渡過無歸海，也找到一座不屬於任何勢力的海外仙島。你不建宗門、不立戒律，只在島口留下一塊木牌：「天下散修，累了便來。」後世記載你走遍十二秘境，修為不輸五大仙門掌教，卻始終只稱自己為青石村的無名散修。",
+        "en": "Your bamboo raft crosses the Sea of No Return and finds an island claimed by no power. You found no sect and write no laws, leaving only a wooden sign: 'Wanderers of the world, rest here when weary.' History records that you explored all Twelve Secret Realms and rivaled every sect master, yet always called yourself an unnamed wanderer of Qingshi Village."
+      },
+      "choices": [
+        { "text": { "zh": "不受山門拘束，走完自己的仙途", "en": "Finish your immortal road, bound by no sect" }, "next": "ending_wanderer", "require": { "item": "wanderer_gourd" } }
+      ]
+    },
+    "demon_entry": {
+      "text": {
+        "zh": "黑袍人帶你進入臨仙城地下，四大魔宗的使者早已等候。他們說正道壟斷靈脈、把魔修都稱作邪祟，而九幽魔印能讓你奪回本該屬於自己的力量。印記入體那刻，你聽見心底最深的願望：再也不要做任人決定命運的普通人。",
+        "en": "The black-robed stranger leads you beneath Linxian City, where envoys of all four demon sects await. They claim the righteous monopolize spirit veins and condemn every unorthodox cultivator as evil. The Ninefold Abyss Mark can take back the power denied to you. When it enters your body, you hear your deepest wish: never again let others decide the fate of an ordinary youth."
+      },
+      "choices": [
+        { "text": { "zh": "接受魔印，前往九幽血池修練", "en": "Accept the mark and cultivate in the Ninefold Blood Pool" }, "next": "demon_trial" }
+      ]
+    },
+    "demon_trial": {
+      "text": {
+        "zh": "血池會把執念煉成力量，也會吞掉軟弱的人。四宗候選者彼此殘殺，最後只剩你與血河殿聖子。魔印在耳邊低語：殺了他，四大魔宗便會承認你；若你退縮，就永遠只是正道眼中的叛徒。",
+        "en": "The Blood Pool refines obsession into power and devours the weak. Candidates of the four demon sects slaughter one another until only you and Bloodriver's holy heir remain. The mark whispers: kill him and all four sects will acknowledge you. Hesitate, and you will remain nothing but a traitor in righteous eyes."
+      },
+      "battle": {
+        "name": { "zh": "血河聖子", "en": "Holy Heir of Bloodriver" },
+        "hp": 27, "atk": 6, "win": "demon_final", "lose": "cultivation_gameover",
+        "reward": { "addItem": "healing_pill" },
+        "rewardText": { "zh": "四宗使者低頭，獻上療傷丹與魔尊黑袍。", "en": "The four envoys bow, offering a healing pill and the mantle of the Demon Lord." }
+      }
+    },
+    "demon_final": {
+      "text": {
+        "zh": "你沒有成為任何一宗的弟子，而是讓四大魔宗向九幽魔印臣服。宗門大戰中，你擊破五大仙門聯軍，卻沒有屠城；你廢除靈脈只能由正道掌控的舊約，也以鐵血手段鎮壓所有反對者。天下終於統一，但每個人提起你的名字時，都會先望一眼身後。",
+        "en": "You become no sect's disciple. Instead, the four demon sects bow to the Ninefold Abyss Mark. In the great war you defeat the alliance of the Five Immortal Sects, yet spare their cities. You abolish the old monopoly over spirit veins—and crush every opponent with an iron hand. The world is united, but anyone who speaks your name first checks who stands behind them."
+      },
+      "choices": [
+        { "text": { "zh": "登上九幽魔座，統一修仙界", "en": "Take the Abyssal Throne and unite the cultivation world" }, "next": "ending_demon", "require": { "item": "demon_mark" } }
+      ]
+    },
+    "ending_immortal": {
+      "ending": { "id": "01", "title": { "zh": "結局・飛升成仙", "en": "Ending · Ascended Immortal" } },
+      "text": {
+        "zh": "你以天命鏡擋下萬道天罰，鏡碎而道成。飛升之門不再只為一人開啟，靈雨灑遍五大仙門、四大魔宗與凡人城鎮。你踏入仙界前回望人間，終於明白真正突破天道，不是逃離規則，而是讓後來者擁有更多選擇。",
+        "en": "You block ten thousand bolts with the Fate Mirror. The mirror breaks, but a new Dao is born. The Gate of Ascension no longer opens for one alone; spiritual rain falls upon immortal sects, demon lands, and mortal towns alike. Before entering the higher realm, you look back and understand: to transcend Heaven is not to escape its laws, but to leave more choices for those who follow."
+      }
+    },
+    "ending_demon": {
+      "ending": { "id": "02", "title": { "zh": "結局・魔尊降世", "en": "Ending · Lord of Demons" } },
+      "text": {
+        "zh": "四大魔宗奉你為共主，五大仙門也在九幽魔旗前低頭。你打破正道延續萬年的秩序，讓所有人都能接觸靈脈；代價是整個修仙界從此只有一個人的命令。史書稱你為終結亂世的魔尊，也稱你為開啟另一個時代的暴君。",
+        "en": "The four demon sects crown you sovereign, and the Five Immortal Sects bow before your abyssal banner. You shatter an order that endured for ten thousand years and open spirit veins to all—the price is a world governed by one command. History names you both the Demon Lord who ended chaos and the tyrant who began a darker age."
+      }
+    },
+    "ending_sword": {
+      "ending": { "id": "03", "title": { "zh": "結局・萬劍之祖", "en": "Ending · Sword Saint" } },
+      "text": {
+        "zh": "你將畢生劍意刻在葬仙原，讓每個前來問劍的人都能找到屬於自己的答案。太阿仙劍自願折斷，化作萬道劍光追隨你的無名劍。後世天下劍修尊你為萬劍之祖，而你的劍從未斬斷心中的情義。",
+        "en": "You carve your life's sword intent upon the Burial Plain, allowing every seeker to find an answer of their own. Tai'e willingly breaks and becomes ten thousand rays following your nameless blade. All later sword cultivators honor you as their first ancestor, yet your sword never severs the bonds within your heart."
+      }
+    },
+    "ending_alchemy": {
+      "ending": { "id": "04", "title": { "zh": "結局・丹道至尊", "en": "Ending · Alchemy Master" } },
+      "text": {
+        "zh": "眾生丹救下渡劫者、凡人與妖族，億萬願力在離火丹爐中凝成一枚無名金丹。你吞丹飛升，卻把所有丹方留在人間。自此丹修不再只問如何長生，也會先問這一爐丹能救誰。",
+        "en": "The Lifebound Pill saves tribulation survivors, mortals, and beasts alike. Their gratitude gathers in the Solarflame Cauldron as a nameless golden pill. You ascend after taking it, leaving every formula behind. From that day, alchemists no longer ask only how to live forever, but first whom their next pill might save."
+      }
+    },
+    "ending_beast": {
+      "ending": { "id": "05", "title": { "zh": "結局・妖王契約者", "en": "Ending · Beast King" } },
+      "text": {
+        "zh": "五色神龍成為萬妖之王，你則是牠唯一主動選擇的契約者。你們終結捕獸與奴役契約，在人族與妖族之間立下平等盟約。千年後仍有人爭論誰才是真正的妖王，而你和神龍只在雲端為這問題笑個不停。",
+        "en": "The five-colored dragon becomes king of all beasts, and you remain the only companion it chose freely. Together you end beast hunting and bonds of enslavement, establishing an equal covenant between humans and beastkind. A thousand years later, scholars still debate which of you was the true king. You and the dragon only laugh from the clouds."
+      }
+    },
+    "ending_samsara": {
+      "ending": { "id": "06", "title": { "zh": "結局・輪迴守護者", "en": "Ending · Guardian of Samsara" } },
+      "text": {
+        "zh": "你坐在輪迴淵前，以五行靈根補起陰陽裂縫。從此每個亡魂都能放下執念、走向來生，而你永遠停在飛升前的最後一步。世人逐漸忘記你的名字，只有新生嬰兒偶爾望向虛空，對你所在的方向露出微笑。",
+        "en": "You sit before the Abyss of Samsara and mend the breach between life and death with your fivefold root. Every soul may now release its attachments and enter another life, while you remain forever one step short of ascension. The world slowly forgets your name, but newborn children sometimes gaze into the distance and smile toward where you keep watch."
+      }
+    },
+    "ending_wanderer": {
+      "ending": { "id": "07", "title": { "zh": "結局・散修傳奇", "en": "Ending · Legendary Wanderer" } },
+      "text": {
+        "zh": "你一生沒有穿過任何宗門道袍，也沒有向任何掌教低頭。青竹酒葫蘆陪你走遍十二秘境，無數落難者因你得到一處歇腳之地。當五大仙門想將你寫入門派譜系時，你早已乘一葉竹筏消失在海天盡頭。",
+        "en": "You never wear a sect robe or bow to a grand master. With a green bamboo gourd you cross all Twelve Secret Realms and give countless outcasts a place to rest. When the Five Immortal Sects try to claim you in their histories, your bamboo raft has already vanished beyond the horizon."
+      }
+    },
+    "ending_sect_leader": {
+      "ending": { "id": "08", "title": { "zh": "結局・一代宗主", "en": "Ending · Sect Leader" } },
+      "text": {
+        "zh": "你接任太玄宗主，沒有急著擴張勢力，而是開放山門，讓沒有靈石的凡人也能測試靈根。百年後，太玄宗成為五大仙門之首，不是因為擁有最強神器，而是因為天下修士遇到危難時，第一個想到的總是太玄二字。",
+        "en": "You become master of Taixuan. Instead of expanding its territory, you open the gates so even mortals without spirit stones may test their roots. A century later Taixuan stands first among the Five Immortal Sects, not for possessing the strongest artifact, but because cultivators in danger always think of its name first."
+      }
+    },
+    "ending_fallen": {
+      "ending": { "id": "09", "title": { "zh": "結局・天道失敗", "en": "Ending · Fallen Cultivator" } },
+      "text": {
+        "zh": "你在道心尚有裂痕時強行渡劫。第九十九道天雷落下，本命靈根寸寸崩解，曾經照亮臨仙城的五色光芒終歸沉寂。你沒有飛升，卻在最後一刻將登天玉拋回人間，留下一句：「別照我的路走，走你們自己的。」",
+        "en": "You force the tribulation while cracks remain in your resolve. The ninety-ninth bolt shatters your spirit root, and the five-colored light that once illuminated Linxian City fades. You do not ascend, but with your final strength cast the Ascension Jade back to the world. 'Do not follow my road. Walk your own.'"
+      }
+    },
+    "ending_ordinary": {
+      "ending": { "id": "10", "title": { "zh": "結局・凡人一生", "en": "Ending · Ordinary Life" } },
+      "text": {
+        "zh": "你沒有前往臨仙城。後來你學會木工、成家立業，也在荒年帶著村民挖井度過難關。六十年後，一名路過的仙人說你本可飛升，你只是笑著替孫兒蓋好被子。那一夜你在熟悉的星空下安然睡去——凡人的一生短暫，卻未必平凡。",
+        "en": "You never travel to Linxian City. You learn carpentry, raise a family, and lead the village in digging a well through years of famine. Sixty years later, a passing immortal says you might have ascended. You only smile and tuck your grandchild into bed. That night, beneath familiar stars, you sleep peacefully. A mortal life is brief, but not necessarily ordinary."
+      }
+    },
+    "cultivation_gameover": {
+      "gameover": true,
+      "text": {
+        "zh": "你的靈力耗盡，意識在戰場上逐漸遠去。仙途本就步步凶險，但天命從不只給人一次選擇。調息片刻，再從青石村重新出發吧。",
+        "en": "Your spiritual power runs dry and your awareness fades upon the battlefield. The immortal road has always been perilous, but fate never offers only one choice. Catch your breath, then begin again from Qingshi Village."
+      }
+    }
+  }
+}

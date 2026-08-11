@@ -370,6 +370,11 @@ const MODAL_DATA = {
     en: { title: 'Quiz Master', subtitle: 'Ten random questions · Test your knowledge' },
     type: 'game',
   },
+  yulu: {
+    zh: { title: 'RPG余路', subtitle: '選一條故事線，你的選擇決定結局' },
+    en: { title: 'RPG Path', subtitle: 'Pick a path — your choices shape the ending' },
+    type: 'game',
+  },
 };
 
 /* ============================================================

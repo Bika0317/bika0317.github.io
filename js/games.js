@@ -1,5 +1,5 @@
 /* ============================================================
-   遊戲區 Games — 猜單字 / 貪吃蛇 / 圈圈叉叉 / 知識王
+   遊戲區 Games — 猜單字 / 小精靈 / 圈圈叉叉 / 知識王 / 文字RPG
    由 main.js 的 openModal 呼叫 renderGameModal / setupGameModal，
    closeModal 時呼叫 stopActiveGame 清除計時器與鍵盤監聽。
    ============================================================ */
@@ -983,6 +983,472 @@ async function setupQuiz(lang) {
 }
 
 /* ============================================================
+   RPG余路（文字冒險 RPG，多條故事線選單）
+   劇情資料在 assets/games/rpg/*.json，一條故事線一個檔，
+   進度與已解鎖結局存 localStorage。
+   ============================================================ */
+/* 故事線設定：available 為 true 的線才能遊玩，其餘顯示敬請期待卡 */
+const YULU_LINES = {
+  star: {
+    file: 'assets/games/rpg/star.json', emoji: '🌌', endings: 3, available: true,
+    zh: '星空冒險', en: 'Starry Voyage',
+    descZh: '在星海中醒來，尋找偷走星光的影子', descEn: 'Wake on a sea of stars and trace the shadow stealing their light',
+  },
+  xianxia: {
+    file: 'assets/games/rpg/xianxia.json', emoji: '🐉', endings: 10, available: true,
+    zh: '古風修仙之路', en: 'Path of Celestial Fate',
+    descZh: '稀有靈根覺醒，十種天命由你選擇', descEn: 'Awaken a rare spirit root and choose among ten celestial fates',
+  },
+  examstudent: {
+    file: null, emoji: '📚', endings: 0, available: false,
+    zh: '現代學測生之路', en: 'Path of the Exam Student',
+    descZh: '在考卷與模擬考間求生', descEn: 'Surviving mock exams and test papers',
+  },
+  college: {
+    file: null, emoji: '🎓', endings: 0, available: false,
+    zh: '大學生之路', en: 'Path of College Life',
+    descZh: '選課、報告與熬夜的日常', descEn: 'Course registration, reports, and all-nighters',
+  },
+  futuretech: {
+    file: null, emoji: '🤖', endings: 0, available: false,
+    zh: '未來科技之路', en: 'Path of Future Tech',
+    descZh: '在近未來的科技浪潮裡闖蕩', descEn: 'Navigating a near-future wave of technology',
+  },
+  worker: {
+    file: null, emoji: '💼', endings: 0, available: false,
+    zh: '現代打工人之路', en: 'Path of the Working Life',
+    descZh: '職場日常的酸甜苦辣', descEn: 'The ups and downs of everyday work life',
+  },
+};
+
+const RPG_SAVE_KEY    = 'bikaRpgSave';    /* localStorage key：各故事線進度存檔 */
+const RPG_ENDINGS_KEY = 'bikaRpgEndings'; /* localStorage key：各故事線已解鎖結局 */
+let _rpgStoryCache = {};
+
+// 功能：RPG 劇情檔載入函式。寫法：依故事線 key 查模組快取，沒有才 fetch 對應 JSON 並存快取後回傳。
+async function loadRpgStory(line) {
+  if (_rpgStoryCache[line]) return _rpgStoryCache[line];
+  const res = await fetch(YULU_LINES[line].file);
+  _rpgStoryCache[line] = await res.json();
+  return _rpgStoryCache[line];
+}
+
+// 功能：localStorage JSON 讀取工具。寫法：取出字串後 JSON.parse，無資料或格式壞掉都回傳空物件。
+function rpgRead(key) {
+  try { return JSON.parse(localStorage.getItem(key)) || {}; }
+  catch (e) { return {}; }
+}
+
+// 功能：localStorage JSON 寫入工具。寫法：JSON.stringify 後寫入，失敗（無痕模式等）就靜默略過。
+function rpgWrite(key, obj) {
+  try { localStorage.setItem(key, JSON.stringify(obj)); } catch (e) {}
+}
+
+// 功能：RPG余路畫面渲染函式。寫法：回傳空容器，故事線選單與劇情皆由 setupYulu 動態渲染。
+function renderYulu(lang) {
+  return `<div class="game-wrap rpg-wrap" id="rpgWrap"></div>`;
+}
+
+// 功能：RPG余路主程式。寫法：內含選單／劇情／戰鬥三種畫面的狀態機，節點推進時自動存檔到 localStorage，打字機計時器註冊到 _gameCleanup 供關閉 Modal 時清除。
+function setupYulu(lang) {
+  const wrap = document.getElementById('rpgWrap');
+  const pick = o => (lang === 'zh' ? o.zh : o.en);
+
+  /* 介面文字（中英對照） */
+  const T = {
+    menuHint:  lang === 'zh' ? '選一條故事線，你的選擇決定結局' : 'Pick a storyline — your choices shape the ending',
+    locked:    lang === 'zh' ? '敬請期待' : 'Coming soon',
+    endings:   (n, m) => lang === 'zh' ? `已解鎖結局 ${n}/${m}` : `Endings ${n}/${m}`,
+    startBtn:  lang === 'zh' ? '開始冒險' : 'Start',
+    contBtn:   lang === 'zh' ? '繼續冒險' : 'Continue',
+    resetBtn:  lang === 'zh' ? '重新開始' : 'Restart',
+    loading:   lang === 'zh' ? '故事準備中…' : 'Loading story…',
+    loadFail:  lang === 'zh' ? '故事載入失敗 QQ' : 'Failed to load the story.',
+    bag:       lang === 'zh' ? '道具' : 'Items',
+    bagEmpty:  lang === 'zh' ? '背包空空的' : 'Your bag is empty',
+    useBtn:    lang === 'zh' ? '使用' : 'Use',
+    atkBtn:    lang === 'zh' ? '⚔️ 攻擊' : '⚔️ Attack',
+    defBtn:    lang === 'zh' ? '🛡️ 防禦' : '🛡️ Defend',
+    itemBtn:   lang === 'zh' ? '🎒 道具' : '🎒 Item',
+    fleeBtn:   lang === 'zh' ? '💨 逃跑' : '💨 Flee',
+    cancelBtn: lang === 'zh' ? '取消' : 'Cancel',
+    noHeal:    lang === 'zh' ? '沒有可以使用的道具！' : 'Nothing usable in your bag!',
+    youHit:    (n, d) => lang === 'zh' ? `你揮出一擊，對${n}造成 ${d} 點傷害！` : `You strike, dealing ${d} damage to ${n}!`,
+    foeHit:    (n, d) => lang === 'zh' ? `${n}反擊，你受到 ${d} 點傷害！` : `${n} hits back for ${d} damage!`,
+    youDef:    lang === 'zh' ? '你舉盾防禦，稍稍喘了口氣（回復 2 HP）。' : 'You raise your guard and catch your breath (+2 HP).',
+    defHalf:   (n, d) => lang === 'zh' ? `${n}的攻擊被擋下一半，你受到 ${d} 點傷害。` : `You block half of ${n}'s blow, taking ${d} damage.`,
+    usePotion: (i, h) => lang === 'zh' ? `你使用了${i}，回復 ${h} 點 HP！` : `You use the ${i} and recover ${h} HP!`,
+    fleeOk:    lang === 'zh' ? '你成功逃跑了！' : 'You got away!',
+    fleeFail:  (n) => lang === 'zh' ? `逃跑失敗！${n}追了上來！` : `No escape — ${n} catches up!`,
+    winMsg:    (n) => lang === 'zh' ? `你打倒了${n}！` : `You defeated ${n}!`,
+    contStory: lang === 'zh' ? '繼續 →' : 'Continue →',
+    gameOver:  lang === 'zh' ? '冒險結束' : 'Game Over',
+    retry:     lang === 'zh' ? '從頭再來' : 'Try Again',
+    toMenu:    lang === 'zh' ? '回到選單' : 'Back to Menu',
+    endingGet: lang === 'zh' ? '達成結局！' : 'Ending unlocked!',
+    again:     lang === 'zh' ? '再冒險一次' : 'Adventure Again',
+    gainItem:  (i) => lang === 'zh' ? `獲得「${i}」` : `Got "${i}"`,
+  };
+
+  /* 打字機計時器：關閉 Modal 或換畫面時要清掉 */
+  let typeTimer = null;
+  _gameCleanup = () => { if (typeTimer) { clearInterval(typeTimer); typeTimer = null; } };
+
+  /* 進行中的冒險狀態：{ line, story, hp, maxHp, atk, items, prevStory } */
+  let S = null;
+  /* 待顯示的效果訊息（選項 effect 產生，顯示在下一個節點的文字上方） */
+  let pendingMsgs = [];
+
+  // 功能：打字機文字效果。寫法：setInterval 逐字填入元素，點擊文字區立即顯示全文，完成後呼叫 done 回呼（顯示選項用）。
+  function typeText(el, text, done) {
+    if (typeTimer) { clearInterval(typeTimer); typeTimer = null; }
+    let i = 0, finished = false;
+    // 功能：結束打字函式。寫法：清計時器、填滿全文並只呼叫一次 done。
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      clearInterval(typeTimer); typeTimer = null;
+      el.textContent = text;
+      done();
+    };
+    el.textContent = '';
+    el.addEventListener('click', finish);
+    typeTimer = setInterval(() => {
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length) finish();
+    }, 24);
+  }
+
+  // 功能：進度存檔函式。寫法：把目前故事線的所在節點與角色數值寫進 localStorage 的存檔物件。
+  function saveProgress(nodeId) {
+    const all = rpgRead(RPG_SAVE_KEY);
+    all[S.line] = { node: nodeId, hp: S.hp, maxHp: S.maxHp, atk: S.atk, items: [...S.items] };
+    rpgWrite(RPG_SAVE_KEY, all);
+  }
+
+  // 功能：清除單線存檔函式。寫法：讀出存檔物件刪掉該故事線的欄位後寫回。
+  function clearProgress(line) {
+    const all = rpgRead(RPG_SAVE_KEY);
+    delete all[line];
+    rpgWrite(RPG_SAVE_KEY, all);
+  }
+
+  // 功能：結局解鎖記錄函式。寫法：把結局 id 加進該故事線的已解鎖清單（去重）後寫回 localStorage。
+  function unlockEnding(line, id) {
+    const all = rpgRead(RPG_ENDINGS_KEY);
+    const list = all[line] || [];
+    if (!list.includes(id)) list.push(id);
+    all[line] = list;
+    rpgWrite(RPG_ENDINGS_KEY, all);
+  }
+
+  // 功能：狀態列 HTML 產生函式。寫法：組出 HP／攻擊力／道具數，inBattle 時道具鈕僅供查看樣式相同。
+  function statusHTML() {
+    return `
+      <div class="rpg-status">
+        <span class="rpg-stat">❤️ ${S.hp}/${S.maxHp}</span>
+        <span class="rpg-stat">⚔️ ${S.atk}</span>
+        <button class="rpg-bag-btn" id="rpgBagBtn">🎒 ${T.bag}（${S.items.length}）</button>
+      </div>
+      <div class="rpg-bag" id="rpgBag" hidden></div>
+    `;
+  }
+
+  // 功能：背包面板繫結函式。寫法：點道具鈕切換面板顯示，列出道具名稱與說明，非戰鬥時補血道具附「使用」鈕。
+  function bindBag(inBattle) {
+    const btn = document.getElementById('rpgBagBtn');
+    const panel = document.getElementById('rpgBag');
+    // 功能：背包內容重繪函式。寫法：map 道具清單成列，補血道具在劇情畫面加使用鈕並綁定補血事件。
+    const renderBag = () => {
+      const defs = S.story.items;
+      panel.innerHTML = S.items.length === 0
+        ? `<p class="rpg-bag-empty">${T.bagEmpty}</p>`
+        : S.items.map((id, idx) => {
+            const it = defs[id];
+            const useBtn = (!inBattle && it.type === 'heal')
+              ? `<button class="rpg-use-btn" data-idx="${idx}">${T.useBtn}</button>` : '';
+            return `<div class="rpg-bag-item"><strong>${pick(it)}</strong>${useBtn}<span>${pick(it.desc)}</span></div>`;
+          }).join('');
+      panel.querySelectorAll('.rpg-use-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          const id = S.items[Number(b.dataset.idx)];
+          const it = defs[id];
+          S.items.splice(Number(b.dataset.idx), 1);
+          S.hp = Math.min(S.maxHp, S.hp + it.heal);
+          saveProgress(S.node);
+          pendingMsgs = [T.usePotion(pick(it), it.heal)];
+          showStory(S.node);
+        });
+      });
+    };
+    btn.addEventListener('click', () => {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) renderBag();
+    });
+  }
+
+  // 功能：選項效果套用函式。寫法：依 effect 物件加減 HP（最低留 1）、增減攻擊力、加道具，並把變化組成訊息陣列存進 pendingMsgs。
+  function applyEffect(eff) {
+    if (!eff) return;
+    const msgs = [];
+    if (eff.hp)  { S.hp = Math.max(1, Math.min(S.maxHp, S.hp + eff.hp)); msgs.push(`❤️ ${eff.hp > 0 ? '+' : ''}${eff.hp}`); }
+    if (eff.atk) { S.atk += eff.atk; msgs.push(`⚔️ ${eff.atk > 0 ? '+' : ''}${eff.atk}`); }
+    if (eff.addItem) { S.items.push(eff.addItem); msgs.push(`🎒 ${T.gainItem(pick(S.story.items[eff.addItem]))}`); }
+    pendingMsgs = msgs;
+  }
+
+  // 功能：節點分派函式。寫法：依節點內容判斷型別——結局、遊戲結束、戰鬥或一般劇情，呼叫對應畫面。
+  function goto(id) {
+    const node = S.story.nodes[id];
+    if (node.ending)   { showEnding(node); return; }
+    if (node.gameover) { showGameOver(node); return; }
+    if (node.battle)   { S.node = id; saveProgress(id); startBattle(node); return; }
+    showStory(id);
+  }
+
+  // 功能：劇情節點畫面函式。寫法：存檔後渲染狀態列、效果訊息與正文，打字機播完才顯示符合 require 條件的選項按鈕。
+  function showStory(id) {
+    const node = S.story.nodes[id];
+    S.node = id;
+    S.prevStory = id;
+    saveProgress(id);
+
+    const effHTML = pendingMsgs.length ? `<p class="rpg-effect">${pendingMsgs.join('　')}</p>` : '';
+    pendingMsgs = [];
+    const choices = (node.choices || []).filter(c => !c.require || (c.require.item && S.items.includes(c.require.item)));
+
+    wrap.innerHTML = `
+      ${statusHTML()}
+      ${effHTML}
+      <p class="rpg-text" id="rpgText"></p>
+      <div class="rpg-choices rpg-hidden" id="rpgChoices">
+        ${choices.map((c, i) => `<button class="rpg-choice" data-i="${i}">${pick(c.text)}</button>`).join('')}
+      </div>
+    `;
+    bindBag(false);
+
+    typeText(document.getElementById('rpgText'), pick(node.text), () => {
+      document.getElementById('rpgChoices').classList.remove('rpg-hidden');
+    });
+
+    wrap.querySelectorAll('.rpg-choice').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const c = choices[Number(btn.dataset.i)];
+        applyEffect(c.effect);
+        goto(c.next);
+      });
+    });
+  }
+
+  // 功能：回合制戰鬥畫面函式。寫法：以區域變數管理敵人血量與戰報，攻擊／防禦／道具／逃跑四指令同步結算，勝利走 win 節點、戰敗走 lose 節點、逃跑回上一個劇情節點。
+  function startBattle(node) {
+    const b = node.battle;
+    const foeName = pick(b.name);
+    let foeHp = b.hp;
+    let log = [];
+
+    // 功能：擲傷害函式。寫法：基礎值加上 -2～+2 的隨機浮動，最低 1 點。
+    const roll = base => Math.max(1, base + Math.floor(Math.random() * 5) - 2);
+
+    // 功能：戰鬥畫面重繪函式。寫法：渲染狀態列、敵人血條、最近四行戰報與指令鈕（或戰鬥結束時的單一按鈕）。
+    function renderBattle(buttonsHTML) {
+      wrap.innerHTML = `
+        ${statusHTML()}
+        <div class="rpg-enemy">
+          <p class="rpg-enemy-name">⚔️ ${foeName}</p>
+          <div class="rpg-enemy-bar"><div class="rpg-enemy-fill" style="width:${Math.max(0, foeHp / b.hp * 100)}%"></div></div>
+        </div>
+        <div class="rpg-log">${log.slice(-4).map(l => `<p>${l}</p>`).join('')}</div>
+        <div class="rpg-choices">${buttonsHTML}</div>
+      `;
+      bindBag(true);
+    }
+
+    // 功能：敵方回合函式。寫法：依玩家是否防禦計算傷害（防禦折半進位），扣血並寫戰報，HP 歸零回傳 true 表示戰敗。
+    function foeTurn(defending) {
+      let dmg = roll(b.atk);
+      if (defending) { dmg = Math.ceil(dmg / 2); log.push(T.defHalf(foeName, dmg)); }
+      else log.push(T.foeHit(foeName, dmg));
+      S.hp -= dmg;
+      return S.hp <= 0;
+    }
+
+    // 功能：戰鬥結束檢查函式。寫法：敵人倒下顯示勝利與獎勵並接 win 節點；玩家倒下走 lose 節點；都沒有就重繪指令。
+    function settle(defending, skipFoe) {
+      if (foeHp <= 0) {
+        log.push(T.winMsg(foeName));
+        if (b.reward && b.reward.addItem) {
+          S.items.push(b.reward.addItem);
+          if (b.rewardText) log.push(pick(b.rewardText));
+        }
+        saveProgress(S.node);
+        renderBattle(`<button class="rpg-choice rpg-choice-key" id="rpgCont">${T.contStory}</button>`);
+        document.getElementById('rpgCont').addEventListener('click', () => goto(b.win));
+        return;
+      }
+      if (!skipFoe && foeTurn(defending)) { goto(b.lose); return; }
+      showCommands();
+    }
+
+    // 功能：戰鬥指令列渲染函式。寫法：畫出攻擊／防禦／道具／逃跑四鈕並綁定各自的回合流程。
+    function showCommands() {
+      renderBattle(`
+        <div class="rpg-cmds">
+          <button class="rpg-choice" id="rpgAtk">${T.atkBtn}</button>
+          <button class="rpg-choice" id="rpgDef">${T.defBtn}</button>
+          <button class="rpg-choice" id="rpgItem">${T.itemBtn}</button>
+          <button class="rpg-choice" id="rpgFlee">${T.fleeBtn}</button>
+        </div>
+      `);
+      document.getElementById('rpgAtk').addEventListener('click', () => {
+        const dmg = roll(S.atk);
+        foeHp -= dmg;
+        log.push(T.youHit(foeName, dmg));
+        settle(false, false);
+      });
+      document.getElementById('rpgDef').addEventListener('click', () => {
+        S.hp = Math.min(S.maxHp, S.hp + 2);
+        log.push(T.youDef);
+        settle(true, false);
+      });
+      document.getElementById('rpgItem').addEventListener('click', () => {
+        const heals = S.items.map((id, idx) => ({ id, idx })).filter(x => S.story.items[x.id].type === 'heal');
+        if (heals.length === 0) { log.push(T.noHeal); showCommands(); return; }
+        renderBattle(`
+          <div class="rpg-cmds">
+            ${heals.map(h => `<button class="rpg-choice" data-idx="${h.idx}">🧪 ${pick(S.story.items[h.id])}</button>`).join('')}
+            <button class="rpg-choice" id="rpgItemCancel">${T.cancelBtn}</button>
+          </div>
+        `);
+        wrap.querySelectorAll('.rpg-choice[data-idx]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const idx = Number(btn.dataset.idx);
+            const it = S.story.items[S.items[idx]];
+            S.items.splice(idx, 1);
+            S.hp = Math.min(S.maxHp, S.hp + it.heal);
+            log.push(T.usePotion(pick(it), it.heal));
+            settle(false, false);
+          });
+        });
+        document.getElementById('rpgItemCancel').addEventListener('click', showCommands);
+      });
+      document.getElementById('rpgFlee').addEventListener('click', () => {
+        if (Math.random() < 0.6) { log.push(T.fleeOk); showStory(S.prevStory); return; }
+        log.push(T.fleeFail(foeName));
+        if (foeTurn(false)) { goto(b.lose); return; }
+        showCommands();
+      });
+    }
+
+    /* 開戰：先用打字機演出遭遇文字，再進指令回合 */
+    wrap.innerHTML = `${statusHTML()}<p class="rpg-text" id="rpgText"></p>`;
+    bindBag(true);
+    typeText(document.getElementById('rpgText'), pick(node.text), showCommands);
+  }
+
+  // 功能：結局畫面函式。寫法：記錄解鎖結局、清掉該線存檔，打字機播完結局文字後顯示稱號與再玩／回選單按鈕。
+  function showEnding(node) {
+    unlockEnding(S.line, node.ending.id);
+    clearProgress(S.line);
+    const line = S.line;
+    wrap.innerHTML = `
+      <p class="rpg-ending-label">🏅 ${T.endingGet}</p>
+      <p class="rpg-ending-title">${pick(node.ending.title)}</p>
+      <p class="rpg-text" id="rpgText"></p>
+      <div class="rpg-choices rpg-hidden" id="rpgChoices">
+        <button class="rpg-choice rpg-choice-key" id="rpgAgain">${T.again}</button>
+        <button class="rpg-choice" id="rpgMenu">${T.toMenu}</button>
+      </div>
+    `;
+    typeText(document.getElementById('rpgText'), pick(node.text), () => {
+      document.getElementById('rpgChoices').classList.remove('rpg-hidden');
+    });
+    document.getElementById('rpgAgain').addEventListener('click', () => startLine(line, false));
+    document.getElementById('rpgMenu').addEventListener('click', showMenu);
+  }
+
+  // 功能：遊戲結束畫面函式。寫法：清掉該線存檔，顯示戰敗文字與從頭再來／回選單按鈕。
+  function showGameOver(node) {
+    clearProgress(S.line);
+    const line = S.line;
+    wrap.innerHTML = `
+      <p class="rpg-ending-label">💫 ${T.gameOver}</p>
+      <p class="rpg-text" id="rpgText"></p>
+      <div class="rpg-choices rpg-hidden" id="rpgChoices">
+        <button class="rpg-choice rpg-choice-key" id="rpgRetry">${T.retry}</button>
+        <button class="rpg-choice" id="rpgMenu">${T.toMenu}</button>
+      </div>
+    `;
+    typeText(document.getElementById('rpgText'), pick(node.text), () => {
+      document.getElementById('rpgChoices').classList.remove('rpg-hidden');
+    });
+    document.getElementById('rpgRetry').addEventListener('click', () => startLine(line, false));
+    document.getElementById('rpgMenu').addEventListener('click', showMenu);
+  }
+
+  // 功能：開始／繼續故事線函式。寫法：載入劇情 JSON，useSave 為真且有存檔就還原角色數值與節點，否則依 meta 建新角色從頭開始。
+  async function startLine(line, useSave) {
+    if (line === 'xianxia' && typeof window.setupXianxiaLife === 'function') {
+      window.setupXianxiaLife(lang, wrap, showMenu, useSave);
+      return;
+    }
+    wrap.innerHTML = `<p class="game-msg">${T.loading}</p>`;
+    let story;
+    try {
+      story = await loadRpgStory(line);
+    } catch (e) {
+      wrap.innerHTML = `<p class="game-msg">${T.loadFail}</p>`;
+      return;
+    }
+    const save = useSave ? rpgRead(RPG_SAVE_KEY)[line] : null;
+    S = save
+      ? { line, story, node: save.node, hp: save.hp, maxHp: save.maxHp, atk: save.atk, items: [...save.items], prevStory: story.start }
+      : { line, story, node: story.start, hp: story.meta.player.hp, maxHp: story.meta.player.hp, atk: story.meta.player.atk, items: [...story.meta.player.items], prevStory: story.start };
+    pendingMsgs = [];
+    goto(S.node);
+  }
+
+  // 功能：故事線選單畫面函式。寫法：列出 YULU_LINES 的每條線，可玩的線依有無存檔顯示開始／繼續／重新開始鈕與結局進度，未開放的顯示鎖定卡。
+  function showMenu() {
+    if (typeTimer) { clearInterval(typeTimer); typeTimer = null; }
+    S = null;
+    const saves = rpgRead(RPG_SAVE_KEY);
+    const ends  = rpgRead(RPG_ENDINGS_KEY);
+    wrap.innerHTML = `
+      <p class="rpg-menu-hint">${T.menuHint}</p>
+      <div class="rpg-menu">
+        ${Object.entries(YULU_LINES).map(([key, l]) => {
+          if (!l.available) {
+            return `
+              <div class="rpg-line locked">
+                <div class="rpg-line-head"><span class="rpg-line-emoji">${l.emoji}</span><span class="rpg-line-name">${pick(l)}</span><span class="rpg-line-endings">🔒 ${T.locked}</span></div>
+                <p class="rpg-line-desc">${lang === 'zh' ? l.descZh : l.descEn}</p>
+              </div>`;
+          }
+          const unlocked = (ends[key] || []).length;
+          const hasSave  = !!saves[key];
+          const btns = hasSave
+            ? `<button class="card-btn rpg-line-btn" data-line="${key}" data-cont="1">${T.contBtn}</button>
+               <button class="card-btn rpg-line-btn" data-line="${key}">${T.resetBtn}</button>`
+            : `<button class="card-btn rpg-line-btn" data-line="${key}">${T.startBtn}</button>`;
+          return `
+            <div class="rpg-line">
+              <div class="rpg-line-head"><span class="rpg-line-emoji">${l.emoji}</span><span class="rpg-line-name">${pick(l)}</span><span class="rpg-line-endings">${T.endings(unlocked, l.endings)}</span></div>
+              <p class="rpg-line-desc">${lang === 'zh' ? l.descZh : l.descEn}</p>
+              <div class="rpg-line-btns">${btns}</div>
+            </div>`;
+        }).join('')}
+      </div>
+    `;
+    wrap.querySelectorAll('.rpg-line-btn').forEach(btn => {
+      btn.addEventListener('click', () => startLine(btn.dataset.line, btn.dataset.cont === '1'));
+    });
+  }
+
+  showMenu();
+}
+
+/* ============================================================
    對外介面（給 main.js 呼叫）
    ============================================================ */
 
@@ -992,6 +1458,7 @@ function renderGameModal(key, lang) {
   if (key === 'pacman')    return renderPacman(lang);
   if (key === 'tictactoe') return renderTicTacToe(lang);
   if (key === 'quiz')      return renderQuiz(lang);
+  if (key === 'yulu')      return renderYulu(lang);
   return '';
 }
 
@@ -1002,4 +1469,5 @@ function setupGameModal(key, lang) {
   if (key === 'pacman')    setupPacman(lang);
   if (key === 'tictactoe') setupTicTacToe(lang);
   if (key === 'quiz')      setupQuiz(lang);
+  if (key === 'yulu')      setupYulu(lang);
 }

@@ -1,0 +1,118 @@
+/* 圈圈叉叉模式選擇與三子移動模式 */
+
+.ttt-wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.ttt-mode-screen {
+  width: 100%;
+  text-align: center;
+}
+
+.ttt-mode-kicker {
+  margin: 0 0 1rem;
+  color: var(--text-2);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+.ttt-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ttt-mode-card {
+  min-height: 190px;
+  padding: 1.25rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.ttt-mode-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  background: var(--btn-bg-h);
+  box-shadow: 0 10px 28px var(--accent-glow);
+}
+
+.ttt-mode-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.ttt-mode-card strong {
+  font-size: 1.15rem;
+}
+
+.ttt-mode-card small {
+  color: var(--text-2);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.ttt-game-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ttt-back-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-2);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.ttt-back-btn:hover { color: var(--accent); }
+
+.ttt-current-mode {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ttt-rule {
+  max-width: 360px;
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--card-bg);
+  color: var(--text-2);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.ttt-cell.movable {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+
+.ttt-cell.selected {
+  border-color: var(--accent);
+  background: var(--btn-bg-h);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: scale(0.92);
+}
+
+@media (max-width: 520px) {
+  .ttt-mode-grid { grid-template-columns: 1fr; }
+  .ttt-mode-card { min-height: 145px; }
+}
